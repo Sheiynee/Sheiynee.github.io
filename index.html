@@ -16,7 +16,7 @@
       --bg-card: #161618;
       --bg-card-hover: #1c1c1f;
       --border: rgba(255,255,255,0.07);
-      --border-accent: rgba(255,255,255,0.14);
+      --border-accent: rgba(255,255,255,0.15);
       --text-primary: #f0ede8;
       --text-secondary: #888880;
       --text-muted: #3a3a38;
@@ -41,7 +41,6 @@
       overflow-x: hidden;
     }
 
-    /* noise */
     body::before {
       content: '';
       position: fixed;
@@ -85,12 +84,12 @@
       z-index: 100;
       padding: 1.2rem 0;
       border-bottom: 1px solid transparent;
-      transition: border-color 0.3s, background 0.3s, backdrop-filter 0.3s;
+      transition: border-color 0.3s, background 0.3s;
     }
     nav.scrolled {
-      background: rgba(10,10,11,0.88);
+      background: rgba(10,10,11,0.9);
       border-color: var(--border);
-      backdrop-filter: blur(18px);
+      backdrop-filter: blur(20px);
     }
     .nav-inner {
       display: flex;
@@ -104,50 +103,66 @@
       text-decoration: none;
       letter-spacing: 0.02em;
       position: relative;
+      white-space: nowrap;
     }
-    .nav-logo .logo-real {
+    .logo-real {
       position: absolute;
       left: 0; top: 50%;
       transform: translateY(-50%);
       white-space: nowrap;
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       font-family: 'JetBrains Mono', monospace;
       color: var(--text-secondary);
       opacity: 0;
       transition: opacity 0.3s;
       pointer-events: none;
     }
+    .logo-alias { transition: opacity 0.3s; display: inline-block; }
     .nav-logo:hover .logo-alias { opacity: 0; }
     .nav-logo:hover .logo-real { opacity: 1; }
-    .logo-alias { transition: opacity 0.3s; }
+
     .nav-links {
       display: flex;
-      gap: 2rem;
+      gap: 0.25rem;
       list-style: none;
     }
     .nav-links a {
       color: var(--text-secondary);
       text-decoration: none;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       font-weight: 600;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       transition: color 0.2s;
+      padding: 0.35rem 0.7rem;
+      border-radius: 3px;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 50%; right: 50%;
+      height: 1px;
+      background: var(--accent);
+      transition: left 0.2s, right 0.2s;
     }
     .nav-links a:hover { color: var(--text-primary); }
+    .nav-links a:hover::after,
+    .nav-links a.active::after { left: 0.7rem; right: 0.7rem; }
+    .nav-links a.active { color: var(--text-primary); }
 
     /* ── HERO ── */
     .hero {
-      padding: 168px 0 110px;
+      padding: 172px 0 120px;
       display: grid;
-      gap: 1.75rem;
+      gap: 1.6rem;
     }
     .hero-eyebrow {
       display: flex;
       align-items: center;
       gap: 0.75rem;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       color: var(--accent);
       letter-spacing: 0.1em;
       opacity: 0;
@@ -165,13 +180,9 @@
       border-radius: 50%;
       background: var(--green);
       animation: blink 2s infinite;
-      margin-right: 2px;
     }
-    @keyframes blink {
-      0%,100% { opacity:1; } 50% { opacity:0.3; }
-    }
+    @keyframes blink { 0%,100%{opacity:1}50%{opacity:0.3} }
 
-    /* name flip */
     .hero-name {
       font-family: 'DM Serif Display', serif;
       font-size: clamp(3.5rem, 8vw, 6.5rem);
@@ -198,33 +209,28 @@
       color: var(--text-primary);
       font-style: normal;
       font-size: clamp(2rem, 4.5vw, 4rem);
-      padding-top: 0.15em;
+      padding-top: 0.18em;
     }
-    .name-flip:hover .name-alias {
-      opacity: 0;
-      transform: translateY(-12px);
-    }
-    .name-flip:hover .name-real {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .name-flip:hover .name-alias { opacity: 0; transform: translateY(-12px); }
+    .name-flip:hover .name-real { opacity: 1; transform: translateY(0); }
     .name-hint {
       display: block;
-      margin-top: 1rem;
+      margin-top: 0.85rem;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.62rem;
+      font-size: 0.6rem;
       color: var(--text-muted);
       letter-spacing: 0.1em;
       text-transform: uppercase;
       opacity: 0;
-      transition: opacity 0.3s 0.15s;
+      transition: opacity 0.3s 0.1s;
+      pointer-events: none;
     }
     .name-flip:hover .name-hint { opacity: 1; }
     em { font-style: italic; color: var(--accent); }
 
     .hero-role {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       color: var(--text-secondary);
       letter-spacing: 0.05em;
       opacity: 0;
@@ -233,8 +239,8 @@
     .hero-role span { color: var(--accent); }
 
     .hero-desc {
-      max-width: 560px;
-      font-size: 0.98rem;
+      max-width: 540px;
+      font-size: 0.97rem;
       color: var(--text-secondary);
       line-height: 1.85;
       opacity: 0;
@@ -242,17 +248,37 @@
     }
     .hero-cta {
       display: flex;
-      gap: 0.85rem;
+      gap: 0.8rem;
       flex-wrap: wrap;
+      align-items: center;
       opacity: 0;
       animation: fadeUp 0.7s 0.55s forwards;
     }
+    .hero-social {
+      display: flex;
+      gap: 0.5rem;
+      margin-left: 0.5rem;
+      padding-left: 1rem;
+      border-left: 1px solid var(--border-accent);
+    }
+    .icon-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px; height: 36px;
+      border-radius: 3px;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .icon-link:hover { color: var(--accent); border-color: var(--accent); background: var(--accent-dim); }
 
     .btn {
       display: inline-flex;
       align-items: center;
       gap: 0.45rem;
-      padding: 0.72rem 1.4rem;
+      padding: 0.7rem 1.4rem;
       border-radius: 3px;
       font-family: 'Syne', sans-serif;
       font-size: 0.72rem;
@@ -271,32 +297,132 @@
       color: var(--text-secondary);
       border: 1px solid var(--border-accent);
     }
-    .btn-ghost:hover { color: var(--text-primary); border-color: rgba(255,255,255,0.25); }
+    .btn-ghost:hover { color: var(--text-primary); border-color: rgba(255,255,255,0.28); }
 
     /* ── DIVIDER ── */
     .divider { width: 100%; height: 1px; background: var(--border); }
 
     /* ── SECTION ── */
-    section { padding: 80px 0; }
+    section { padding: 84px 0; }
     .section-label {
       display: flex;
       align-items: center;
       gap: 0.75rem;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.65rem;
+      font-size: 0.62rem;
       color: var(--accent);
-      letter-spacing: 0.14em;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
-      margin-bottom: 2.5rem;
+      margin-bottom: 2.75rem;
     }
     .section-label::before {
       content: '';
-      width: 22px; height: 1px;
+      width: 20px; height: 1px;
       background: var(--accent);
       opacity: 0.5;
     }
 
-    /* ── PROJECT CARD ── */
+    /* ── EXPERIENCE — timeline ── */
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+      padding-left: 2rem;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 8px; bottom: 8px;
+      width: 1px;
+      background: var(--border);
+    }
+    .tl-item {
+      position: relative;
+      padding-bottom: 2.5rem;
+    }
+    .tl-item:last-child { padding-bottom: 0; }
+    .tl-dot {
+      position: absolute;
+      left: -2.4rem;
+      top: 6px;
+      width: 9px; height: 9px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-accent);
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .tl-item:hover .tl-dot {
+      border-color: var(--accent);
+      background: var(--accent-dim);
+    }
+    .tl-item.current .tl-dot {
+      border-color: var(--green);
+      background: var(--green-dim);
+    }
+    .tl-meta {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+      margin-bottom: 0.25rem;
+      flex-wrap: wrap;
+    }
+    .tl-period {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.62rem;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+      white-space: nowrap;
+    }
+    .tl-loc {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+    .tl-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.18rem 0.55rem;
+      border-radius: 2px;
+      background: var(--green-dim);
+      color: var(--green);
+    }
+    .tl-company {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.15rem;
+    }
+    .tl-role {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.67rem;
+      color: var(--accent);
+      letter-spacing: 0.07em;
+      margin-bottom: 0.9rem;
+    }
+    .tl-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .tl-bullets li {
+      font-size: 0.86rem;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      padding-left: 1rem;
+      position: relative;
+    }
+    .tl-bullets li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--text-muted);
+      font-size: 0.7rem;
+    }
+
+    /* ── PROJECTS ── */
     .projects-grid { display: grid; gap: 2px; }
     .project-card {
       background: var(--bg-card);
@@ -319,11 +445,7 @@
       opacity: 0;
       transition: opacity 0.35s;
     }
-    .project-card:hover {
-      background: var(--bg-card-hover);
-      border-color: var(--border-accent);
-      transform: translateY(-2px);
-    }
+    .project-card:hover { background: var(--bg-card-hover); border-color: var(--border-accent); transform: translateY(-2px); }
     .project-card:hover::before { opacity: 1; }
 
     .project-status {
@@ -331,13 +453,12 @@
       align-items: center;
       gap: 0.4rem;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.62rem;
-      font-weight: 500;
+      font-size: 0.6rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--green);
       background: var(--green-dim);
-      padding: 0.28rem 0.7rem;
+      padding: 0.25rem 0.65rem;
       border-radius: 2px;
       margin-bottom: 1rem;
     }
@@ -348,7 +469,6 @@
       background: var(--green);
       animation: blink 2s infinite;
     }
-
     .project-title {
       font-family: 'DM Serif Display', serif;
       font-size: 1.9rem;
@@ -364,15 +484,10 @@
       margin-bottom: 1.25rem;
       max-width: 580px;
     }
-    .project-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.35rem;
-      margin-bottom: 1.5rem;
-    }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-bottom: 1.5rem; }
     .tag {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.65rem;
+      font-size: 0.63rem;
       color: var(--tag-text);
       background: var(--tag-bg);
       border: 1px solid var(--border);
@@ -380,12 +495,12 @@
       border-radius: 2px;
       letter-spacing: 0.04em;
     }
-    .project-links { display: flex; gap: 0.65rem; flex-wrap: wrap; }
+    .project-links { display: flex; gap: 0.6rem; flex-wrap: wrap; }
     .project-links a {
       display: inline-flex;
       align-items: center;
       gap: 0.4rem;
-      font-size: 0.75rem;
+      font-size: 0.73rem;
       font-weight: 600;
       letter-spacing: 0.06em;
       text-decoration: none;
@@ -396,11 +511,7 @@
       transition: all 0.2s;
     }
     .project-links a:hover { color: var(--accent); border-color: var(--accent); background: var(--accent-dim); }
-    .project-links a.primary {
-      color: var(--accent);
-      border-color: rgba(200,169,110,0.28);
-      background: var(--accent-dim);
-    }
+    .project-links a.primary { color: var(--accent); border-color: rgba(200,169,110,0.28); background: var(--accent-dim); }
     .project-links a.primary:hover { background: rgba(200,169,110,0.22); }
     .project-number {
       font-family: 'DM Serif Display', serif;
@@ -409,86 +520,19 @@
       line-height: 1;
       user-select: none;
     }
-
-    /* ── EXPERIENCE ── */
-    .exp-list { display: flex; flex-direction: column; gap: 1px; }
-    .exp-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1.8rem 2rem;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 1rem;
-      transition: background 0.2s, border-color 0.2s;
-    }
-    .exp-card:hover { background: var(--bg-card-hover); border-color: var(--border-accent); }
-    .exp-company {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 0.15rem;
-    }
-    .exp-role {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.68rem;
-      color: var(--accent);
-      letter-spacing: 0.07em;
-      margin-bottom: 0.9rem;
-    }
-    .exp-bullets {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.45rem;
-    }
-    .exp-bullets li {
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      line-height: 1.75;
-      padding-left: 1.1rem;
-      position: relative;
-    }
-    .exp-bullets li::before {
-      content: '—';
-      position: absolute;
-      left: 0;
-      color: var(--text-muted);
-      font-size: 0.7rem;
-      top: 0.05rem;
-    }
-    .exp-meta {
-      text-align: right;
-      white-space: nowrap;
-    }
-    .exp-period {
+    .projects-more {
+      text-align: center;
+      padding: 1.5rem 0 0;
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.65rem;
       color: var(--text-muted);
-      letter-spacing: 0.06em;
-      margin-bottom: 0.3rem;
-    }
-    .exp-location {
-      font-size: 0.72rem;
-      color: var(--text-muted);
-    }
-    .exp-badge {
-      display: inline-block;
-      margin-top: 0.5rem;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.58rem;
       letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 0.2rem 0.55rem;
-      border-radius: 2px;
-      background: var(--green-dim);
-      color: var(--green);
     }
 
-    /* ── STACK ── */
+    /* ── STACK — fixed 3-col ── */
     .stack-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 1px;
       background: var(--border);
       border: 1px solid var(--border);
@@ -497,61 +541,20 @@
     }
     .stack-item {
       background: var(--bg-card);
-      padding: 1.5rem 1.75rem;
+      padding: 1.6rem 1.8rem;
       transition: background 0.2s;
     }
     .stack-item:hover { background: var(--bg-card-hover); }
     .stack-cat {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.62rem;
+      font-size: 0.6rem;
       color: var(--accent);
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      margin-bottom: 0.85rem;
+      margin-bottom: 0.9rem;
     }
     .stack-items { display: flex; flex-direction: column; gap: 0.35rem; }
     .stack-items span { font-size: 0.84rem; color: var(--text-secondary); }
-
-    /* ── ABOUT ── */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: start;
-    }
-    .about-text p {
-      font-size: 0.92rem;
-      color: var(--text-secondary);
-      line-height: 1.9;
-      margin-bottom: 1rem;
-    }
-    .about-text p:last-child { margin-bottom: 0; }
-    .about-details { display: flex; flex-direction: column; gap: 0; }
-    .detail-row {
-      display: flex;
-      flex-direction: column;
-      gap: 0.2rem;
-      padding: 0.9rem 0;
-      border-bottom: 1px solid var(--border);
-    }
-    .detail-row:first-child { padding-top: 0; }
-    .detail-row:last-child { border-bottom: none; padding-bottom: 0; }
-    .detail-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.6rem;
-      color: var(--text-muted);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-    .detail-val {
-      font-size: 0.88rem;
-      color: var(--text-primary);
-    }
-    .detail-val a {
-      color: var(--accent);
-      text-decoration: none;
-    }
-    .detail-val a:hover { text-decoration: underline; }
 
     /* ── EDUCATION ── */
     .edu-card {
@@ -560,26 +563,19 @@
       border-radius: 8px;
       padding: 1.8rem 2rem;
       display: flex;
-      align-items: flex-start;
+      align-items: center;
       justify-content: space-between;
       gap: 2rem;
       flex-wrap: wrap;
+      transition: background 0.2s, border-color 0.2s;
     }
-    .edu-school {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 0.2rem;
-    }
-    .edu-degree {
-      font-size: 0.88rem;
-      color: var(--text-secondary);
-      margin-bottom: 0.5rem;
-    }
+    .edu-card:hover { background: var(--bg-card-hover); border-color: var(--border-accent); }
+    .edu-school { font-size: 1rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.2rem; }
+    .edu-degree { font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 0.6rem; }
     .edu-honor {
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
+      gap: 0.35rem;
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.62rem;
       letter-spacing: 0.08em;
@@ -594,30 +590,108 @@
       font-size: 0.65rem;
       color: var(--text-muted);
       white-space: nowrap;
+      text-align: right;
     }
 
+    /* ── ABOUT — cleaner split ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .about-text p {
+      font-size: 0.93rem;
+      color: var(--text-secondary);
+      line-height: 1.9;
+      margin-bottom: 1rem;
+    }
+    .about-text p:last-child { margin-bottom: 0; }
+    .about-details { display: flex; flex-direction: column; }
+    .detail-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      padding: 0.85rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .detail-row:first-child { padding-top: 0; }
+    .detail-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .detail-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.58rem;
+      color: var(--text-muted);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .detail-val { font-size: 0.87rem; color: var(--text-primary); }
+    .detail-val a { color: var(--accent); text-decoration: none; }
+    .detail-val a:hover { text-decoration: underline; }
+
     /* ── CONTACT ── */
-    .contact-bar {
+    .contact-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      align-items: stretch;
+    }
+    .contact-main {
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 8px;
       padding: 2.5rem;
       display: flex;
-      align-items: center;
+      flex-direction: column;
       justify-content: space-between;
       gap: 2rem;
-      flex-wrap: wrap;
     }
-    .contact-text h3 {
+    .contact-main h3 {
       font-family: 'DM Serif Display', serif;
-      font-size: 1.7rem;
-      margin-bottom: 0.3rem;
+      font-size: 2rem;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
     }
-    .contact-text p {
-      font-size: 0.86rem;
+    .contact-main p {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 1.75;
+    }
+    .contact-links-col {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+    .contact-link-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.2rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      transition: all 0.2s;
+      gap: 1rem;
+    }
+    .contact-link-item:hover { background: var(--bg-card-hover); border-color: var(--border-accent); color: var(--text-primary); }
+    .contact-link-item:hover .contact-link-arrow { color: var(--accent); transform: translate(2px, -2px); }
+    .contact-link-left { display: flex; align-items: center; gap: 0.75rem; }
+    .contact-link-label { font-size: 0.72rem; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; letter-spacing: 0.06em; display: block; margin-bottom: 0.1rem; }
+    .contact-link-val { font-size: 0.88rem; color: var(--text-primary); }
+    .contact-link-arrow { transition: transform 0.2s, color 0.2s; color: var(--text-muted); }
+    .contact-icon {
+      width: 36px; height: 36px;
+      border-radius: 3px;
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
       color: var(--text-secondary);
     }
-    .contact-links { display: flex; gap: 0.7rem; flex-wrap: wrap; }
 
     /* ── FOOTER ── */
     footer {
@@ -631,10 +705,33 @@
     }
     footer p {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.65rem;
+      font-size: 0.62rem;
       color: var(--text-muted);
       letter-spacing: 0.05em;
     }
+
+    /* ── SCROLL TO TOP ── */
+    #back-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 40px; height: 40px;
+      border-radius: 4px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-accent);
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 50;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.3s, transform 0.3s, color 0.2s, border-color 0.2s;
+      text-decoration: none;
+    }
+    #back-top.visible { opacity: 1; transform: translateY(0); }
+    #back-top:hover { color: var(--accent); border-color: var(--accent); }
 
     /* ── ANIMATIONS ── */
     @keyframes fadeUp {
@@ -647,20 +744,24 @@
       transition: opacity 0.6s ease, transform 0.6s ease;
     }
     .reveal.visible { opacity: 1; transform: translateY(0); }
-    .reveal-d1 { transition-delay: 0.05s; }
-    .reveal-d2 { transition-delay: 0.12s; }
-    .reveal-d3 { transition-delay: 0.2s; }
+    .reveal-d1 { transition-delay: 0.08s; }
+    .reveal-d2 { transition-delay: 0.16s; }
+    .reveal-d3 { transition-delay: 0.24s; }
 
     /* ── MOBILE ── */
-    @media (max-width: 680px) {
+    @media (max-width: 720px) {
       .project-card { grid-template-columns: 1fr; }
       .project-number { display: none; }
       .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .contact-wrap { grid-template-columns: 1fr; }
+      .stack-grid { grid-template-columns: 1fr 1fr; }
       .nav-links { display: none; }
-      .contact-bar { flex-direction: column; align-items: flex-start; }
-      .exp-card { grid-template-columns: 1fr; }
-      .exp-meta { text-align: left; }
       footer { flex-direction: column; text-align: center; }
+      #back-top { bottom: 1.25rem; right: 1.25rem; }
+      .hero-social { display: none; }
+    }
+    @media (max-width: 480px) {
+      .stack-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -671,16 +772,17 @@
   <!-- NAV -->
   <nav id="nav">
     <div class="container nav-inner">
-      <a href="#" class="nav-logo">
+      <a href="#home" class="nav-logo">
         <span class="logo-alias">Sheiynee</span>
         <span class="logo-real">Rick Armand de Leon</span>
       </a>
       <ul class="nav-links">
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#stack">Stack</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="#experience" data-section="experience">Experience</a></li>
+        <li><a href="#projects" data-section="projects">Projects</a></li>
+        <li><a href="#stack" data-section="stack">Stack</a></li>
+        <li><a href="#education" data-section="education">Education</a></li>
+        <li><a href="#about" data-section="about">About</a></li>
+        <li><a href="#contact" data-section="contact">Contact</a></li>
       </ul>
     </div>
   </nav>
@@ -700,27 +802,105 @@
         </span>
       </h1>
       <p class="hero-role">
-        <span>BS Computer Science</span> &nbsp;·&nbsp; Cum Laude, PLM 2024 &nbsp;·&nbsp; <span>Full-Stack · Odoo · Discord Bots</span>
+        <span>BS Computer Science, Cum Laude</span> &nbsp;·&nbsp; PLM 2024 &nbsp;·&nbsp;
+        <span>Full-Stack &amp; Odoo Developer</span>
       </p>
       <p class="hero-desc">
-        I build things end-to-end — from Firestore schemas and Express APIs to polished React
-        UIs and Discord bots. Currently working as a Front-End Developer at Journey Better,
+        I build things end-to-end — from Firestore schemas and Express APIs to polished
+        React UIs and Discord bots. Currently a Front-End Developer at Journey Better,
         integrating Webflow CMS with Odoo SaaS backends.
       </p>
       <div class="hero-cta">
         <a href="#projects" class="btn btn-primary">View Projects</a>
-        <a href="https://github.com/Sheiynee" target="_blank" rel="noopener" class="btn btn-ghost">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-          GitHub
-        </a>
-        <a href="https://www.linkedin.com/in/rick-armand-de-leon-810843356/" target="_blank" rel="noopener" class="btn btn-ghost">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-          LinkedIn
-        </a>
-        <a href="mailto:rickarmand3@gmail.com" class="btn btn-ghost">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
-          Email
-        </a>
+        <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+        <div class="hero-social">
+          <!-- GitHub -->
+          <a href="https://github.com/Sheiynee" target="_blank" rel="noopener" class="icon-link" title="GitHub">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          </a>
+          <!-- LinkedIn -->
+          <a href="https://www.linkedin.com/in/rick-armand-de-leon-810843356/" target="_blank" rel="noopener" class="icon-link" title="LinkedIn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <!-- Email -->
+          <a href="mailto:rickarmand3@gmail.com" class="icon-link" title="Email">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- EXPERIENCE -->
+  <div class="container">
+    <section id="experience">
+      <div class="section-label">Experience</div>
+      <div class="timeline">
+
+        <div class="tl-item current reveal reveal-d1">
+          <div class="tl-dot"></div>
+          <div class="tl-meta">
+            <span class="tl-period">Jan 2025 – Present</span>
+            <span class="tl-loc">Makati, PH</span>
+            <span class="tl-badge">Current</span>
+          </div>
+          <div class="tl-company">Journey Better Business Group Inc.</div>
+          <div class="tl-role">Front-End Developer</div>
+          <ul class="tl-bullets">
+            <li>Develop and maintain custom Odoo modules using Python — business logic, model extensions, ORM method overrides.</li>
+            <li>Architected data synchronization between Webflow CMS and Odoo SaaS backends via custom API integrations.</li>
+            <li>Designed responsive frontend interfaces using Webflow and Odoo's QWeb/XML templating engine.</li>
+            <li>Optimized backend performance through efficient PostgreSQL query design and automated Cron Jobs.</li>
+            <li>Collaborated across the full SDLC — from requirement gathering to SaaS deployment.</li>
+          </ul>
+        </div>
+
+        <div class="tl-item reveal reveal-d2">
+          <div class="tl-dot"></div>
+          <div class="tl-meta">
+            <span class="tl-period">Oct 2024 – Dec 2024</span>
+            <span class="tl-loc">Pasig, PH</span>
+          </div>
+          <div class="tl-company">Software Farm International Inc.</div>
+          <div class="tl-role">Python Developer</div>
+          <ul class="tl-bullets">
+            <li>Implemented complex workflow designs into Odoo, customizing modules to fit diverse client operational needs.</li>
+            <li>Resolved critical errors and maintained data integrity across production Odoo environments.</li>
+            <li>Configured Odoo Access Rights and Record Rules to enforce data security and user permissions.</li>
+            <li>Developed Python-based automation solutions to streamline repetitive data tasks and enhance Odoo functionality.</li>
+          </ul>
+        </div>
+
+        <div class="tl-item reveal reveal-d3">
+          <div class="tl-dot"></div>
+          <div class="tl-meta">
+            <span class="tl-period">Jun 2023 – Aug 2023</span>
+            <span class="tl-loc">Manila, PH</span>
+          </div>
+          <div class="tl-company">PLM – ICTO</div>
+          <div class="tl-role">Front-End Developer Intern</div>
+          <ul class="tl-bullets">
+            <li>Developed UI components for the university's Patient Management System (PMS).</li>
+            <li>Built interactive elements using HTML, CSS, PHP, and JavaScript — fully responsive across devices.</li>
+            <li>Collaborated with clients, presented progress, created documentation, and conducted UAT.</li>
+          </ul>
+        </div>
+
+        <div class="tl-item reveal">
+          <div class="tl-dot"></div>
+          <div class="tl-meta">
+            <span class="tl-period">Sep 2023 – Mar 2024</span>
+            <span class="tl-loc">Manila, PH</span>
+          </div>
+          <div class="tl-company">Google Developer Student Club</div>
+          <div class="tl-role">Social Media Manager</div>
+          <ul class="tl-bullets">
+            <li>Managed and curated all social media content — captions, content calendar, and club event promotions to drive student engagement.</li>
+          </ul>
+        </div>
+
       </div>
     </section>
   </div>
@@ -732,7 +912,6 @@
     <section id="projects">
       <div class="section-label">Projects</div>
       <div class="projects-grid">
-
         <div class="project-card reveal">
           <div>
             <div class="project-status">In Progress</div>
@@ -767,81 +946,8 @@
           </div>
           <div class="project-number">01</div>
         </div>
-
-        <div class="project-card reveal" style="opacity:0.38;pointer-events:none;">
-          <div>
-            <div style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:var(--text-muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem;">Coming Soon</div>
-            <h2 class="project-title" style="color:var(--text-muted);">Next Project</h2>
-            <p class="project-desc" style="color:var(--text-muted);">Something new is in the works. Check back soon.</p>
-          </div>
-          <div class="project-number">02</div>
-        </div>
-
       </div>
-    </section>
-  </div>
-
-  <div class="divider"></div>
-
-  <!-- EXPERIENCE -->
-  <div class="container">
-    <section id="experience">
-      <div class="section-label">Experience</div>
-      <div class="exp-list">
-
-        <div class="exp-card reveal reveal-d1">
-          <div>
-            <div class="exp-company">Journey Better Business Group Inc.</div>
-            <div class="exp-role">Front-End Developer</div>
-            <ul class="exp-bullets">
-              <li>Develop and maintain custom Odoo modules using Python — business logic, model extensions, ORM method overrides.</li>
-              <li>Architected data synchronization between Webflow CMS and Odoo SaaS backends via custom API integrations.</li>
-              <li>Designed responsive frontend interfaces using Webflow and Odoo's QWeb/XML templating engine.</li>
-              <li>Optimized backend performance through efficient PostgreSQL query design and automated Cron Jobs.</li>
-              <li>Collaborated across the full SDLC — from requirement gathering to SaaS deployment.</li>
-            </ul>
-          </div>
-          <div class="exp-meta">
-            <div class="exp-period">Jan 2025 – Present</div>
-            <div class="exp-location">Makati, PH</div>
-            <div class="exp-badge">Current</div>
-          </div>
-        </div>
-
-        <div class="exp-card reveal reveal-d2">
-          <div>
-            <div class="exp-company">Software Farm International Inc.</div>
-            <div class="exp-role">Python Developer</div>
-            <ul class="exp-bullets">
-              <li>Implemented complex workflow designs into Odoo, customizing modules to fit diverse client operational needs.</li>
-              <li>Resolved critical errors and maintained data integrity across production Odoo environments.</li>
-              <li>Configured Odoo Access Rights and Record Rules to enforce data security and user permissions.</li>
-              <li>Developed Python-based automation solutions to streamline repetitive data tasks and enhance Odoo functionality.</li>
-            </ul>
-          </div>
-          <div class="exp-meta">
-            <div class="exp-period">Oct 2024 – Dec 2024</div>
-            <div class="exp-location">Pasig, PH</div>
-          </div>
-        </div>
-
-        <div class="exp-card reveal reveal-d3">
-          <div>
-            <div class="exp-company">PLM – ICTO</div>
-            <div class="exp-role">Front-End Developer Intern</div>
-            <ul class="exp-bullets">
-              <li>Developed UI components for the university's Patient Management System (PMS).</li>
-              <li>Built interactive elements using HTML, CSS, PHP, and JavaScript — fully responsive across devices.</li>
-              <li>Collaborated with clients, presented progress, created documentation, and conducted UAT.</li>
-            </ul>
-          </div>
-          <div class="exp-meta">
-            <div class="exp-period">Jun 2023 – Aug 2023</div>
-            <div class="exp-location">Manila, PH</div>
-          </div>
-        </div>
-
-      </div>
+      <p class="projects-more reveal">More projects coming soon — currently heads-down on TaskFlow.</p>
     </section>
   </div>
 
@@ -892,7 +998,7 @@
           </div>
         </div>
         <div class="stack-item">
-          <div class="stack-cat">Deploy</div>
+          <div class="stack-cat">Tools &amp; Deploy</div>
           <div class="stack-items">
             <span>Vercel</span>
             <span>Railway / Render</span>
@@ -900,6 +1006,32 @@
             <span>GitHub Pages</span>
           </div>
         </div>
+        <div class="stack-item">
+          <div class="stack-cat">Platforms</div>
+          <div class="stack-items">
+            <span>Odoo SaaS</span>
+            <span>Webflow CMS</span>
+            <span>Firebase</span>
+            <span>Discord API</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- EDUCATION -->
+  <div class="container">
+    <section id="education">
+      <div class="section-label">Education</div>
+      <div class="edu-card reveal">
+        <div>
+          <div class="edu-school">Pamantasan ng Lungsod ng Maynila</div>
+          <div class="edu-degree">Bachelor of Science in Computer Science</div>
+          <span class="edu-honor">✦ Cum Laude</span>
+        </div>
+        <div class="edu-year">Graduated 2024<br/>Manila, PH</div>
       </div>
     </section>
   </div>
@@ -918,29 +1050,15 @@
             ground up.
           </p>
           <p>
-            By day I'm working with Odoo, Webflow, and PostgreSQL at Journey Better Business Group,
-            architecting integrations between CMS and SaaS backends. By night I build
+            By day I'm working with Odoo, Webflow, and PostgreSQL at Journey Better Business
+            Group, architecting integrations between CMS and SaaS backends. By night I build
             personal projects like TaskFlow — a PM tool with Discord bots, role-based access,
             and real-time notifications.
           </p>
           <p>
             Outside of code: music, basketball, volleyball, and video games keep me sane.
           </p>
-
-          <!-- Education inline -->
-          <div style="margin-top:2rem;">
-            <div class="section-label" style="margin-bottom:1rem;font-size:0.6rem;">Education</div>
-            <div class="edu-card">
-              <div>
-                <div class="edu-school">Pamantasan ng Lungsod ng Maynila</div>
-                <div class="edu-degree">BS Computer Science</div>
-                <span class="edu-honor">✦ Cum Laude</span>
-              </div>
-              <div class="edu-year">2024 &nbsp;·&nbsp; Manila, PH</div>
-            </div>
-          </div>
         </div>
-
         <div class="about-details reveal">
           <div class="detail-row">
             <span class="detail-label">Full Name</span>
@@ -953,10 +1071,6 @@
           <div class="detail-row">
             <span class="detail-label">Location</span>
             <span class="detail-val">Caloocan City, Metro Manila, PH</span>
-          </div>
-          <div class="detail-row">
-            <span class="detail-label">Email</span>
-            <span class="detail-val"><a href="mailto:rickarmand3@gmail.com">rickarmand3@gmail.com</a></span>
           </div>
           <div class="detail-row">
             <span class="detail-label">Currently At</span>
@@ -989,23 +1103,53 @@
   <div class="container">
     <section id="contact">
       <div class="section-label">Contact</div>
-      <div class="contact-bar reveal">
-        <div class="contact-text">
-          <h3>Let's work together.</h3>
-          <p>Open to freelance, full-time, and collaborative opportunities.</p>
-        </div>
-        <div class="contact-links">
-          <a href="mailto:rickarmand3@gmail.com" class="btn btn-primary">
+      <div class="contact-wrap reveal">
+        <div class="contact-main">
+          <div>
+            <h3>Let's build something together.</h3>
+            <p>Open to full-time roles, freelance work, and interesting collaborations. I'm based in Metro Manila and available remotely.</p>
+          </div>
+          <a href="mailto:rickarmand3@gmail.com" class="btn btn-primary" style="align-self:flex-start;">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
             Send Email
           </a>
-          <a href="https://www.linkedin.com/in/rick-armand-de-leon-810843356/" target="_blank" rel="noopener" class="btn btn-ghost">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-            LinkedIn
+        </div>
+        <div class="contact-links-col">
+          <a href="mailto:rickarmand3@gmail.com" class="contact-link-item">
+            <div class="contact-link-left">
+              <div class="contact-icon">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+              </div>
+              <div>
+                <span class="contact-link-label">Email</span>
+                <span class="contact-link-val">rickarmand3@gmail.com</span>
+              </div>
+            </div>
+            <svg class="contact-link-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
           </a>
-          <a href="https://github.com/Sheiynee" target="_blank" rel="noopener" class="btn btn-ghost">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-            GitHub
+          <a href="https://www.linkedin.com/in/rick-armand-de-leon-810843356/" target="_blank" rel="noopener" class="contact-link-item">
+            <div class="contact-link-left">
+              <div class="contact-icon">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              </div>
+              <div>
+                <span class="contact-link-label">LinkedIn</span>
+                <span class="contact-link-val">Rick Armand de Leon</span>
+              </div>
+            </div>
+            <svg class="contact-link-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
+          </a>
+          <a href="https://github.com/Sheiynee" target="_blank" rel="noopener" class="contact-link-item">
+            <div class="contact-link-left">
+              <div class="contact-icon">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              </div>
+              <div>
+                <span class="contact-link-label">GitHub</span>
+                <span class="contact-link-val">github.com/Sheiynee</span>
+              </div>
+            </div>
+            <svg class="contact-link-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
           </a>
         </div>
       </div>
@@ -1015,17 +1159,39 @@
   <!-- FOOTER -->
   <div class="container">
     <footer>
-      <p>© 2026 Rick Armand de Leon (Sheiynee). Hosted on GitHub Pages.</p>
-      <p>Built with HTML · CSS · JS — no frameworks</p>
+      <p>© 2026 Rick Armand de Leon · Sheiynee · Metro Manila, PH</p>
+      <p>HTML · CSS · JS — no frameworks · GitHub Pages</p>
     </footer>
   </div>
 
+  <!-- SCROLL TO TOP -->
+  <a href="#home" id="back-top" title="Back to top">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 15l-6-6-6 6"/></svg>
+  </a>
+
   <script>
+    // Nav scroll + active section highlight
     const nav = document.getElementById('nav');
+    const navLinks = document.querySelectorAll('.nav-links a[data-section]');
+    const sections = document.querySelectorAll('section[id]');
+    const backTop = document.getElementById('back-top');
+
     window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 40);
+      const y = window.scrollY;
+      nav.classList.toggle('scrolled', y > 40);
+      backTop.classList.toggle('visible', y > 400);
+
+      // Active nav link
+      let current = '';
+      sections.forEach(s => {
+        if (y >= s.offsetTop - 120) current = s.id;
+      });
+      navLinks.forEach(a => {
+        a.classList.toggle('active', a.dataset.section === current);
+      });
     });
 
+    // Scroll reveal
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.isIntersecting) {
