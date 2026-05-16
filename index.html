@@ -43,7 +43,6 @@
       overflow-x: hidden;
     }
 
-    /* noise */
     body::before {
       content: '';
       position: fixed;
@@ -787,7 +786,6 @@
   <div class="glow-orb one"></div>
   <div class="glow-orb two"></div>
 
-  <!-- SCROLL TO TOP -->
   <a href="#home" id="back-top" aria-label="Back to top">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
   </a>
@@ -814,7 +812,7 @@
     <section class="hero">
       <div class="hero-eyebrow">
         <span class="dot-live"></span>
-        Front-End Developer &mdash; Journey Better, Makati PH
+        Full-Stack Developer &amp; Automation Engineer &mdash; Journey Better, Makati PH
       </div>
       <h1 class="hero-name">
         <span class="name-flip">
@@ -825,12 +823,12 @@
       </h1>
       <p class="hero-tagline">
         <span>BS Computer Science · Cum Laude, PLM 2024</span>
-        &nbsp;·&nbsp; Full-Stack &nbsp;·&nbsp; Odoo &nbsp;·&nbsp; Discord Bots
+        &nbsp;·&nbsp; Full-Stack &nbsp;·&nbsp; Odoo &nbsp;·&nbsp; Workflow Automation
       </p>
       <p class="hero-desc">
-        I build things end-to-end — Firestore schemas, Express APIs, React UIs,
-        and Discord bots. Currently integrating Webflow CMS with Odoo SaaS backends
-        at Journey Better Business Group.
+        I build things end-to-end — Firestore schemas, Express APIs, React UIs, and custom Odoo
+        modules. Currently serving US-based clients at Journey Better Business Group, architecting
+        CMS-to-ERP integrations and automating business workflows with n8n and Python.
       </p>
       <div class="hero-cta">
         <a href="#experience" class="btn btn-primary">View My Work</a>
@@ -858,6 +856,7 @@
       <div class="section-label">Experience</div>
       <div class="exp-timeline">
 
+        <!-- Journey Better -->
         <div class="exp-item reveal">
           <div class="exp-dot"></div>
           <div class="exp-header">
@@ -866,19 +865,22 @@
               <span class="exp-current">Current</span>
             </div>
             <div class="exp-sub">
-              <span class="exp-role">Front-End Developer</span>
-              <span class="exp-meta-inline">Jan 2025 – Present &nbsp;·&nbsp; Makati, PH</span>
+              <span class="exp-role">Full-Stack Developer &amp; Client Solutions Engineer</span>
+              <span class="exp-meta-inline">Jan 2025 – Present &nbsp;·&nbsp; Makati, PH &nbsp;·&nbsp; US-based clients</span>
             </div>
           </div>
           <ul class="exp-bullets">
-            <li>Develop and maintain custom Odoo modules using Python — business logic, model extensions, and ORM method overrides.</li>
-            <li>Architected data synchronization between Webflow CMS and Odoo SaaS backends via custom API integrations.</li>
+            <li>Serve as primary technical liaison for US-based clients — leading reconnection meetings, drafting workflow proposals, and managing ongoing ticket resolution via direct communication and email.</li>
+            <li>Develop and maintain custom Odoo modules using Python — business logic, model extensions, and ORM method overrides tailored to diverse client operational needs.</li>
+            <li>Architected data synchronization between Webflow CMS and Odoo SaaS backends via custom API integrations, eliminating manual data entry across client systems.</li>
+            <li>Design and implement workflow automations using n8n to streamline repetitive business processes and reduce operational overhead for clients.</li>
             <li>Designed responsive frontend interfaces using Webflow and Odoo's QWeb/XML templating engine.</li>
             <li>Optimized backend performance through efficient PostgreSQL query design and automated Cron Jobs.</li>
-            <li>Collaborated across the full SDLC — from technical requirement gathering to SaaS deployment.</li>
+            <li>Collaborated across the full SDLC — from technical requirement gathering through client proposals to SaaS deployment.</li>
           </ul>
         </div>
 
+        <!-- Software Farm -->
         <div class="exp-item reveal reveal-d1">
           <div class="exp-dot"></div>
           <div class="exp-header">
@@ -886,18 +888,19 @@
               <span class="exp-company">Software Farm International Inc.</span>
             </div>
             <div class="exp-sub">
-              <span class="exp-role">Python Developer</span>
-              <span class="exp-meta-inline">Oct 2024 – Dec 2024 &nbsp;·&nbsp; Pasig, PH</span>
+              <span class="exp-role">Python Developer / Odoo Specialist</span>
+              <span class="exp-meta-inline">Oct 2024 – Dec 2024 &nbsp;·&nbsp; Pasig, PH &nbsp;·&nbsp; Odoo Ready Partner</span>
             </div>
           </div>
           <ul class="exp-bullets">
-            <li>Implemented complex workflow designs into Odoo by customizing modules with Python scripting to fit diverse client operational needs.</li>
-            <li>Resolved critical errors and maintained data integrity across production Odoo environments.</li>
-            <li>Configured Odoo Access Rights and Record Rules to enforce data security and user permissions.</li>
-            <li>Developed Python-based automation solutions to streamline repetitive data tasks and enhance Odoo functionality.</li>
+            <li>Implemented complex workflow designs into Odoo by customizing modules with Python scripting to fit diverse client operational needs across multiple industries.</li>
+            <li>Resolved critical production errors and maintained data integrity across live Odoo environments under tight turnaround requirements.</li>
+            <li>Configured Odoo Access Rights and Record Rules to enforce data security and role-based user permissions.</li>
+            <li>Developed Python-based automation solutions to streamline repetitive data tasks and extend core Odoo functionality for clients.</li>
           </ul>
         </div>
 
+        <!-- PLM Intern -->
         <div class="exp-item reveal reveal-d2">
           <div class="exp-dot"></div>
           <div class="exp-header">
@@ -916,6 +919,7 @@
           </ul>
         </div>
 
+        <!-- GDSC -->
         <div class="exp-item reveal reveal-d3">
           <div class="exp-dot"></div>
           <div class="exp-header">
@@ -945,7 +949,6 @@
       <div class="section-label">Projects</div>
       <div class="projects-grid">
 
-        <!-- PROJECT 01: TaskFlow -->
         <div class="project-card reveal">
           <div>
             <div class="project-status">Completed</div>
@@ -981,7 +984,6 @@
           <div class="project-number">01</div>
         </div>
 
-        <!-- PROJECT 02: LinkFOLIO -->
         <div class="project-card reveal reveal-d1">
           <div>
             <div class="project-status in-progress">In Progress</div>
@@ -1009,7 +1011,7 @@
                 Live Demo
               </a>
               <a href="https://github.com/Sheiynee/LinkFOLIO" target="_blank" rel="noopener">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
                 Source
               </a>
             </div>
@@ -1062,31 +1064,33 @@
           </div>
         </div>
         <div class="stack-item">
+          <div class="stack-cat">Automation</div>
+          <div class="stack-items">
+            <span>n8n</span>
+            <span>Odoo Cron Jobs</span>
+            <span>Python scripting</span>
+            <span>Webflow CMS API</span>
+            <span>Webhook integrations</span>
+          </div>
+        </div>
+        <div class="stack-item">
           <div class="stack-cat">Integrations</div>
           <div class="stack-items">
             <span>Discord.js</span>
             <span>NextAuth v5</span>
             <span>Resend</span>
-            <span>Webflow CMS API</span>
             <span>Firebase Auth &amp; Storage</span>
           </div>
         </div>
         <div class="stack-item">
-          <div class="stack-cat">Deploy</div>
+          <div class="stack-cat">Deploy &amp; Tools</div>
           <div class="stack-items">
             <span>Vercel</span>
             <span>Railway / Render</span>
             <span>Firebase Hosting</span>
             <span>GitHub Pages</span>
-          </div>
-        </div>
-        <div class="stack-item">
-          <div class="stack-cat">Tools</div>
-          <div class="stack-items">
             <span>Git &amp; GitHub</span>
-            <span>VS Code</span>
             <span>Postman</span>
-            <span>ESLint</span>
           </div>
         </div>
       </div>
@@ -1103,17 +1107,25 @@
         <div class="about-text reveal">
           <p>
             I'm Rick Armand de Leon — a Computer Science graduate from Pamantasan ng Lungsod
-            ng Maynila (Cum Laude, 2024) and a developer who likes building things from the ground up.
+            ng Maynila (Cum Laude, 2024) and a developer who builds things end-to-end, from
+            database schema to deployed UI.
           </p>
           <p>
-            By day I'm at Journey Better Business Group working with Odoo, Webflow, and PostgreSQL —
-            architecting data sync between CMS and SaaS backends. By night I build
-            personal projects like TaskFlow — a PM tool with Discord bots, role-based access,
-            and real-time notifications — and LinkFOLIO, a live creator page builder
-            powered by Next.js and Supabase.
+            By day I'm at Journey Better Business Group, working directly with US-based clients
+            to architect Odoo ERP solutions, integrate Webflow CMS with SaaS backends, and
+            automate business workflows with n8n and Python. I handle the full loop — technical
+            scoping, client meetings, proposals, and delivery.
           </p>
           <p>
-            Outside of code: music, basketball, volleyball, and video games keep me sane.
+            Before that, I specialized in Odoo module development at an official Odoo Ready
+            Partner, building custom Python solutions for clients across multiple industries.
+            Outside of my day job, I build side projects like TaskFlow and LinkFOLIO that let
+            me explore new parts of the stack.
+          </p>
+          <p>
+            I'm open to remote and international opportunities — particularly in full-stack
+            development, ERP consulting, or workflow automation. Outside of code: music,
+            basketball, volleyball, and video games keep me sane.
           </p>
         </div>
         <div class="about-details reveal">
@@ -1151,7 +1163,7 @@
           </div>
           <div class="detail-row">
             <span class="detail-label">Status</span>
-            <span class="detail-val" style="color:var(--green);">Open to new opportunities</span>
+            <span class="detail-val" style="color:var(--green);">Open to remote &amp; international roles</span>
           </div>
         </div>
       </div>
@@ -1184,7 +1196,7 @@
       <div class="contact-wrap reveal">
         <div class="contact-cell">
           <h3>Let's work<br><em>together.</em></h3>
-          <p>Open to freelance, full-time, and collaborative opportunities. Feel free to reach out through any of these channels.</p>
+          <p>Open to remote, international, freelance, and full-time opportunities. Feel free to reach out through any of these channels.</p>
         </div>
         <div class="contact-cell">
           <div class="contact-links">
@@ -1221,7 +1233,6 @@
   </div>
 
   <script>
-    // Nav scroll + active link
     const nav = document.getElementById('nav');
     const navLinks = document.querySelectorAll('.nav-links a[data-section]');
     const sections = document.querySelectorAll('section[id]');
@@ -1232,7 +1243,6 @@
       nav.classList.toggle('scrolled', y > 40);
       backTop.classList.toggle('visible', y > 400);
 
-      // active nav link
       let current = '';
       sections.forEach(s => {
         if (y >= s.offsetTop - 120) current = s.id;
@@ -1242,7 +1252,6 @@
       });
     });
 
-    // Scroll reveal
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.isIntersecting) {
