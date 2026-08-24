@@ -560,6 +560,105 @@
       letter-spacing: 0.08em;
     }
 
+    /* ── CLIENT SITES ── */
+    .clients-grid { display: flex; flex-direction: column; gap: 2px; }
+    .client-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2.2rem 2.5rem;
+      transition: background 0.25s, border-color 0.25s, transform 0.25s;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 2px;
+    }
+    .client-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--blue-dim) 0%, transparent 55%);
+      opacity: 0;
+      transition: opacity 0.35s;
+      pointer-events: none;
+    }
+    .client-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-accent);
+      transform: translateY(-2px);
+    }
+    .client-card:hover::before { opacity: 1; }
+    .client-top {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.4rem;
+    }
+    .client-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.7rem;
+      color: var(--text-primary);
+      letter-spacing: -0.01em;
+      line-height: 1.15;
+    }
+    .client-platform {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--blue);
+      background: var(--blue-dim);
+      padding: 0.22rem 0.6rem;
+      border-radius: 2px;
+      white-space: nowrap;
+    }
+    .client-desc {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      margin-bottom: 1.1rem;
+      max-width: 600px;
+    }
+    .client-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin-bottom: 1.4rem;
+    }
+    .client-bullets li {
+      font-size: 0.86rem;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      padding-left: 1rem;
+      position: relative;
+      max-width: 620px;
+    }
+    .client-bullets li::before {
+      content: '–';
+      position: absolute;
+      left: 0;
+      color: var(--text-muted);
+    }
+    .client-links { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+    .client-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.74rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-decoration: none;
+      color: var(--blue);
+      border: 1px solid rgba(110,168,200,0.28);
+      background: var(--blue-dim);
+      padding: 0.42rem 1rem;
+      border-radius: 3px;
+      transition: all 0.2s;
+    }
+    .client-links a:hover { background: rgba(110,168,200,0.22); }
+
     /* ── STACK ── */
     .stack-grid {
       display: grid;
@@ -769,6 +868,7 @@
     @media (max-width: 700px) {
       .project-card { grid-template-columns: 1fr; }
       .project-number { display: none; }
+      .client-top { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
       .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
       .stack-grid { grid-template-columns: 1fr 1fr; }
       .contact-wrap { grid-template-columns: 1fr; }
@@ -800,6 +900,7 @@
       <ul class="nav-links">
         <li><a href="#experience" data-section="experience">Experience</a></li>
         <li><a href="#projects" data-section="projects">Projects</a></li>
+        <li><a href="#client-sites" data-section="client-sites">Client Sites</a></li>
         <li><a href="#stack" data-section="stack">Stack</a></li>
         <li><a href="#about" data-section="about">About</a></li>
         <li><a href="#contact" data-section="contact">Contact</a></li>
@@ -812,7 +913,7 @@
     <section class="hero">
       <div class="hero-eyebrow">
         <span class="dot-live"></span>
-        Full-Stack Developer &amp; Automation Engineer &mdash; Journey Better, Makati PH
+        Odoo Development Manager &mdash; Journey Better, Makati PH
       </div>
       <h1 class="hero-name">
         <span class="name-flip">
@@ -823,12 +924,12 @@
       </h1>
       <p class="hero-tagline">
         <span>BS Computer Science · Cum Laude, PLM 2024</span>
-        &nbsp;·&nbsp; Full-Stack &nbsp;·&nbsp; Odoo &nbsp;·&nbsp; Workflow Automation
+        &nbsp;·&nbsp; Odoo &nbsp;·&nbsp; Full-Stack &nbsp;·&nbsp; Workflow Automation
       </p>
       <p class="hero-desc">
         I build things end-to-end — Firestore schemas, Express APIs, React UIs, and custom Odoo
-        modules. Currently serving US-based clients at Journey Better Business Group, architecting
-        CMS-to-ERP integrations and automating business workflows with n8n and Python.
+        modules. Now leading the Odoo development team at Journey Better Business Group, directing
+        technical delivery, code quality, and CMS-to-ERP integrations for US-based clients.
       </p>
       <div class="hero-cta">
         <a href="#experience" class="btn btn-primary">View My Work</a>
@@ -856,7 +957,7 @@
       <div class="section-label">Experience</div>
       <div class="exp-timeline">
 
-        <!-- Journey Better -->
+        <!-- Journey Better - Odoo Development Manager -->
         <div class="exp-item reveal">
           <div class="exp-dot"></div>
           <div class="exp-header">
@@ -865,23 +966,40 @@
               <span class="exp-current">Current</span>
             </div>
             <div class="exp-sub">
-              <span class="exp-role">Full-Stack Developer &amp; Client Solutions Engineer</span>
-              <span class="exp-meta-inline">Jan 2025 – Present &nbsp;·&nbsp; Makati, PH &nbsp;·&nbsp; US-based clients</span>
+              <span class="exp-role">Odoo Development Manager</span>
+              <span class="exp-meta-inline">Jun 2026 – Present &nbsp;·&nbsp; Makati, PH &nbsp;·&nbsp; US-based clients</span>
             </div>
           </div>
           <ul class="exp-bullets">
-            <li>Serve as primary technical liaison for US-based clients — leading reconnection meetings, drafting workflow proposals, and managing ongoing ticket resolution via direct communication and email.</li>
-            <li>Develop and maintain custom Odoo modules using Python — business logic, model extensions, and ORM method overrides tailored to diverse client operational needs.</li>
-            <li>Architected data synchronization between Webflow CMS and Odoo SaaS backends via custom API integrations, eliminating manual data entry across client systems.</li>
-            <li>Design and implement workflow automations using n8n to streamline repetitive business processes and reduce operational overhead for clients.</li>
-            <li>Designed responsive frontend interfaces using Webflow and Odoo's QWeb/XML templating engine.</li>
-            <li>Optimized backend performance through efficient PostgreSQL query design and automated Cron Jobs.</li>
-            <li>Collaborated across the full SDLC — from technical requirement gathering through client proposals to SaaS deployment.</li>
+            <li>Oversee and direct the Odoo development team, providing technical leadership and conducting QC code reviews on all tasks to ensure software reliability and standards.</li>
+            <li>Architected and managed data synchronization between Webflow CMS and Odoo SaaS backends via custom API integrations.</li>
+            <li>Built automated n8n workflows for data migration, data analysis, and mass data editing in Odoo.</li>
+            <li>Developed Python scripts for automated database dumping and backup operations.</li>
+          </ul>
+        </div>
+
+        <!-- Journey Better - Front End Developer -->
+        <div class="exp-item reveal reveal-d1">
+          <div class="exp-dot"></div>
+          <div class="exp-header">
+            <div class="exp-top">
+              <span class="exp-company">Journey Better Business Group Inc.</span>
+            </div>
+            <div class="exp-sub">
+              <span class="exp-role">Front End Developer</span>
+              <span class="exp-meta-inline">Jan 2026 – May 2026 &nbsp;·&nbsp; Makati, PH &nbsp;·&nbsp; US-based clients</span>
+            </div>
+          </div>
+          <ul class="exp-bullets">
+            <li>Developed and maintained custom Odoo modules using Python, focusing on business logic, model extensions, and ORM method overrides.</li>
+            <li>Designed and implemented responsive frontend interfaces using Webflow and Odoo's QWeb/XML templating engine.</li>
+            <li>Optimized backend performance through PostgreSQL query tuning and automated Scheduled Actions (Cron Jobs).</li>
+            <li>Collaborated across the full SDLC from requirement gathering to SaaS environment deployment.</li>
           </ul>
         </div>
 
         <!-- Software Farm -->
-        <div class="exp-item reveal reveal-d1">
+        <div class="exp-item reveal reveal-d2">
           <div class="exp-dot"></div>
           <div class="exp-header">
             <div class="exp-top">
@@ -889,7 +1007,7 @@
             </div>
             <div class="exp-sub">
               <span class="exp-role">Python Developer / Odoo Specialist</span>
-              <span class="exp-meta-inline">Oct 2024 – Dec 2024 &nbsp;·&nbsp; Pasig, PH &nbsp;·&nbsp; Odoo Ready Partner</span>
+              <span class="exp-meta-inline">Oct 2024 – Dec 2025 &nbsp;·&nbsp; Pasig, PH &nbsp;·&nbsp; Odoo Ready Partner</span>
             </div>
           </div>
           <ul class="exp-bullets">
@@ -899,6 +1017,7 @@
             <li>Developed Python-based automation solutions to streamline repetitive data tasks and extend core Odoo functionality for clients.</li>
           </ul>
         </div>
+
 
         <!-- PLM Intern -->
         <div class="exp-item reveal reveal-d2">
@@ -986,7 +1105,7 @@
 
         <div class="project-card reveal reveal-d1">
           <div>
-            <div class="project-status in-progress">In Progress</div>
+            <div class="project-status">Completed</div>
             <h2 class="project-title">LinkFOLIO</h2>
             <p class="project-desc">
               A live page builder for creators — a single hub aggregating your identity across
@@ -1051,6 +1170,84 @@
             </div>
           </div>
           <div class="project-number">03</div>
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CLIENT SITES -->
+  <div class="container">
+    <section id="client-sites">
+      <div class="section-label">Client Sites — Odoo Website Design</div>
+      <div class="clients-grid">
+
+        <div class="client-card reveal">
+          <div class="client-top">
+            <h2 class="client-title">Scilogex</h2>
+            <span class="client-platform">Odoo Website Editor</span>
+          </div>
+          <p class="client-desc">
+            Benchtop lab equipment manufacturer — centrifuges, stirrers, pipettes,
+            and liquid-handling products for research labs.
+          </p>
+          <ul class="client-bullets">
+            <li>Built the instant quote form and its underlying calculation logic, letting visitors request pricing straight from a product page.</li>
+            <li>Translated the design team's mockups into live product and category page layouts across the catalog.</li>
+            <li>Rebuilt the products mega menu for clearer navigation across a wide, category-heavy catalog.</li>
+            <li>Reworked the checkout page layout and flow.</li>
+          </ul>
+          <div class="client-links">
+            <a href="https://www.scilogex.com" target="_blank" rel="noopener">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+              Visit Site
+            </a>
+          </div>
+        </div>
+
+        <div class="client-card reveal reveal-d1">
+          <div class="client-top">
+            <h2 class="client-title">Block Scientific</h2>
+            <span class="client-platform">Odoo Website Editor</span>
+          </div>
+          <p class="client-desc">
+            Distributor of new, used, and refurbished clinical lab analyzers and equipment
+            for hospitals and diagnostic labs.
+          </p>
+          <ul class="client-bullets">
+            <li>Added the homepage promotional banner and repositioned the lead-generation form for better visibility.</li>
+            <li>Translated the design team's mockups into live homepage and page layouts.</li>
+            <li>Built the sales rep banner module, shown conditionally based on the visitor's selected or detected US region so each visitor sees their assigned rep.</li>
+          </ul>
+          <div class="client-links">
+            <a href="https://www.blockscientific.com" target="_blank" rel="noopener">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+              Visit Site
+            </a>
+          </div>
+        </div>
+
+        <div class="client-card reveal reveal-d2">
+          <div class="client-top">
+            <h2 class="client-title">Yamato USA</h2>
+            <span class="client-platform">Odoo Website Editor</span>
+          </div>
+          <p class="client-desc">
+            US arm of a 140-year-old Japanese lab equipment manufacturer — rotary evaporators,
+            spray dryers, water purification, and industry-specific lab systems.
+          </p>
+          <ul class="client-bullets">
+            <li>Rebuilt the products mega menu and its mobile navigation counterpart.</li>
+            <li>Implemented designer-created layouts across several product and category pages.</li>
+          </ul>
+          <div class="client-links">
+            <a href="https://www.yamato-usa.com" target="_blank" rel="noopener">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+              Visit Site
+            </a>
+          </div>
         </div>
 
       </div>
@@ -1145,10 +1342,9 @@
             database schema to deployed UI.
           </p>
           <p>
-            By day I'm at Journey Better Business Group, working directly with US-based clients
-            to architect Odoo ERP solutions, integrate Webflow CMS with SaaS backends, and
-            automate business workflows with n8n and Python. I handle the full loop — technical
-            scoping, client meetings, proposals, and delivery.
+            By day I lead the Odoo development team at Journey Better Business Group, directing
+            technical delivery and code quality for US-based clients while architecting Odoo ERP
+            solutions, Webflow-to-SaaS integrations, and n8n-driven workflow automation.
           </p>
           <p>
             Before that, I specialized in Odoo module development at an official Odoo Ready
