@@ -1,1496 +1,956 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sheiynee — Rick Armand de Leon</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Rick Armand De Leon — Odoo Development Manager</title>
+<meta name="description" content="Rick Armand De Leon — Odoo Development Manager. ERP customization, systems integration, and workflow automation." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet" />
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 
-    :root {
-      --bg: #0a0a0b;
-      --bg-surface: #111113;
-      --bg-card: #161618;
-      --bg-card-hover: #1c1c1f;
-      --border: rgba(255,255,255,0.07);
-      --border-accent: rgba(255,255,255,0.16);
-      --text-primary: #f0ede8;
-      --text-secondary: #84807a;
-      --text-muted: #363633;
-      --accent: #c8a96e;
-      --accent-dim: rgba(200,169,110,0.12);
-      --accent-glow: rgba(200,169,110,0.06);
-      --tag-bg: rgba(255,255,255,0.04);
-      --tag-text: #5e5b56;
-      --green: #5dc8a0;
-      --green-dim: rgba(93,200,160,0.1);
-      --blue: #6ea8c8;
-      --blue-dim: rgba(110,168,200,0.1);
-    }
+  :root{
+    --paper:#EDEBE2;
+    --paper-dim:#E3E0D3;
+    --ink:#1C2A28;
+    --ink-soft:#5B675F;
+    --ink-faint:#8B9089;
+    --line:#C7C1AC;
+    --line-strong:#A79F87;
+    --red:#AE3A2B;
+    --red-dim:rgba(174,58,43,0.09);
+    --red-dim-2:rgba(174,58,43,0.16);
+    --sans:'Space Grotesk',sans-serif;
+    --serif:'Source Serif 4',serif;
+    --mono:'IBM Plex Mono',monospace;
+  }
 
-    html { scroll-behavior: smooth; }
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+  }
 
-    body {
-      background: var(--bg);
-      color: var(--text-primary);
-      font-family: 'Syne', sans-serif;
-      font-size: 16px;
-      line-height: 1.6;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--serif);
+    font-size:16px;
+    line-height:1.6;
+  }
 
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.4;
-    }
+  html, body{ overflow-x:hidden; }
 
-    .glow-orb {
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(140px);
-      pointer-events: none;
-      z-index: 0;
-    }
-    .glow-orb.one {
-      width: 700px; height: 700px;
-      background: radial-gradient(circle, rgba(200,169,110,0.055) 0%, transparent 70%);
-      top: -280px; left: -280px;
-    }
-    .glow-orb.two {
-      width: 500px; height: 500px;
-      background: radial-gradient(circle, rgba(93,200,160,0.035) 0%, transparent 70%);
-      bottom: -180px; right: -180px;
-    }
+  a{color:inherit;}
+  ::selection{background:var(--red-dim-2); color:var(--ink);}
 
-    .container {
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 0 2rem;
-      position: relative;
-      z-index: 1;
-    }
+  :focus-visible{
+    outline:2px solid var(--red);
+    outline-offset:2px;
+  }
 
-    /* ── NAV ── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      padding: 1.2rem 0;
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.3s, background 0.3s, backdrop-filter 0.3s;
-    }
-    nav.scrolled {
-      background: rgba(10,10,11,0.9);
-      border-color: var(--border);
-      backdrop-filter: blur(20px);
-    }
-    .nav-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .nav-logo {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.15rem;
-      color: var(--accent);
-      text-decoration: none;
-      letter-spacing: 0.02em;
-      position: relative;
-      display: inline-block;
-      min-width: 90px;
-    }
-    .logo-alias { transition: opacity 0.28s ease; display: block; }
-    .logo-real {
-      position: absolute;
-      left: 0; top: 50%;
-      transform: translateY(-50%);
-      white-space: nowrap;
-      font-size: 0.7rem;
-      font-family: 'JetBrains Mono', monospace;
-      color: var(--text-secondary);
-      opacity: 0;
-      transition: opacity 0.28s ease;
-      pointer-events: none;
-    }
-    .nav-logo:hover .logo-alias { opacity: 0; }
-    .nav-logo:hover .logo-real { opacity: 1; }
+  .wrap{
+    max-width:980px;
+    margin:0 auto;
+    padding:0 1.75rem;
+  }
 
-    .nav-links {
-      display: flex;
-      gap: 0.25rem;
-      list-style: none;
-    }
-    .nav-links a {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 0.4rem 0.75rem;
-      border-radius: 3px;
-      transition: color 0.2s, background 0.2s;
-      position: relative;
-    }
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: 2px; left: 50%; right: 50%;
-      height: 1px;
-      background: var(--accent);
-      transition: left 0.25s ease, right 0.25s ease;
-    }
-    .nav-links a:hover { color: var(--text-primary); }
-    .nav-links a:hover::after,
-    .nav-links a.active::after { left: 0.75rem; right: 0.75rem; }
-    .nav-links a.active { color: var(--text-primary); }
+  /* ── registration marks — the recurring signature: small crosshair
+     ticks like the ones printers/drafters use to align a sheet ── */
+  .reg{
+    position:relative;
+    width:11px;height:11px;
+    flex-shrink:0;
+  }
+  .reg::before,.reg::after{
+    content:'';
+    position:absolute;
+    background:var(--line-strong);
+  }
+  .reg::before{ top:5px;left:0;width:11px;height:1px; }
+  .reg::after{ left:5px;top:0;width:1px;height:11px; }
+  .reg.on{ }
+  .reg.on::before,.reg.on::after{ background:var(--red); }
 
-    /* ── HERO ── */
-    .hero {
-      padding: 172px 0 100px;
-      display: grid;
-      gap: 1.6rem;
-      max-width: 780px;
-    }
-    .hero-eyebrow {
-      display: flex;
-      align-items: center;
-      gap: 0.7rem;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.7rem;
-      color: var(--accent);
-      letter-spacing: 0.1em;
-      opacity: 0;
-      animation: fadeUp 0.6s 0.1s forwards;
-    }
-    .hero-eyebrow::before {
-      content: '';
-      width: 24px; height: 1px;
-      background: var(--accent);
-      opacity: 0.5;
-      flex-shrink: 0;
-    }
-    .dot-live {
-      display: inline-block;
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--green);
-      animation: blink 2s infinite;
-      flex-shrink: 0;
-    }
-    @keyframes blink { 0%,100%{opacity:1}50%{opacity:0.3} }
+  /* ── TOP BAR / TITLE BLOCK HEADER ── */
+  header{
+    border-bottom:1px solid var(--ink);
+    background:var(--paper);
+    position:sticky;
+    top:0;
+    z-index:50;
+  }
+  .titleblock{
+    display:grid;
+    grid-template-columns:1fr auto;
+    align-items:stretch;
+    border-bottom:1px solid var(--line);
+  }
+  .tb-main{
+    padding:0.85rem 0 0.85rem 0;
+    display:flex;
+    align-items:center;
+    gap:0.6rem;
+  }
+  .tb-name{
+    font-family:var(--sans);
+    font-weight:700;
+    font-size:0.86rem;
+    letter-spacing:0.02em;
+  }
+  .tb-role{
+    font-family:var(--mono);
+    font-size:0.68rem;
+    color:var(--ink-soft);
+    letter-spacing:0.02em;
+  }
+  nav{
+    display:flex;
+    align-items:center;
+    gap:0;
+  }
+  .nav-links{
+    display:flex;
+    list-style:none;
+    gap:0;
+  }
+  .nav-links a{
+    display:block;
+    font-family:var(--mono);
+    font-size:0.68rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    text-decoration:none;
+    color:var(--ink-soft);
+    padding:0.9rem 0.75rem;
+    border-left:1px solid var(--line);
+    transition:color 0.15s, background 0.15s;
+  }
+  .nav-links a:hover{ color:var(--ink); background:var(--paper-dim); }
+  .nav-links a.active{ color:var(--red); }
 
-    .hero-name {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(3.5rem, 8vw, 6.5rem);
-      line-height: 1;
-      letter-spacing: -0.02em;
-      opacity: 0;
-      animation: fadeUp 0.7s 0.22s forwards;
+  @media (max-width:900px){
+    .titleblock{ grid-template-columns:1fr; }
+    nav{
+      overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
+      scrollbar-width:none;
+      border-top:1px solid var(--line);
     }
-    .name-flip {
-      display: inline-block;
-      position: relative;
-      cursor: default;
+    nav::-webkit-scrollbar{ display:none; }
+    .nav-links{
+      flex-wrap:nowrap;
+      width:max-content;
+      min-width:100%;
     }
-    .name-alias, .name-real {
-      display: block;
-      transition: opacity 0.36s ease, transform 0.36s ease;
-    }
-    .name-real {
-      position: absolute;
-      top: 0; left: 0;
-      white-space: nowrap;
-      opacity: 0;
-      transform: translateY(14px);
-      font-style: normal;
-      font-size: clamp(1.9rem, 4.2vw, 3.8rem);
-      padding-top: 0.18em;
-      color: var(--text-primary);
-    }
-    .name-flip:hover .name-alias { opacity: 0; transform: translateY(-14px); }
-    .name-flip:hover .name-real { opacity: 1; transform: translateY(0); }
-    .name-hint {
-      display: block;
-      margin-top: 0.9rem;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.6rem;
-      color: var(--text-muted);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      opacity: 0;
-      transition: opacity 0.3s 0.1s;
-    }
-    .name-flip:hover .name-hint { opacity: 1; }
-    em { font-style: italic; color: var(--accent); }
+    .nav-links a{ padding:1rem 0.8rem; white-space:nowrap; }
+  }
 
-    .hero-tagline {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.76rem;
-      color: var(--text-secondary);
-      letter-spacing: 0.04em;
-      line-height: 1.7;
-      opacity: 0;
-      animation: fadeUp 0.6s 0.34s forwards;
-    }
-    .hero-tagline span { color: var(--accent); }
+  /* ── SHEET LABEL — appears once atop each section, functions like
+     a drawing-sheet index: number / title / rev+scale note ── */
+  .sheet-bar{
+    display:flex;
+    align-items:center;
+    gap:0.9rem;
+    padding:2.6rem 0 1.4rem;
+  }
+  .sheet-num{
+    font-family:var(--mono);
+    font-size:0.72rem;
+    color:var(--ink-faint);
+    letter-spacing:0.04em;
+  }
+  .sheet-title{
+    font-family:var(--sans);
+    font-weight:700;
+    font-size:0.82rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+  }
+  .sheet-rule{
+    flex:1;
+    height:1px;
+    background:var(--line);
+  }
+  .sheet-meta{
+    font-family:var(--mono);
+    font-size:0.62rem;
+    color:var(--ink-faint);
+    letter-spacing:0.03em;
+    white-space:nowrap;
+  }
 
-    .hero-desc {
-      font-size: 0.96rem;
-      color: var(--text-secondary);
-      line-height: 1.9;
-      max-width: 560px;
-      opacity: 0;
-      animation: fadeUp 0.7s 0.46s forwards;
-    }
+  section{ padding-bottom:1.5rem; }
 
-    .hero-cta {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      flex-wrap: wrap;
-      opacity: 0;
-      animation: fadeUp 0.7s 0.58s forwards;
-    }
-    .hero-social {
-      display: flex;
-      gap: 0.5rem;
-      margin-left: 0.5rem;
-      padding-left: 1rem;
-      border-left: 1px solid var(--border-accent);
-    }
-    .social-icon {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 36px; height: 36px;
-      border-radius: 3px;
-      border: 1px solid var(--border);
-      color: var(--text-secondary);
-      text-decoration: none;
-      transition: color 0.2s, border-color 0.2s, background 0.2s;
-    }
-    .social-icon:hover {
-      color: var(--accent);
-      border-color: rgba(200,169,110,0.35);
-      background: var(--accent-dim);
-    }
+  @media (max-width:640px){
+    .hero{ padding:2.2rem 0 2rem; }
+    .sheet-bar{ padding:1.8rem 0 1.1rem; flex-wrap:wrap; row-gap:0.4rem; }
+    .sheet-rule{ order:3; flex-basis:100%; height:0; }
+  }
 
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      padding: 0.72rem 1.4rem;
-      border-radius: 3px;
-      font-family: 'Syne', sans-serif;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      text-decoration: none;
-      transition: all 0.2s;
-      cursor: pointer;
-      border: none;
-    }
-    .btn-primary { background: var(--accent); color: #0a0a0b; }
-    .btn-primary:hover { background: #d4b87a; transform: translateY(-1px); }
-    .btn-ghost {
-      background: transparent;
-      color: var(--text-secondary);
-      border: 1px solid var(--border-accent);
-    }
-    .btn-ghost:hover { color: var(--text-primary); border-color: rgba(255,255,255,0.28); }
+  /* ── HERO ── */
+  .hero{
+    padding:3.2rem 0 3rem;
+    display:grid;
+    gap:1.5rem;
+    max-width:700px;
+  }
+  .hero-kicker{
+    font-family:var(--mono);
+    font-size:0.7rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--red);
+    display:flex;
+    align-items:center;
+    gap:0.5rem;
+  }
+  .hero h1{
+    font-family:var(--sans);
+    font-weight:700;
+    font-size:clamp(2.1rem, 5.4vw, 3.2rem);
+    line-height:1.08;
+    letter-spacing:-0.01em;
+  }
+  .hero h1 span{ color:var(--ink-soft); font-weight:500; }
+  .hero-desc{
+    font-size:1.02rem;
+    line-height:1.85;
+    color:var(--ink-soft);
+    max-width:560px;
+  }
+  .hero-facts{
+    display:flex;
+    flex-wrap:wrap;
+    gap:0 2rem;
+    font-family:var(--mono);
+    font-size:0.72rem;
+    color:var(--ink-faint);
+    padding-top:0.3rem;
+  }
+  .hero-facts b{ color:var(--ink); font-weight:500; }
+  .hero-actions{
+    display:flex;
+    align-items:center;
+    gap:1.4rem;
+    padding-top:0.4rem;
+  }
+  .btn{
+    font-family:var(--mono);
+    font-size:0.72rem;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    text-decoration:none;
+    padding:0.65rem 1.1rem;
+    border:1px solid var(--ink);
+    color:var(--ink);
+    transition:background 0.15s, color 0.15s;
+  }
+  .btn:hover{ background:var(--ink); color:var(--paper); }
+  .link-inline{
+    font-family:var(--mono);
+    font-size:0.72rem;
+    letter-spacing:0.03em;
+    text-decoration:none;
+    color:var(--ink-soft);
+    border-bottom:1px solid var(--line-strong);
+    padding-bottom:0.1rem;
+  }
+  .link-inline:hover{ color:var(--red); border-color:var(--red); }
 
-    /* ── DIVIDER ── */
-    .divider { width: 100%; height: 1px; background: var(--border); }
+  /* ── LEDGER (experience) ── */
+  .ledger{ display:flex; flex-direction:column; }
+  .entry{
+    display:grid;
+    grid-template-columns:150px 1fr;
+    gap:1.6rem;
+    padding:1.6rem 0;
+    border-top:1px solid var(--line);
+  }
+  .entry:last-child{ border-bottom:1px solid var(--line); }
+  .entry-period{
+    font-family:var(--mono);
+    font-size:0.68rem;
+    color:var(--ink-faint);
+    padding-top:0.2rem;
+    line-height:1.7;
+  }
+  .entry-period .now{
+    display:inline-block;
+    margin-top:0.5rem;
+    font-size:0.6rem;
+    letter-spacing:0.08em;
+    color:var(--red);
+    border:1px solid var(--red);
+    padding:0.12rem 0.4rem;
+  }
+  .entry-head{
+    display:flex;
+    align-items:baseline;
+    gap:0.6rem;
+    flex-wrap:wrap;
+    margin-bottom:0.6rem;
+  }
+  .entry-role{
+    font-family:var(--sans);
+    font-weight:600;
+    font-size:1.02rem;
+  }
+  .entry-co{
+    font-family:var(--mono);
+    font-size:0.72rem;
+    color:var(--ink-soft);
+  }
+  .entry ul{
+    list-style:none;
+    display:flex;
+    flex-direction:column;
+    gap:0.4rem;
+  }
+  .entry li{
+    font-size:0.9rem;
+    color:var(--ink-soft);
+    line-height:1.75;
+    padding-left:1rem;
+    position:relative;
+  }
+  .entry li::before{
+    content:'—';
+    position:absolute; left:0; color:var(--ink-faint);
+  }
+  @media (max-width:640px){
+    .entry{ grid-template-columns:1fr; gap:0.6rem; }
+  }
 
-    /* ── SECTION ── */
-    section { padding: 80px 0; }
-    .section-label {
-      display: flex;
-      align-items: center;
-      gap: 0.7rem;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.63rem;
-      color: var(--accent);
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      margin-bottom: 2.5rem;
-    }
-    .section-label::before {
-      content: '';
-      width: 20px; height: 1px;
-      background: var(--accent);
-      opacity: 0.5;
-      flex-shrink: 0;
-    }
+  /* ── PANELS (projects / client work) ── */
+  .panels{ display:flex; flex-direction:column; }
+  .panel{
+    position:relative;
+    border-top:1px solid var(--line);
+    padding:1.8rem 0.25rem;
+    display:grid;
+    grid-template-columns:34px 1fr;
+    gap:0.5rem 1.4rem;
+  }
+  .panel:last-child{ border-bottom:1px solid var(--line); }
+  .panel .reg{ margin-top:0.3rem; }
+  .panel-head{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:1rem;
+    flex-wrap:wrap;
+    margin-bottom:0.5rem;
+  }
+  .panel-title{
+    font-family:var(--sans);
+    font-weight:600;
+    font-size:1.18rem;
+  }
+  .panel-status{
+    font-family:var(--mono);
+    font-size:0.6rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    white-space:nowrap;
+  }
+  .panel-desc{
+    font-size:0.9rem;
+    color:var(--ink-soft);
+    line-height:1.8;
+    max-width:620px;
+    margin-bottom:0.9rem;
+  }
+  .panel ul{
+    list-style:none;
+    display:flex;
+    flex-direction:column;
+    gap:0.35rem;
+    margin-bottom:0.9rem;
+  }
+  .panel li{
+    font-size:0.87rem;
+    color:var(--ink-soft);
+    line-height:1.75;
+    padding-left:1rem;
+    position:relative;
+    max-width:620px;
+  }
+  .panel li::before{ content:'—'; position:absolute; left:0; color:var(--ink-faint); }
+  .panel-tags{
+    display:flex; flex-wrap:wrap; gap:0.4rem 0.7rem;
+    margin-bottom:0.9rem;
+    font-family:var(--mono);
+    font-size:0.66rem;
+    color:var(--ink-faint);
+  }
+  .panel-tags span::after{ content:' /'; color:var(--line-strong); }
+  .panel-tags span:last-child::after{ content:''; }
+  .panel-links{ display:flex; gap:1.2rem; }
+  .panel-links a{
+    font-family:var(--mono);
+    font-size:0.72rem;
+    text-decoration:none;
+    color:var(--ink);
+    border-bottom:1px solid var(--line-strong);
+  }
+  .panel-links a:hover{ color:var(--red); border-color:var(--red); }
+  @media (max-width:640px){
+    .panel{ grid-template-columns:1fr; }
+    .panel .reg{ display:none; }
+    .panel-links{ gap:0.5rem 1.4rem; }
+    .panel-links a{ display:inline-block; padding:0.4rem 0; }
+  }
 
-    /* ── EXPERIENCE TIMELINE ── */
-    .exp-timeline {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      position: relative;
-      padding-left: 1.5rem;
-    }
-    .exp-timeline::before {
-      content: '';
-      position: absolute;
-      left: 0; top: 8px; bottom: 8px;
-      width: 1px;
-      background: linear-gradient(to bottom, var(--accent), rgba(200,169,110,0.1));
-    }
-    .exp-item {
-      position: relative;
-      padding: 0 0 3rem 2rem;
-    }
-    .exp-item:last-child { padding-bottom: 0; }
-    .exp-dot {
-      position: absolute;
-      left: -0.4rem;
-      top: 0.35rem;
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: var(--bg);
-      border: 1.5px solid var(--accent);
-      transition: background 0.2s;
-    }
-    .exp-item:first-child .exp-dot { background: var(--accent); }
-    .exp-header {
-      display: flex;
-      flex-direction: column;
-      gap: 0.15rem;
-      margin-bottom: 0.9rem;
-    }
-    .exp-top {
-      display: flex;
-      align-items: baseline;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-    }
-    .exp-company {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--text-primary);
-    }
-    .exp-current {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.58rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 0.18rem 0.5rem;
-      border-radius: 2px;
-      background: var(--green-dim);
-      color: var(--green);
-    }
-    .exp-sub {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-    .exp-role {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.68rem;
-      color: var(--accent);
-      letter-spacing: 0.06em;
-    }
-    .exp-meta-inline {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.63rem;
-      color: var(--text-muted);
-      letter-spacing: 0.04em;
-    }
-    .exp-bullets {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-    }
-    .exp-bullets li {
-      font-size: 0.86rem;
-      color: var(--text-secondary);
-      line-height: 1.75;
-      padding-left: 1rem;
-      position: relative;
-    }
-    .exp-bullets li::before {
-      content: '–';
-      position: absolute;
-      left: 0;
-      color: var(--text-muted);
-    }
+  /* ── STACK — bill of materials ── */
+  .bom{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    border-top:1px solid var(--line);
+    border-left:1px solid var(--line);
+  }
+  .bom-cell{
+    border-right:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    padding:1.3rem 1.4rem;
+  }
+  .bom-cat{
+    font-family:var(--mono);
+    font-size:0.62rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--red);
+    margin-bottom:0.7rem;
+  }
+  .bom-items{ display:flex; flex-direction:column; gap:0.32rem; }
+  .bom-items span{ font-size:0.85rem; color:var(--ink-soft); }
+  @media (max-width:640px){
+    .bom{ grid-template-columns:1fr 1fr; }
+  }
+  @media (max-width:560px){
+    .bom{ grid-template-columns:1fr; }
+  }
 
-    /* ── PROJECT CARD ── */
-    .projects-grid { display: flex; flex-direction: column; gap: 2px; }
-    .project-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 2.2rem 2.5rem;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 1.5rem;
-      align-items: start;
-      transition: background 0.25s, border-color 0.25s, transform 0.25s;
-      position: relative;
-      overflow: hidden;
-      margin-bottom: 2px;
-    }
-    .project-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, var(--accent-glow) 0%, transparent 55%);
-      opacity: 0;
-      transition: opacity 0.35s;
-      pointer-events: none;
-    }
-    .project-card:hover {
-      background: var(--bg-card-hover);
-      border-color: var(--border-accent);
-      transform: translateY(-2px);
-    }
-    .project-card:hover::before { opacity: 1; }
+  /* ── ABOUT ── */
+  .about{
+    display:grid;
+    grid-template-columns:1.15fr 0.85fr;
+    gap:3rem;
+    align-items:start;
+  }
+  .about-text p{
+    font-size:0.96rem;
+    color:var(--ink-soft);
+    line-height:1.95;
+    margin-bottom:1.05rem;
+  }
+  .about-text p:last-child{ margin-bottom:0; }
+  .about-facts{ border-top:1px solid var(--line); }
+  .fact-row{
+    display:flex;
+    justify-content:space-between;
+    gap:1rem;
+    padding:0.75rem 0;
+    border-bottom:1px solid var(--line);
+    font-size:0.86rem;
+  }
+  .fact-label{
+    font-family:var(--mono);
+    font-size:0.62rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    padding-top:0.15rem;
+  }
+  .fact-val{ text-align:right; color:var(--ink); overflow-wrap:break-word; max-width:70%; }
+  .fact-val a{ text-decoration:none; border-bottom:1px solid var(--line-strong); }
+  .fact-val a:hover{ color:var(--red); border-color:var(--red); }
+  @media (max-width:700px){
+    .about{ grid-template-columns:1fr; gap:2rem; }
+  }
 
-    .project-status {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.6rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--green);
-      background: var(--green-dim);
-      padding: 0.25rem 0.65rem;
-      border-radius: 2px;
-      margin-bottom: 1rem;
-    }
-    .project-status::before {
-      content: '';
-      width: 5px; height: 5px;
-      border-radius: 50%;
-      background: var(--green);
-      animation: blink 2s infinite;
-    }
-    .project-status.in-progress {
-      color: var(--blue);
-      background: var(--blue-dim);
-    }
-    .project-status.in-progress::before {
-      background: var(--blue);
-    }
-    .project-title {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.9rem;
-      color: var(--text-primary);
-      letter-spacing: -0.01em;
-      margin-bottom: 0.5rem;
-      line-height: 1.15;
-    }
-    .project-desc {
-      font-size: 0.88rem;
-      color: var(--text-secondary);
-      line-height: 1.8;
-      margin-bottom: 1.25rem;
-      max-width: 580px;
-    }
-    .project-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.32rem;
-      margin-bottom: 1.5rem;
-    }
-    .tag {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.63rem;
-      color: var(--tag-text);
-      background: var(--tag-bg);
-      border: 1px solid var(--border);
-      padding: 0.2rem 0.52rem;
-      border-radius: 2px;
-      letter-spacing: 0.04em;
-    }
-    .project-links { display: flex; gap: 0.6rem; flex-wrap: wrap; }
-    .project-links a {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-size: 0.74rem;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      text-decoration: none;
-      color: var(--text-secondary);
-      border: 1px solid var(--border);
-      padding: 0.42rem 1rem;
-      border-radius: 3px;
-      transition: all 0.2s;
-    }
-    .project-links a:hover { color: var(--accent); border-color: var(--accent); background: var(--accent-dim); }
-    .project-links a.primary {
-      color: var(--accent);
-      border-color: rgba(200,169,110,0.28);
-      background: var(--accent-dim);
-    }
-    .project-links a.primary:hover { background: rgba(200,169,110,0.22); }
-    .project-number {
-      font-family: 'DM Serif Display', serif;
-      font-size: 5rem;
-      color: rgba(255,255,255,0.025);
-      line-height: 1;
-      user-select: none;
-      flex-shrink: 0;
-    }
-    .projects-more {
-      text-align: center;
-      padding: 1.5rem 0 0;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.65rem;
-      color: var(--text-muted);
-      letter-spacing: 0.08em;
-    }
+  /* ── CONTACT / FOOTER TITLE BLOCK ── */
+  .contact-band{
+    border-top:1px solid var(--ink);
+    border-bottom:1px solid var(--ink);
+    padding:2.4rem 0;
+    display:grid;
+    grid-template-columns:1.2fr 1fr;
+    gap:2rem;
+  }
+  .contact-band h2{
+    font-family:var(--sans);
+    font-weight:700;
+    font-size:clamp(1.6rem,3.4vw,2.2rem);
+    line-height:1.2;
+    margin-bottom:0.8rem;
+  }
+  .contact-band p{ color:var(--ink-soft); font-size:0.92rem; max-width:420px; line-height:1.8; }
+  .contact-list{ display:flex; flex-direction:column; justify-content:center; gap:0.1rem; }
+  .contact-row{
+    display:flex; justify-content:space-between; align-items:baseline;
+    padding:0.7rem 0;
+    border-bottom:1px solid var(--line);
+    text-decoration:none;
+    color:var(--ink);
+  }
+  .contact-row:hover{ color:var(--red); }
+  .contact-row .clabel{
+    font-family:var(--mono);
+    font-size:0.6rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+  }
+  .contact-row .cval{ font-family:var(--mono); font-size:0.82rem; overflow-wrap:break-word; text-align:right; }
+  @media (max-width:700px){
+    .contact-band{ grid-template-columns:1fr; }
+  }
+  @media (max-width:480px){
+    .contact-row{ flex-direction:column; align-items:flex-start; gap:0.2rem; padding:0.9rem 0; }
+    .contact-row .cval{ text-align:left; }
+  }
 
-    /* ── CLIENT SITES ── */
-    .clients-grid { display: flex; flex-direction: column; gap: 2px; }
-    .client-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 2.2rem 2.5rem;
-      transition: background 0.25s, border-color 0.25s, transform 0.25s;
-      position: relative;
-      overflow: hidden;
-      margin-bottom: 2px;
-    }
-    .client-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, var(--blue-dim) 0%, transparent 55%);
-      opacity: 0;
-      transition: opacity 0.35s;
-      pointer-events: none;
-    }
-    .client-card:hover {
-      background: var(--bg-card-hover);
-      border-color: var(--border-accent);
-      transform: translateY(-2px);
-    }
-    .client-card:hover::before { opacity: 1; }
-    .client-top {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 1rem;
-      flex-wrap: wrap;
-      margin-bottom: 0.4rem;
-    }
-    .client-title {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.7rem;
-      color: var(--text-primary);
-      letter-spacing: -0.01em;
-      line-height: 1.15;
-    }
-    .client-platform {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.6rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--blue);
-      background: var(--blue-dim);
-      padding: 0.22rem 0.6rem;
-      border-radius: 2px;
-      white-space: nowrap;
-    }
-    .client-desc {
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      line-height: 1.75;
-      margin-bottom: 1.1rem;
-      max-width: 600px;
-    }
-    .client-bullets {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-      margin-bottom: 1.4rem;
-    }
-    .client-bullets li {
-      font-size: 0.86rem;
-      color: var(--text-secondary);
-      line-height: 1.75;
-      padding-left: 1rem;
-      position: relative;
-      max-width: 620px;
-    }
-    .client-bullets li::before {
-      content: '–';
-      position: absolute;
-      left: 0;
-      color: var(--text-muted);
-    }
-    .client-links { display: flex; gap: 0.6rem; flex-wrap: wrap; }
-    .client-links a {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-size: 0.74rem;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      text-decoration: none;
-      color: var(--blue);
-      border: 1px solid rgba(110,168,200,0.28);
-      background: var(--blue-dim);
-      padding: 0.42rem 1rem;
-      border-radius: 3px;
-      transition: all 0.2s;
-    }
-    .client-links a:hover { background: rgba(110,168,200,0.22); }
+  footer{
+    padding:1.4rem 0 2.5rem;
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:0.5rem;
+    font-family:var(--mono);
+    font-size:0.62rem;
+    color:var(--ink-faint);
+    letter-spacing:0.02em;
+  }
 
-    /* ── STACK ── */
-    .stack-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      overflow: hidden;
-    }
-    .stack-item {
-      background: var(--bg-card);
-      padding: 1.6rem 1.8rem;
-      transition: background 0.2s;
-    }
-    .stack-item:hover { background: var(--bg-card-hover); }
-    .stack-cat {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.6rem;
-      color: var(--accent);
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      margin-bottom: 0.9rem;
-    }
-    .stack-items { display: flex; flex-direction: column; gap: 0.35rem; }
-    .stack-items span { font-size: 0.84rem; color: var(--text-secondary); }
-
-    /* ── ABOUT ── */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 4rem;
-      align-items: start;
-    }
-    .about-text p {
-      font-size: 0.92rem;
-      color: var(--text-secondary);
-      line-height: 1.95;
-      margin-bottom: 1rem;
-    }
-    .about-text p:last-child { margin-bottom: 0; }
-    .about-details { display: flex; flex-direction: column; }
-    .detail-row {
-      display: flex;
-      flex-direction: column;
-      gap: 0.18rem;
-      padding: 0.85rem 0;
-      border-bottom: 1px solid var(--border);
-    }
-    .detail-row:first-child { padding-top: 0; }
-    .detail-row:last-child { border-bottom: none; padding-bottom: 0; }
-    .detail-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.58rem;
-      color: var(--text-muted);
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-    }
-    .detail-val { font-size: 0.87rem; color: var(--text-primary); }
-    .detail-val a { color: var(--accent); text-decoration: none; }
-    .detail-val a:hover { text-decoration: underline; }
-
-    /* ── EDUCATION ── */
-    .edu-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1.6rem 2rem;
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 1.5rem;
-      transition: border-color 0.2s, background 0.2s;
-    }
-    .edu-card:hover { background: var(--bg-card-hover); border-color: var(--border-accent); }
-    .edu-school { font-size: 0.96rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.2rem; }
-    .edu-degree { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.6rem; }
-    .edu-honor {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.6rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--accent);
-      background: var(--accent-dim);
-      padding: 0.22rem 0.6rem;
-      border-radius: 2px;
-    }
-    .edu-year {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.63rem;
-      color: var(--text-muted);
-      white-space: nowrap;
-      text-align: right;
-      line-height: 1.8;
-    }
-
-    /* ── CONTACT ── */
-    .contact-wrap {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      overflow: hidden;
-    }
-    .contact-cell {
-      background: var(--bg-card);
-      padding: 2.2rem 2.5rem;
-      transition: background 0.2s;
-    }
-    .contact-cell:hover { background: var(--bg-card-hover); }
-    .contact-cell h3 {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.6rem;
-      margin-bottom: 0.5rem;
-      line-height: 1.2;
-    }
-    .contact-cell p {
-      font-size: 0.86rem;
-      color: var(--text-secondary);
-      line-height: 1.8;
-      margin-bottom: 1.5rem;
-    }
-    .contact-cell .contact-links { display: flex; flex-direction: column; gap: 0.5rem; }
-    .contact-link-row {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      font-size: 0.84rem;
-      color: var(--text-secondary);
-      text-decoration: none;
-      padding: 0.5rem 0;
-      border-bottom: 1px solid var(--border);
-      transition: color 0.2s;
-    }
-    .contact-link-row:last-child { border-bottom: none; }
-    .contact-link-row:hover { color: var(--accent); }
-    .contact-link-icon {
-      width: 30px; height: 30px;
-      border-radius: 3px;
-      border: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-      color: var(--text-muted);
-      transition: color 0.2s, border-color 0.2s;
-    }
-    .contact-link-row:hover .contact-link-icon { color: var(--accent); border-color: rgba(200,169,110,0.3); }
-
-    /* ── FOOTER ── */
-    footer {
-      padding: 2rem 0;
-      border-top: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-    footer p {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.63rem;
-      color: var(--text-muted);
-      letter-spacing: 0.05em;
-    }
-
-    /* ── SCROLL TO TOP ── */
-    #back-top {
-      position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      width: 40px; height: 40px;
-      border-radius: 4px;
-      background: var(--bg-card);
-      border: 1px solid var(--border-accent);
-      color: var(--text-secondary);
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer;
-      z-index: 99;
-      opacity: 0;
-      transform: translateY(10px);
-      transition: opacity 0.3s, transform 0.3s, color 0.2s, border-color 0.2s, background 0.2s;
-      text-decoration: none;
-    }
-    #back-top.visible { opacity: 1; transform: translateY(0); }
-    #back-top:hover { color: var(--accent); border-color: rgba(200,169,110,0.4); background: var(--bg-card-hover); }
-
-    /* ── ANIMATIONS ── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .reveal {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-    .reveal-d1 { transition-delay: 0.06s; }
-    .reveal-d2 { transition-delay: 0.14s; }
-    .reveal-d3 { transition-delay: 0.22s; }
-
-    /* ── MOBILE ── */
-    @media (max-width: 700px) {
-      .project-card { grid-template-columns: 1fr; }
-      .project-number { display: none; }
-      .client-top { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
-      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-      .stack-grid { grid-template-columns: 1fr 1fr; }
-      .contact-wrap { grid-template-columns: 1fr; }
-      .nav-links { display: none; }
-      .hero-social { display: none; }
-      footer { flex-direction: column; text-align: center; }
-      #back-top { bottom: 1.25rem; right: 1.25rem; }
-    }
-    @media (max-width: 420px) {
-      .stack-grid { grid-template-columns: 1fr; }
-    }
-  </style>
+  /* ── reveal (subtle, sparing) ── */
+  .reveal{
+    opacity:0;
+    transform:translateY(10px);
+    transition:opacity 0.5s ease, transform 0.5s ease;
+  }
+  .reveal.visible{ opacity:1; transform:translateY(0); }
+</style>
 </head>
 <body>
-  <div class="glow-orb one"></div>
-  <div class="glow-orb two"></div>
 
-  <a href="#home" id="back-top" aria-label="Back to top">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
-  </a>
-
-  <!-- NAV -->
-  <nav id="nav">
-    <div class="container nav-inner">
-      <a href="#home" class="nav-logo">
-        <span class="logo-alias">Sheiynee</span>
-        <span class="logo-real">Rick Armand De Leon</span>
-      </a>
-      <ul class="nav-links">
-        <li><a href="#experience" data-section="experience">Experience</a></li>
-        <li><a href="#projects" data-section="projects">Projects</a></li>
-        <li><a href="#client-sites" data-section="client-sites">Client Sites</a></li>
-        <li><a href="#stack" data-section="stack">Stack</a></li>
-        <li><a href="#about" data-section="about">About</a></li>
-        <li><a href="#contact" data-section="contact">Contact</a></li>
-      </ul>
+<header>
+  <div class="wrap titleblock">
+    <div class="tb-main">
+      <div class="reg on"></div>
+      <div>
+        <div class="tb-name">RICK ARMAND DE LEON</div>
+        <div class="tb-role">Odoo Development Manager — Journey Better Business Group</div>
+      </div>
     </div>
-  </nav>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#experience" data-section="experience">01 Exp</a></li>
+        <li><a href="#work" data-section="work">02 Work</a></li>
+        <li><a href="#clients" data-section="clients">03 Clients</a></li>
+        <li><a href="#stack" data-section="stack">04 Stack</a></li>
+        <li><a href="#about" data-section="about">05 About</a></li>
+        <li><a href="#contact" data-section="contact">06 Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
 
   <!-- HERO -->
-  <div class="container" id="home">
-    <section class="hero">
-      <div class="hero-eyebrow">
-        <span class="dot-live"></span>
-        Odoo Development Manager &mdash; Journey Better, Makati PH
-      </div>
-      <h1 class="hero-name">
-        <span class="name-flip">
-          <span class="name-alias">Shei<em>ynee.</em></span>
-          <span class="name-real">Rick Armand <em>De Leon.</em></span>
-          <span class="name-hint">↑ hover for real name</span>
-        </span>
-      </h1>
-      <p class="hero-tagline">
-        <span>BS Computer Science · Cum Laude, PLM 2024</span>
-        &nbsp;·&nbsp; Odoo &nbsp;·&nbsp; Full-Stack &nbsp;·&nbsp; Workflow Automation
-      </p>
-      <p class="hero-desc">
-        I build things end-to-end — Firestore schemas, Express APIs, React UIs, and custom Odoo
-        modules. Now leading the Odoo development team at Journey Better Business Group, directing
-        technical delivery, code quality, and CMS-to-ERP integrations for US-based clients.
-      </p>
-      <div class="hero-cta">
-        <a href="#experience" class="btn btn-primary">View My Work</a>
-        <a href="#contact" class="btn btn-ghost">Get In Touch</a>
-        <div class="hero-social">
-          <a href="https://github.com/Sheiynee" target="_blank" rel="noopener" class="social-icon" aria-label="GitHub">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-          </a>
-          <a href="https://www.linkedin.com/in/rick-armand-de-leon-810843356/" target="_blank" rel="noopener" class="social-icon" aria-label="LinkedIn">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-          </a>
-          <a href="mailto:rickarmand3@gmail.com" class="social-icon" aria-label="Email">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
-          </a>
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <div class="divider"></div>
+  <section class="hero" id="home">
+    <div class="hero-kicker"><span class="reg on"></span> Currently at Journey Better Business Group, Makati PH</div>
+    <h1>I build and maintain the systems<br>that run other people's businesses.<span> </span></h1>
+    <p class="hero-desc">
+      ERP customization, cross-platform integrations, and the automation that keeps
+      data moving between them. I lead the Odoo development team at Journey Better,
+      overseeing code quality, architecting Webflow↔Odoo integrations, and building
+      the n8n workflows and Python scripts that run underneath.
+    </p>
+    <div class="hero-facts">
+      <span><b>BS Computer Science</b>, Cum Laude — PLM, 2024</span>
+      <span><b>Based in</b> Caloocan City, Metro Manila, PH</span>
+      <span><b>Open to</b> remote &amp; international roles</span>
+    </div>
+    <div class="hero-actions">
+      <a href="#experience" class="btn">View experience</a>
+      <a href="mailto:rickarmand3@gmail.com" class="link-inline">rickarmand3@gmail.com</a>
+    </div>
+  </section>
 
   <!-- EXPERIENCE -->
-  <div class="container">
-    <section id="experience">
-      <div class="section-label">Experience</div>
-      <div class="exp-timeline">
+  <section id="experience">
+    <div class="sheet-bar">
+      <span class="sheet-num">01</span>
+      <span class="sheet-title">Experience</span>
+      <span class="sheet-rule"></span>
+      <span class="sheet-meta">2023 — PRESENT</span>
+    </div>
 
-        <!-- Journey Better - Odoo Development Manager -->
-        <div class="exp-item reveal">
-          <div class="exp-dot"></div>
-          <div class="exp-header">
-            <div class="exp-top">
-              <span class="exp-company">Journey Better Business Group Inc.</span>
-              <span class="exp-current">Current</span>
-            </div>
-            <div class="exp-sub">
-              <span class="exp-role">Odoo Development Manager</span>
-              <span class="exp-meta-inline">Jun 2026 – Present &nbsp;·&nbsp; Makati, PH &nbsp;·&nbsp; US-based clients</span>
-            </div>
+    <div class="ledger">
+
+      <div class="entry reveal">
+        <div class="entry-period">
+          JUN 2026 —<br>PRESENT
+          <span class="now">CURRENT</span>
+        </div>
+        <div>
+          <div class="entry-head">
+            <span class="entry-role">Odoo Development Manager</span>
+            <span class="entry-co">Journey Better Business Group Inc. — Makati, PH</span>
           </div>
-          <ul class="exp-bullets">
-            <li>Oversee and direct the Odoo development team, providing technical leadership and conducting QC code reviews on all tasks to ensure software reliability and standards.</li>
-            <li>Architected and managed data synchronization between Webflow CMS and Odoo SaaS backends via custom API integrations.</li>
-            <li>Built automated n8n workflows for data migration, data analysis, and mass data editing in Odoo.</li>
-            <li>Developed Python scripts for automated database dumping and backup operations.</li>
+          <ul>
+            <li>Lead and direct the Odoo development team, conducting QC code reviews on all tasks to maintain reliability and standards.</li>
+            <li>Architect custom API integrations between Webflow CMS and Odoo SaaS, keeping frontend and ERP data in sync.</li>
+            <li>Build automated n8n workflows for data migration, analysis, and mass data updates across Odoo operations.</li>
+            <li>Write Python scripts for automated database dumping and backups.</li>
           </ul>
         </div>
-
-        <!-- Journey Better - Front End Developer -->
-        <div class="exp-item reveal reveal-d1">
-          <div class="exp-dot"></div>
-          <div class="exp-header">
-            <div class="exp-top">
-              <span class="exp-company">Journey Better Business Group Inc.</span>
-            </div>
-            <div class="exp-sub">
-              <span class="exp-role">Front End Developer</span>
-              <span class="exp-meta-inline">Jan 2026 – May 2026 &nbsp;·&nbsp; Makati, PH &nbsp;·&nbsp; US-based clients</span>
-            </div>
-          </div>
-          <ul class="exp-bullets">
-            <li>Developed and maintained custom Odoo modules using Python, focusing on business logic, model extensions, and ORM method overrides.</li>
-            <li>Designed and implemented responsive frontend interfaces using Webflow and Odoo's QWeb/XML templating engine.</li>
-            <li>Optimized backend performance through PostgreSQL query tuning and automated Scheduled Actions (Cron Jobs).</li>
-            <li>Collaborated across the full SDLC from requirement gathering to SaaS environment deployment.</li>
-          </ul>
-        </div>
-
-        <!-- Software Farm -->
-        <div class="exp-item reveal reveal-d2">
-          <div class="exp-dot"></div>
-          <div class="exp-header">
-            <div class="exp-top">
-              <span class="exp-company">Software Farm International Inc.</span>
-            </div>
-            <div class="exp-sub">
-              <span class="exp-role">Python Developer / Odoo Specialist</span>
-              <span class="exp-meta-inline">Oct 2024 – Dec 2025 &nbsp;·&nbsp; Pasig, PH &nbsp;·&nbsp; Odoo Ready Partner</span>
-            </div>
-          </div>
-          <ul class="exp-bullets">
-            <li>Implemented complex workflow designs into Odoo by customizing modules with Python scripting to fit diverse client operational needs across multiple industries.</li>
-            <li>Resolved critical production errors and maintained data integrity across live Odoo environments under tight turnaround requirements.</li>
-            <li>Configured Odoo Access Rights and Record Rules to enforce data security and role-based user permissions.</li>
-            <li>Developed Python-based automation solutions to streamline repetitive data tasks and extend core Odoo functionality for clients.</li>
-          </ul>
-        </div>
-
-
-        <!-- PLM Intern -->
-        <div class="exp-item reveal reveal-d2">
-          <div class="exp-dot"></div>
-          <div class="exp-header">
-            <div class="exp-top">
-              <span class="exp-company">Pamantasan ng Lungsod ng Maynila – ICTO</span>
-            </div>
-            <div class="exp-sub">
-              <span class="exp-role">Front-End Developer Intern</span>
-              <span class="exp-meta-inline">Jun 2023 – Aug 2023 &nbsp;·&nbsp; Manila, PH</span>
-            </div>
-          </div>
-          <ul class="exp-bullets">
-            <li>Developed user interface components for the university's Patient Management System (PMS).</li>
-            <li>Built interactive elements using HTML, CSS, PHP, and JavaScript — fully responsive across devices.</li>
-            <li>Collaborated with clients, created documentation, and conducted User Acceptance Testing (UAT).</li>
-          </ul>
-        </div>
-
-        <!-- GDSC -->
-        <div class="exp-item reveal reveal-d3">
-          <div class="exp-dot"></div>
-          <div class="exp-header">
-            <div class="exp-top">
-              <span class="exp-company">Google Developer Student Club</span>
-            </div>
-            <div class="exp-sub">
-              <span class="exp-role">Social Media Manager</span>
-              <span class="exp-meta-inline">Sep 2023 – Mar 2024 &nbsp;·&nbsp; Manila, PH</span>
-            </div>
-          </div>
-          <ul class="exp-bullets">
-            <li>Managed and curated all social media content across platforms to promote club events, workshops, and initiatives.</li>
-            <li>Developed a content calendar and ensured consistent brand messaging to increase student engagement and club visibility.</li>
-          </ul>
-        </div>
-
       </div>
-    </section>
-  </div>
 
-  <div class="divider"></div>
+      <div class="entry reveal">
+        <div class="entry-period">JAN 2026 —<br>MAY 2026</div>
+        <div>
+          <div class="entry-head">
+            <span class="entry-role">Front-End Developer</span>
+            <span class="entry-co">Journey Better Business Group Inc. — Makati, PH</span>
+          </div>
+          <ul>
+            <li>Developed and maintained custom Odoo modules in Python — business logic, model extensions, ORM overrides.</li>
+            <li>Built responsive frontends in Webflow and Odoo's QWeb/XML templating engine.</li>
+            <li>Tuned PostgreSQL queries and automated Scheduled Actions (cron jobs).</li>
+            <li>Worked the full SDLC, requirements through deployment, in SaaS environments.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="entry reveal">
+        <div class="entry-period">OCT 2024 —<br>DEC 2025</div>
+        <div>
+          <div class="entry-head">
+            <span class="entry-role">Python Developer</span>
+            <span class="entry-co">Software Farm International Inc. — Pasig, PH</span>
+          </div>
+          <ul>
+            <li>Translated complex client operational requirements into customized Odoo workflows and solutions using Python.</li>
+            <li>Developed and customized Odoo modules to support client-specific business processes and operational workflows.</li>
+            <li>Diagnosed and resolved critical system issues to maintain data integrity and reliable system operations.</li>
+            <li>Configured and optimized Odoo Access Rights and Record Rules to implement secure, role-based access to ERP data.</li>
+            <li>Developed Python-based automation solutions to reduce repetitive data tasks and enhance Odoo functionality and operational efficiency.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="entry reveal">
+        <div class="entry-period">JUN 2023 —<br>AUG 2023</div>
+        <div>
+          <div class="entry-head">
+            <span class="entry-role">Front-End Developer Intern</span>
+            <span class="entry-co">Pamantasan ng Lungsod ng Maynila — ICTO, Manila</span>
+          </div>
+          <ul>
+            <li>Developed user interface components for the university's Patient Management System (PMS).</li>
+            <li>Used HTML, CSS, PHP, and JavaScript to build interactive elements and ensure responsiveness across devices.</li>
+            <li>Collaborated with clients to gather preferences and presented project progress to clients and supervisors.</li>
+            <li>Created documentation, including user manuals, and conducted User Acceptance Testing (UAT) for the website.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="entry reveal">
+        <div class="entry-period">SEP 2023 —<br>MAR 2024</div>
+        <div>
+          <div class="entry-head">
+            <span class="entry-role">Social Media Manager</span>
+            <span class="entry-co">Google Developer Student Club — Manila</span>
+          </div>
+          <ul>
+            <li>Managed content across platforms to promote club events, workshops, and initiatives.</li>
+            <li>Built a content calendar and kept brand messaging consistent across channels.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
 
   <!-- PROJECTS -->
-  <div class="container">
-    <section id="projects">
-      <div class="section-label">Projects</div>
-      <div class="projects-grid">
+  <section id="work">
+    <div class="sheet-bar">
+      <span class="sheet-num">02</span>
+      <span class="sheet-title">Personal Work</span>
+      <span class="sheet-rule"></span>
+      <span class="sheet-meta">SELF-DIRECTED</span>
+    </div>
 
-        <div class="project-card reveal">
-          <div>
-            <div class="project-status">Completed</div>
-            <h2 class="project-title">TaskFlow</h2>
-            <p class="project-desc">
-              A full-featured project and task management web app with Discord OAuth login,
-              a slash-command bot, and real-time email + Discord assignment notifications.
-              Built with granular role-based access control — viewers, members, managers,
-              and admins — so teams can collaborate cleanly.
-            </p>
-            <div class="project-tags">
-              <span class="tag">React 19</span>
-              <span class="tag">Vite</span>
-              <span class="tag">Tailwind v4</span>
-              <span class="tag">Node + Express</span>
-              <span class="tag">Firebase</span>
-              <span class="tag">Firestore</span>
-              <span class="tag">Discord.js</span>
-              <span class="tag">Resend</span>
-              <span class="tag">Tiptap</span>
-            </div>
-            <div class="project-links">
-              <a href="https://taskflow-pm-lovat.vercel.app" target="_blank" rel="noopener" class="primary">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
-                Live Demo
-              </a>
-              <a href="https://github.com/Sheiynee/TaskFlow" target="_blank" rel="noopener">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-                Source
-              </a>
-            </div>
+    <div class="panels">
+
+      <div class="panel reveal">
+        <div class="reg"></div>
+        <div>
+          <div class="panel-head">
+            <span class="panel-title">TaskFlow</span>
+            <span class="panel-status">Completed</span>
           </div>
-          <div class="project-number">01</div>
-        </div>
-
-        <div class="project-card reveal reveal-d1">
-          <div>
-            <div class="project-status">Completed</div>
-            <h2 class="project-title">LinkFOLIO</h2>
-            <p class="project-desc">
-              A live page builder for creators — a single hub aggregating your identity across
-              Twitch, YouTube, TikTok, Spotify, and more into one expressive, themeable page.
-              Live data is first-class: viewers see when you're streaming, what's currently playing,
-              and your latest uploads — not a static list of links.
-            </p>
-            <div class="project-tags">
-              <span class="tag">Next.js 14</span>
-              <span class="tag">TypeScript</span>
-              <span class="tag">App Router</span>
-              <span class="tag">Supabase</span>
-              <span class="tag">NextAuth v5</span>
-              <span class="tag">Tailwind CSS</span>
-              <span class="tag">shadcn/ui</span>
-              <span class="tag">dnd-kit</span>
-              <span class="tag">Vercel</span>
-            </div>
-            <div class="project-links">
-              <a href="https://link-folio-blue.vercel.app" target="_blank" rel="noopener" class="primary">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
-                Live Demo
-              </a>
-              <a href="https://github.com/Sheiynee/LinkFOLIO" target="_blank" rel="noopener">
-                  <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-                Source
-              </a>
-            </div>
-          </div>
-          <div class="project-number">02</div>
-        </div>
-
-                <!-- PROJECT 03: Supply Tracker -->
-        <div class="project-card reveal reveal-d2">
-          <div>
-            <div class="project-status">Completed</div>
-            <h2 class="project-title">Supply Tracker</h2>
-            <p class="project-desc">
-              A full-stack inventory and supply management web app for tracking stock levels,
-              managing suppliers, and monitoring supply chain activity in real time.
-              Built with a Next.js App Router frontend backed by a Prisma ORM data layer —
-              giving teams a clean, type-safe interface to keep inventory organized and up to date.
-            </p>
-            <div class="project-tags">
-              <span class="tag">Next.js</span>
-              <span class="tag">TypeScript</span>
-              <span class="tag">App Router</span>
-              <span class="tag">Prisma ORM</span>
-              <span class="tag">Tailwind CSS</span>
-              <span class="tag">shadcn/ui</span>
-              <span class="tag">Vercel</span>
-            </div>
-            <div class="project-links">
-              <a href="https://supply-tracker-beta.vercel.app" target="_blank" rel="noopener" class="primary">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
-                Live Demo
-              </a>
-              <a href="https://github.com/Sheiynee/supply-tracker" target="_blank" rel="noopener">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-                Source
-              </a>
-            </div>
-          </div>
-          <div class="project-number">03</div>
-        </div>
-
-      </div>
-    </section>
-  </div>
-
-  <div class="divider"></div>
-
-  <!-- CLIENT SITES -->
-  <div class="container">
-    <section id="client-sites">
-      <div class="section-label">Client Sites — Odoo Website Design</div>
-      <div class="clients-grid">
-
-        <div class="client-card reveal">
-          <div class="client-top">
-            <h2 class="client-title">Scilogex</h2>
-            <span class="client-platform">Odoo Website Editor</span>
-          </div>
-          <p class="client-desc">
-            Benchtop lab equipment manufacturer — centrifuges, stirrers, pipettes,
-            and liquid-handling products for research labs.
+          <p class="panel-desc">
+            Project and task management app with Discord OAuth login, a slash-command bot, and
+            real-time email + Discord notifications on assignment. Role-based access —
+            viewer, member, manager, admin.
           </p>
-          <ul class="client-bullets">
-            <li>Built the instant quote form and its underlying calculation logic, letting visitors request pricing straight from a product page.</li>
-            <li>Translated the design team's mockups into live product and category page layouts across the catalog.</li>
-            <li>Rebuilt the products mega menu for clearer navigation across a wide, category-heavy catalog.</li>
+          <div class="panel-tags">
+            <span>React 19</span><span>Vite</span><span>Tailwind v4</span><span>Node + Express</span>
+            <span>Firebase</span><span>Firestore</span><span>Discord.js</span><span>Resend</span><span>Tiptap</span>
+          </div>
+          <div class="panel-links">
+            <a href="https://taskflow-pm-lovat.vercel.app" target="_blank" rel="noopener">Live demo →</a>
+            <a href="https://github.com/Sheiynee/TaskFlow" target="_blank" rel="noopener">Source →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel reveal">
+        <div class="reg"></div>
+        <div>
+          <div class="panel-head">
+            <span class="panel-title">LinkFOLIO</span>
+            <span class="panel-status">Completed</span>
+          </div>
+          <p class="panel-desc">
+            A live page builder for creators — one themeable hub aggregating Twitch, YouTube,
+            TikTok, and Spotify. Live data throughout: viewers see when you're streaming and what's
+            currently playing, not a static link list.
+          </p>
+          <div class="panel-tags">
+            <span>Next.js 14</span><span>TypeScript</span><span>App Router</span><span>Supabase</span>
+            <span>NextAuth v5</span><span>Tailwind CSS</span><span>shadcn/ui</span><span>dnd-kit</span>
+          </div>
+          <div class="panel-links">
+            <a href="https://link-folio-blue.vercel.app" target="_blank" rel="noopener">Live demo →</a>
+            <a href="https://github.com/Sheiynee/LinkFOLIO" target="_blank" rel="noopener">Source →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel reveal">
+        <div class="reg"></div>
+        <div>
+          <div class="panel-head">
+            <span class="panel-title">Supply Tracker</span>
+            <span class="panel-status">Completed</span>
+          </div>
+          <p class="panel-desc">
+            Full-stack inventory and supply management app — stock levels, suppliers, and
+            supply-chain activity in real time, on a Next.js frontend with a Prisma data layer.
+          </p>
+          <div class="panel-tags">
+            <span>Next.js</span><span>TypeScript</span><span>App Router</span><span>Prisma ORM</span>
+            <span>Tailwind CSS</span><span>shadcn/ui</span>
+          </div>
+          <div class="panel-links">
+            <a href="https://supply-tracker-beta.vercel.app" target="_blank" rel="noopener">Live demo →</a>
+            <a href="https://github.com/Sheiynee/supply-tracker" target="_blank" rel="noopener">Source →</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CLIENT WORK -->
+  <section id="clients">
+    <div class="sheet-bar">
+      <span class="sheet-num">03</span>
+      <span class="sheet-title">Client Work — Odoo Websites</span>
+      <span class="sheet-rule"></span>
+      <span class="sheet-meta">VIA JOURNEY BETTER</span>
+    </div>
+
+    <div class="panels">
+
+      <div class="panel reveal">
+        <div class="reg"></div>
+        <div>
+          <div class="panel-head">
+            <span class="panel-title">Scilogex</span>
+            <span class="panel-status">Odoo Website Editor</span>
+          </div>
+          <p class="panel-desc">Benchtop lab equipment manufacturer — centrifuges, stirrers, pipettes, and liquid-handling products for research labs.</p>
+          <ul>
+            <li>Built the instant quote form and its underlying calculation logic, requestable straight from a product page.</li>
+            <li>Translated design mockups into live product and category page layouts across the catalog.</li>
+            <li>Rebuilt the products mega menu for a wide, category-heavy catalog.</li>
             <li>Reworked the checkout page layout and flow.</li>
           </ul>
-          <div class="client-links">
-            <a href="https://www.scilogex.com" target="_blank" rel="noopener">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
-              Visit Site
-            </a>
+          <div class="panel-links">
+            <a href="https://www.scilogex.com" target="_blank" rel="noopener">Visit site →</a>
           </div>
         </div>
+      </div>
 
-        <div class="client-card reveal reveal-d1">
-          <div class="client-top">
-            <h2 class="client-title">Block Scientific</h2>
-            <span class="client-platform">Odoo Website Editor</span>
+      <div class="panel reveal">
+        <div class="reg"></div>
+        <div>
+          <div class="panel-head">
+            <span class="panel-title">Block Scientific</span>
+            <span class="panel-status">Odoo Website Editor</span>
           </div>
-          <p class="client-desc">
-            Distributor of new, used, and refurbished clinical lab analyzers and equipment
-            for hospitals and diagnostic labs.
-          </p>
-          <ul class="client-bullets">
-            <li>Added the homepage promotional banner and repositioned the lead-generation form for better visibility.</li>
-            <li>Translated the design team's mockups into live homepage and page layouts.</li>
-            <li>Built the sales rep banner module, shown conditionally based on the visitor's selected or detected US region so each visitor sees their assigned rep.</li>
+          <p class="panel-desc">Distributor of new, used, and refurbished clinical lab analyzers and equipment for hospitals and diagnostic labs.</p>
+          <ul>
+            <li>Added the homepage promotional banner and repositioned the lead-generation form.</li>
+            <li>Translated design mockups into live homepage and page layouts.</li>
+            <li>Built the sales-rep banner module, shown conditionally by the visitor's US region.</li>
           </ul>
-          <div class="client-links">
-            <a href="https://www.blockscientific.com" target="_blank" rel="noopener">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
-              Visit Site
-            </a>
+          <div class="panel-links">
+            <a href="https://www.blockscientific.com" target="_blank" rel="noopener">Visit site →</a>
           </div>
         </div>
+      </div>
 
-        <div class="client-card reveal reveal-d2">
-          <div class="client-top">
-            <h2 class="client-title">Yamato USA</h2>
-            <span class="client-platform">Odoo Website Editor</span>
+      <div class="panel reveal">
+        <div class="reg"></div>
+        <div>
+          <div class="panel-head">
+            <span class="panel-title">Yamato USA</span>
+            <span class="panel-status">Odoo Website Editor</span>
           </div>
-          <p class="client-desc">
-            US arm of a 140-year-old Japanese lab equipment manufacturer — rotary evaporators,
-            spray dryers, water purification, and industry-specific lab systems.
-          </p>
-          <ul class="client-bullets">
+          <p class="panel-desc">US arm of a 140-year-old Japanese lab equipment manufacturer — rotary evaporators, spray dryers, water purification, and industry-specific lab systems.</p>
+          <ul>
             <li>Rebuilt the products mega menu and its mobile navigation counterpart.</li>
             <li>Implemented designer-created layouts across several product and category pages.</li>
           </ul>
-          <div class="client-links">
-            <a href="https://www.yamato-usa.com" target="_blank" rel="noopener">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
-              Visit Site
-            </a>
+          <div class="panel-links">
+            <a href="https://www.yamato-usa.com" target="_blank" rel="noopener">Visit site →</a>
           </div>
         </div>
-
       </div>
-    </section>
-  </div>
 
-  <div class="divider"></div>
+    </div>
+  </section>
 
   <!-- STACK -->
-  <div class="container">
-    <section id="stack">
-      <div class="section-label">Tech Stack</div>
-      <div class="stack-grid reveal">
-        <div class="stack-item">
-          <div class="stack-cat">Languages</div>
-          <div class="stack-items">
-            <span>Python</span>
-            <span>JavaScript</span>
-            <span>TypeScript</span>
-            <span>PHP</span>
-            <span>C# &amp; C++</span>
-            <span>SQL</span>
-          </div>
-        </div>
-        <div class="stack-item">
-          <div class="stack-cat">Frontend</div>
-          <div class="stack-items">
-            <span>React 19</span>
-            <span>Next.js 14</span>
-            <span>Vite</span>
-            <span>Tailwind CSS</span>
-            <span>Webflow</span>
-            <span>HTML / CSS / SASS</span>
-          </div>
-        </div>
-        <div class="stack-item">
-          <div class="stack-cat">Backend</div>
-          <div class="stack-items">
-            <span>Node.js + Express</span>
-            <span>Odoo (Python)</span>
-            <span>Firebase Admin</span>
-            <span>Supabase</span>
-            <span>PostgreSQL</span>
-            <span>XML / QWeb</span>
-          </div>
-        </div>
-        <div class="stack-item">
-          <div class="stack-cat">Automation</div>
-          <div class="stack-items">
-            <span>n8n</span>
-            <span>Odoo Cron Jobs</span>
-            <span>Python scripting</span>
-            <span>Webflow CMS API</span>
-            <span>Webhook integrations</span>
-          </div>
-        </div>
-        <div class="stack-item">
-          <div class="stack-cat">Integrations</div>
-          <div class="stack-items">
-            <span>Discord.js</span>
-            <span>NextAuth v5</span>
-            <span>Resend</span>
-            <span>Firebase Auth &amp; Storage</span>
-          </div>
-        </div>
-        <div class="stack-item">
-          <div class="stack-cat">Deploy &amp; Tools</div>
-          <div class="stack-items">
-            <span>Vercel</span>
-            <span>Railway / Render</span>
-            <span>Firebase Hosting</span>
-            <span>GitHub Pages</span>
-            <span>Git &amp; GitHub</span>
-            <span>Postman</span>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
+  <section id="stack">
+    <div class="sheet-bar">
+      <span class="sheet-num">04</span>
+      <span class="sheet-title">Stack — Bill of Materials</span>
+      <span class="sheet-rule"></span>
+      <span class="sheet-meta">AS OF 2026</span>
+    </div>
 
-  <div class="divider"></div>
+    <div class="bom reveal">
+      <div class="bom-cell">
+        <div class="bom-cat">Languages</div>
+        <div class="bom-items"><span>Python</span><span>JavaScript</span><span>SQL</span><span>PHP</span><span>HTML</span><span>CSS</span><span>XML</span></div>
+      </div>
+      <div class="bom-cell">
+        <div class="bom-cat">Odoo</div>
+        <div class="bom-items"><span>Odoo SaaS</span><span>Custom Module Development</span><span>ORM</span><span>QWeb</span><span>Access Rights</span><span>Record Rules</span><span>Scheduled Actions</span></div>
+      </div>
+      <div class="bom-cell">
+        <div class="bom-cat">Tools &amp; Technologies</div>
+        <div class="bom-items"><span>PostgreSQL</span><span>REST APIs</span><span>n8n</span><span>Webflow</span><span>Git</span><span>Database Dumping / Backups</span></div>
+      </div>
+      <div class="bom-cell">
+        <div class="bom-cat">Professional</div>
+        <div class="bom-items"><span>Technical Leadership</span><span>Code Review</span><span>Quality Control (QC)</span><span>User Acceptance Testing (UAT)</span><span>SDLC</span><span>Data Migration</span></div>
+      </div>
+    </div>
+  </section>
 
   <!-- ABOUT -->
-  <div class="container">
-    <section id="about">
-      <div class="section-label">About</div>
-      <div class="about-grid">
-        <div class="about-text reveal">
-          <p>
-            I'm Rick Armand de Leon — a Computer Science graduate from Pamantasan ng Lungsod
-            ng Maynila (Cum Laude, 2024) and a developer who builds things end-to-end, from
-            database schema to deployed UI.
-          </p>
-          <p>
-            By day I lead the Odoo development team at Journey Better Business Group, directing
-            technical delivery and code quality for US-based clients while architecting Odoo ERP
-            solutions, Webflow-to-SaaS integrations, and n8n-driven workflow automation.
-          </p>
-          <p>
-            Before that, I specialized in Odoo module development at an official Odoo Ready
-            Partner, building custom Python solutions for clients across multiple industries.
-            Outside of my day job, I build side projects like TaskFlow and LinkFOLIO that let
-            me explore new parts of the stack.
-          </p>
-          <p>
-            I'm open to remote and international opportunities — particularly in full-stack
-            development, ERP consulting, or workflow automation. Outside of code: music,
-            basketball, volleyball, and video games keep me sane.
-          </p>
-        </div>
-        <div class="about-details reveal">
-          <div class="detail-row">
-            <span class="detail-label">Full Name</span>
-            <span class="detail-val">Rick Armand de Leon</span>
-          </div>
-          <div class="detail-row">
-            <span class="detail-label">Alias</span>
-            <span class="detail-val">Sheiynee</span>
-          </div>
-          <div class="detail-row">
-            <span class="detail-label">Location</span>
-            <span class="detail-val">Caloocan City, Metro Manila, PH</span>
-          </div>
-          <div class="detail-row">
-            <span class="detail-label">Currently At</span>
-            <span class="detail-val">Journey Better Business Group Inc.</span>
-          </div>
-          <div class="detail-row">
-            <span class="detail-label">Email</span>
-            <span class="detail-val"><a href="mailto:rickarmand3@gmail.com">rickarmand3@gmail.com</a></span>
-          </div>
-          <div class="detail-row">
-            <span class="detail-label">GitHub</span>
-            <span class="detail-val"><a href="https://github.com/Sheiynee" target="_blank" rel="noopener">github.com/Sheiynee</a></span>
-          </div>
-          <div class="detail-row">
-            <span class="detail-label">LinkedIn</span>
-            <span class="detail-val"><a href="https://www.linkedin.com/in/rick-armand-de-leon-810843356/" target="_blank" rel="noopener">Rick Armand de Leon</a></span>
-          </div>
-          <div class="detail-row">
-            <span class="detail-label">Interests</span>
-            <span class="detail-val">Music · Basketball · Volleyball · Video Games</span>
-          </div>
-          <div class="detail-row">
-            <span class="detail-label">Status</span>
-            <span class="detail-val" style="color:var(--green);">Open to remote &amp; international roles</span>
-          </div>
-        </div>
+  <section id="about">
+    <div class="sheet-bar">
+      <span class="sheet-num">05</span>
+      <span class="sheet-title">About</span>
+      <span class="sheet-rule"></span>
+      <span class="sheet-meta">SCALE N.T.S.</span>
+    </div>
+
+    <div class="about">
+      <div class="about-text reveal">
+        <p>
+          I'm a Computer Science graduate from Pamantasan ng Lungsod ng Maynila (Cum Laude, 2024)
+          and a developer who works end-to-end — from database schema to deployed interface.
+        </p>
+        <p>
+          I currently lead the Odoo development team at Journey Better Business Group, directing
+          technical delivery and code quality for US-based clients while architecting ERP
+          customizations, Webflow-to-SaaS integrations, and n8n-driven automation.
+        </p>
+        <p>
+          Before that I worked as a Python Developer at Software Farm International, building
+          custom Odoo workflows and modules for client-specific business processes.
+          Outside the day job, I build side projects — TaskFlow, LinkFOLIO, Supply Tracker — to work
+          new parts of the stack.
+        </p>
+        <p>
+          Outside of code: music, basketball, volleyball, and video games.
+        </p>
       </div>
-    </section>
-  </div>
-
-  <div class="divider"></div>
-
-  <!-- EDUCATION -->
-  <div class="container">
-    <section id="education">
-      <div class="section-label">Education</div>
-      <div class="edu-card reveal">
-        <div>
-          <div class="edu-school">Pamantasan ng Lungsod ng Maynila</div>
-          <div class="edu-degree">Bachelor of Science in Computer Science</div>
-          <span class="edu-honor">✦ Cum Laude</span>
-        </div>
-        <div class="edu-year">Graduated 2024<br>Manila, PH</div>
+      <div class="about-facts reveal">
+        <div class="fact-row"><span class="fact-label">Alias</span><span class="fact-val">Sheiynee</span></div>
+        <div class="fact-row"><span class="fact-label">Location</span><span class="fact-val">Caloocan City, Metro Manila, PH</span></div>
+        <div class="fact-row"><span class="fact-label">Currently at</span><span class="fact-val">Journey Better Business Group Inc.</span></div>
+        <div class="fact-row"><span class="fact-label">Education</span><span class="fact-val">BS Computer Science, Cum Laude — PLM, 2024</span></div>
+        <div class="fact-row"><span class="fact-label">Email</span><span class="fact-val"><a href="mailto:rickarmand3@gmail.com">rickarmand3@gmail.com</a></span></div>
+        <div class="fact-row"><span class="fact-label">GitHub</span><span class="fact-val"><a href="https://github.com/Sheiynee" target="_blank" rel="noopener">github.com/Sheiynee</a></span></div>
+        <div class="fact-row"><span class="fact-label">LinkedIn</span><span class="fact-val"><a href="https://www.linkedin.com/in/rick-armand-de-leon-810843356/" target="_blank" rel="noopener">Rick Armand De Leon</a></span></div>
+        <div class="fact-row"><span class="fact-label">Status</span><span class="fact-val">Open to remote &amp; international roles</span></div>
       </div>
-    </section>
+    </div>
+  </section>
+
+</div>
+
+<!-- CONTACT -->
+<div class="wrap" id="contact">
+  <div class="contact-band reveal">
+    <div>
+      <h2>Have a system that needs fixing, connecting, or automating?</h2>
+      <p>Open to remote, international, freelance, and full-time roles — Odoo/ERP work, integrations, or workflow automation.</p>
+    </div>
+    <div class="contact-list">
+      <a class="contact-row" href="mailto:rickarmand3@gmail.com">
+        <span class="clabel">Email</span><span class="cval">rickarmand3@gmail.com</span>
+      </a>
+      <a class="contact-row" href="https://www.linkedin.com/in/rick-armand-de-leon-810843356/" target="_blank" rel="noopener">
+        <span class="clabel">LinkedIn</span><span class="cval">/in/rick-armand-de-leon</span>
+      </a>
+      <a class="contact-row" href="https://github.com/Sheiynee" target="_blank" rel="noopener">
+        <span class="clabel">GitHub</span><span class="cval">github.com/Sheiynee</span>
+      </a>
+    </div>
   </div>
+</div>
 
-  <div class="divider"></div>
+<div class="wrap">
+  <footer>
+    <span>DRAWN BY R. DE LEON — CHECKED SELF-QC — REV 2026.08</span>
+    <span>© 2026 Rick Armand De Leon — Hosted on GitHub Pages — no framework</span>
+  </footer>
+</div>
 
-  <!-- CONTACT -->
-  <div class="container">
-    <section id="contact">
-      <div class="section-label">Contact</div>
-      <div class="contact-wrap reveal">
-        <div class="contact-cell">
-          <h3>Let's work<br><em>together.</em></h3>
-          <p>Open to remote, international, freelance, and full-time opportunities. Feel free to reach out through any of these channels.</p>
-        </div>
-        <div class="contact-cell">
-          <div class="contact-links">
-            <a href="mailto:rickarmand3@gmail.com" class="contact-link-row">
-              <span class="contact-link-icon">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
-              </span>
-              rickarmand3@gmail.com
-            </a>
-            <a href="https://www.linkedin.com/in/rick-armand-de-leon-810843356/" target="_blank" rel="noopener" class="contact-link-row">
-              <span class="contact-link-icon">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-              </span>
-              Rick Armand de Leon
-            </a>
-            <a href="https://github.com/Sheiynee" target="_blank" rel="noopener" class="contact-link-row">
-              <span class="contact-link-icon">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-              </span>
-              github.com/Sheiynee
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
+<script>
+  const navLinks = document.querySelectorAll('.nav-links a[data-section]');
+  const sections = document.querySelectorAll('section[id]');
 
-  <!-- FOOTER -->
-  <div class="container">
-    <footer>
-      <p>© 2026 Rick Armand de Leon (Sheiynee). Hosted on GitHub Pages.</p>
-      <p>Built with HTML · CSS · JS — no frameworks</p>
-    </footer>
-  </div>
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    let current = '';
+    sections.forEach(s => { if (y >= s.offsetTop - 140) current = s.id; });
+    navLinks.forEach(a => a.classList.toggle('active', a.dataset.section === current));
+  });
 
-  <script>
-    const nav = document.getElementById('nav');
-    const navLinks = document.querySelectorAll('.nav-links a[data-section]');
-    const sections = document.querySelectorAll('section[id]');
-    const backTop = document.getElementById('back-top');
-
-    window.addEventListener('scroll', () => {
-      const y = window.scrollY;
-      nav.classList.toggle('scrolled', y > 40);
-      backTop.classList.toggle('visible', y > 400);
-
-      let current = '';
-      sections.forEach(s => {
-        if (y >= s.offsetTop - 120) current = s.id;
-      });
-      navLinks.forEach(a => {
-        a.classList.toggle('active', a.dataset.section === current);
-      });
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
     });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          observer.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.08 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-  </script>
 </body>
 </html>
