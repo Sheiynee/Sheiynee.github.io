@@ -3,953 +3,851 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Rick Armand De Leon — Odoo Development Manager</title>
-<meta name="description" content="Rick Armand De Leon — Odoo Development Manager. ERP customization, systems integration, and workflow automation." />
+<title>Rick Armand De Leon — Odoo &amp; front-end developer</title>
+<meta name="description" content="Odoo and front-end developer in Metro Manila. ERP customization, Webflow-to-Odoo integrations, and n8n workflow automation for US-based clients." />
+<meta name="theme-color" content="#ffffff" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..600&family=Instrument+Sans:wght@400;500&display=swap" rel="stylesheet" />
 <style>
-  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  *,*::before,*::after{ box-sizing:border-box; margin:0; padding:0; }
 
   :root{
-    --paper:#EDEBE2;
-    --paper-dim:#E3E0D3;
-    --ink:#1C2A28;
-    --ink-soft:#5B675F;
-    --ink-faint:#8B9089;
-    --line:#C7C1AC;
-    --line-strong:#A79F87;
-    --red:#AE3A2B;
-    --red-dim:rgba(174,58,43,0.09);
-    --red-dim-2:rgba(174,58,43,0.16);
-    --sans:'Space Grotesk',sans-serif;
-    --serif:'Source Serif 4',serif;
-    --mono:'IBM Plex Mono',monospace;
+    --paper:#ffffff;
+    --ink:#111111;
+    --text:#343434;
+    --quiet:#8a8a86;
+    --rule:#e9e9e6;
+    --rule-live:#b4b4ae;
+
+    --display:'Bricolage Grotesque', Georgia, serif;
+    --body:'Instrument Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+    --gutter:132px;
+    --gap:3.25rem;
+    --edge:clamp(1.5rem, 6vw, 4rem);
+    --head:70px;
+
+    --ease:cubic-bezier(0.22, 0.75, 0.2, 1);
   }
 
-  html{scroll-behavior:smooth;}
-  @media (prefers-reduced-motion: reduce){
-    html{scroll-behavior:auto;}
-    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
-  }
+  html{ scroll-behavior:smooth; scroll-padding-top:calc(var(--head) + 1.5rem); }
 
   body{
     background:var(--paper);
-    color:var(--ink);
-    font-family:var(--serif);
-    font-size:16px;
-    line-height:1.6;
+    color:var(--text);
+    font-family:var(--body);
+    font-size:17px;
+    line-height:1.68;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
   }
 
-  html, body{ overflow-x:hidden; }
+  a{ color:inherit; }
+  ::selection{ background:#111; color:#fff; }
+  :focus-visible{ outline:2px solid var(--ink); outline-offset:3px; }
 
-  a{color:inherit;}
-  ::selection{background:var(--red-dim-2); color:var(--ink);}
+  .page{ max-width:1040px; margin:0 auto; padding:0 var(--edge); }
 
-  :focus-visible{
-    outline:2px solid var(--red);
-    outline-offset:2px;
+  /* ─── load sequence ─────────────────────────── */
+  @keyframes rise{
+    from{ opacity:0; transform:translateY(16px); }
+    to{ opacity:1; transform:none; }
   }
+  .lift{ animation:rise 0.85s var(--ease) backwards; }
+  .d1{ animation-delay:0.02s; }
+  .d2{ animation-delay:0.14s; }
+  .d3{ animation-delay:0.26s; }
+  .d4{ animation-delay:0.38s; }
 
-  .wrap{
-    max-width:980px;
-    margin:0 auto;
-    padding:0 1.75rem;
-  }
-
-  /* ── registration marks — the recurring signature: small crosshair
-     ticks like the ones printers/drafters use to align a sheet ── */
-  .reg{
-    position:relative;
-    width:11px;height:11px;
-    flex-shrink:0;
-  }
-  .reg::before,.reg::after{
-    content:'';
-    position:absolute;
-    background:var(--line-strong);
-  }
-  .reg::before{ top:5px;left:0;width:11px;height:1px; }
-  .reg::after{ left:5px;top:0;width:1px;height:11px; }
-  .reg.on{ }
-  .reg.on::before,.reg.on::after{ background:var(--red); }
-
-  /* ── TOP BAR / TITLE BLOCK HEADER ── */
-  header{
-    border-bottom:1px solid var(--ink);
-    background:var(--paper);
-    position:sticky;
-    top:0;
-    z-index:50;
-  }
-  .titleblock{
-    display:grid;
-    grid-template-columns:1fr auto;
-    align-items:stretch;
-    border-bottom:1px solid var(--line);
-  }
-  .tb-main{
-    padding:0.85rem 0 0.85rem 0;
-    display:flex;
-    align-items:center;
-    gap:0.6rem;
-  }
-  .tb-name{
-    font-family:var(--sans);
-    font-weight:700;
-    font-size:0.86rem;
-    letter-spacing:0.02em;
-  }
-  .tb-role{
-    font-family:var(--mono);
-    font-size:0.68rem;
-    color:var(--ink-soft);
-    letter-spacing:0.02em;
-  }
-  nav{
-    display:flex;
-    align-items:center;
-    gap:0;
-  }
-  .nav-links{
-    display:flex;
-    list-style:none;
-    gap:0;
-  }
-  .nav-links a{
+  /* ─── headline, revealed a line at a time ───── */
+  .js .opening h1{ visibility:hidden; }
+  .js .opening h1.ready{ visibility:visible; }
+  .ln{
     display:block;
-    font-family:var(--mono);
-    font-size:0.68rem;
-    letter-spacing:0.06em;
-    text-transform:uppercase;
-    text-decoration:none;
-    color:var(--ink-soft);
-    padding:0.9rem 0.75rem;
-    border-left:1px solid var(--line);
-    transition:color 0.15s, background 0.15s;
+    overflow:hidden;
+    padding-bottom:0.14em;
+    margin-bottom:-0.14em;
   }
-  .nav-links a:hover{ color:var(--ink); background:var(--paper-dim); }
-  .nav-links a.active{ color:var(--red); }
+  .opening h1.done .ln{ overflow:visible; }
+  .ln-i{
+    display:block;
+    transform:translateY(108%);
+    animation:lineUp 0.95s var(--ease) forwards;
+  }
+  @keyframes lineUp{ to{ transform:none; } }
 
-  @media (max-width:900px){
-    .titleblock{ grid-template-columns:1fr; }
-    nav{
-      overflow-x:auto;
-      -webkit-overflow-scrolling:touch;
-      scrollbar-width:none;
-      border-top:1px solid var(--line);
-    }
-    nav::-webkit-scrollbar{ display:none; }
-    .nav-links{
-      flex-wrap:nowrap;
-      width:max-content;
-      min-width:100%;
-    }
-    .nav-links a{ padding:1rem 0.8rem; white-space:nowrap; }
-  }
-
-  /* ── SHEET LABEL — appears once atop each section, functions like
-     a drawing-sheet index: number / title / rev+scale note ── */
-  .sheet-bar{
-    display:flex;
-    align-items:center;
-    gap:0.9rem;
-    padding:2.6rem 0 1.4rem;
-  }
-  .sheet-num{
-    font-family:var(--mono);
-    font-size:0.72rem;
-    color:var(--ink-faint);
-    letter-spacing:0.04em;
-  }
-  .sheet-title{
-    font-family:var(--sans);
-    font-weight:700;
-    font-size:0.82rem;
-    letter-spacing:0.14em;
-    text-transform:uppercase;
-  }
-  .sheet-rule{
-    flex:1;
-    height:1px;
-    background:var(--line);
-  }
-  .sheet-meta{
-    font-family:var(--mono);
-    font-size:0.62rem;
-    color:var(--ink-faint);
-    letter-spacing:0.03em;
-    white-space:nowrap;
-  }
-
-  section{ padding-bottom:1.5rem; }
-
-  @media (max-width:640px){
-    .hero{ padding:2.2rem 0 2rem; }
-    .sheet-bar{ padding:1.8rem 0 1.1rem; flex-wrap:wrap; row-gap:0.4rem; }
-    .sheet-rule{ order:3; flex-basis:100%; height:0; }
-  }
-
-  /* ── HERO ── */
-  .hero{
-    padding:3.2rem 0 3rem;
+  /* ─── practice cards: one divided panel, shared hairlines ─── */
+  .cards{
     display:grid;
-    gap:1.5rem;
-    max-width:700px;
+    grid-template-columns:repeat(3, minmax(0,1fr));
+    gap:1px;
+    padding:1px;
+    background:var(--rule);
   }
-  .hero-kicker{
-    font-family:var(--mono);
-    font-size:0.7rem;
-    letter-spacing:0.08em;
-    text-transform:uppercase;
-    color:var(--red);
-    display:flex;
-    align-items:center;
-    gap:0.5rem;
+  .card{
+    background:var(--paper);
+    padding:1.6rem 1.5rem 1.7rem;
+    transition:background 0.35s var(--ease);
   }
-  .hero h1{
-    font-family:var(--sans);
-    font-weight:700;
-    font-size:clamp(2.1rem, 5.4vw, 3.2rem);
-    line-height:1.08;
-    letter-spacing:-0.01em;
-  }
-  .hero h1 span{ color:var(--ink-soft); font-weight:500; }
-  .hero-desc{
-    font-size:1.02rem;
-    line-height:1.85;
-    color:var(--ink-soft);
-    max-width:560px;
-  }
-  .hero-facts{
-    display:flex;
-    flex-wrap:wrap;
-    gap:0 2rem;
-    font-family:var(--mono);
-    font-size:0.72rem;
-    color:var(--ink-faint);
-    padding-top:0.3rem;
-  }
-  .hero-facts b{ color:var(--ink); font-weight:500; }
-  .hero-actions{
-    display:flex;
-    align-items:center;
-    gap:1.4rem;
-    padding-top:0.4rem;
-  }
-  .btn{
-    font-family:var(--mono);
-    font-size:0.72rem;
-    letter-spacing:0.05em;
-    text-transform:uppercase;
-    text-decoration:none;
-    padding:0.65rem 1.1rem;
-    border:1px solid var(--ink);
+  .card:hover{ background:#fbfbf9; }
+  .card h3{
+    font-family:var(--display);
+    font-variation-settings:'opsz' 18;
+    font-size:1.02rem; font-weight:600;
+    letter-spacing:-0.015em;
     color:var(--ink);
-    transition:background 0.15s, color 0.15s;
-  }
-  .btn:hover{ background:var(--ink); color:var(--paper); }
-  .link-inline{
-    font-family:var(--mono);
-    font-size:0.72rem;
-    letter-spacing:0.03em;
-    text-decoration:none;
-    color:var(--ink-soft);
-    border-bottom:1px solid var(--line-strong);
-    padding-bottom:0.1rem;
-  }
-  .link-inline:hover{ color:var(--red); border-color:var(--red); }
-
-  /* ── LEDGER (experience) ── */
-  .ledger{ display:flex; flex-direction:column; }
-  .entry{
-    display:grid;
-    grid-template-columns:150px 1fr;
-    gap:1.6rem;
-    padding:1.6rem 0;
-    border-top:1px solid var(--line);
-  }
-  .entry:last-child{ border-bottom:1px solid var(--line); }
-  .entry-period{
-    font-family:var(--mono);
-    font-size:0.68rem;
-    color:var(--ink-faint);
-    padding-top:0.2rem;
-    line-height:1.7;
-  }
-  .entry-period .now{
-    display:inline-block;
-    margin-top:0.5rem;
-    font-size:0.6rem;
-    letter-spacing:0.08em;
-    color:var(--red);
-    border:1px solid var(--red);
-    padding:0.12rem 0.4rem;
-  }
-  .entry-head{
-    display:flex;
-    align-items:baseline;
-    gap:0.6rem;
-    flex-wrap:wrap;
-    margin-bottom:0.6rem;
-  }
-  .entry-role{
-    font-family:var(--sans);
-    font-weight:600;
-    font-size:1.02rem;
-  }
-  .entry-co{
-    font-family:var(--mono);
-    font-size:0.72rem;
-    color:var(--ink-soft);
-  }
-  .entry ul{
-    list-style:none;
-    display:flex;
-    flex-direction:column;
-    gap:0.4rem;
-  }
-  .entry li{
-    font-size:0.9rem;
-    color:var(--ink-soft);
-    line-height:1.75;
-    padding-left:1rem;
-    position:relative;
-  }
-  .entry li::before{
-    content:'—';
-    position:absolute; left:0; color:var(--ink-faint);
-  }
-  @media (max-width:640px){
-    .entry{ grid-template-columns:1fr; gap:0.6rem; }
-  }
-
-  /* ── PANELS (projects / client work) ── */
-  .panels{ display:flex; flex-direction:column; }
-  .panel{
-    position:relative;
-    border-top:1px solid var(--line);
-    padding:1.8rem 0.25rem;
-    display:grid;
-    grid-template-columns:34px 1fr;
-    gap:0.5rem 1.4rem;
-  }
-  .panel:last-child{ border-bottom:1px solid var(--line); }
-  .panel .reg{ margin-top:0.3rem; }
-  .panel-head{
-    display:flex;
-    align-items:baseline;
-    justify-content:space-between;
-    gap:1rem;
-    flex-wrap:wrap;
-    margin-bottom:0.5rem;
-  }
-  .panel-title{
-    font-family:var(--sans);
-    font-weight:600;
-    font-size:1.18rem;
-  }
-  .panel-status{
-    font-family:var(--mono);
-    font-size:0.6rem;
-    letter-spacing:0.06em;
-    text-transform:uppercase;
-    color:var(--ink-faint);
-    white-space:nowrap;
-  }
-  .panel-desc{
-    font-size:0.9rem;
-    color:var(--ink-soft);
-    line-height:1.8;
-    max-width:620px;
-    margin-bottom:0.9rem;
-  }
-  .panel ul{
-    list-style:none;
-    display:flex;
-    flex-direction:column;
-    gap:0.35rem;
-    margin-bottom:0.9rem;
-  }
-  .panel li{
-    font-size:0.87rem;
-    color:var(--ink-soft);
-    line-height:1.75;
-    padding-left:1rem;
-    position:relative;
-    max-width:620px;
-  }
-  .panel li::before{ content:'—'; position:absolute; left:0; color:var(--ink-faint); }
-  .panel-tags{
-    display:flex; flex-wrap:wrap; gap:0.4rem 0.7rem;
-    margin-bottom:0.9rem;
-    font-family:var(--mono);
-    font-size:0.66rem;
-    color:var(--ink-faint);
-  }
-  .panel-tags span::after{ content:' /'; color:var(--line-strong); }
-  .panel-tags span:last-child::after{ content:''; }
-  .panel-links{ display:flex; gap:1.2rem; }
-  .panel-links a{
-    font-family:var(--mono);
-    font-size:0.72rem;
-    text-decoration:none;
-    color:var(--ink);
-    border-bottom:1px solid var(--line-strong);
-  }
-  .panel-links a:hover{ color:var(--red); border-color:var(--red); }
-  @media (max-width:640px){
-    .panel{ grid-template-columns:1fr; }
-    .panel .reg{ display:none; }
-    .panel-links{ gap:0.5rem 1.4rem; }
-    .panel-links a{ display:inline-block; padding:0.4rem 0; }
-  }
-
-  /* ── STACK — bill of materials ── */
-  .bom{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    border-top:1px solid var(--line);
-    border-left:1px solid var(--line);
-  }
-  .bom-cell{
-    border-right:1px solid var(--line);
-    border-bottom:1px solid var(--line);
-    padding:1.3rem 1.4rem;
-  }
-  .bom-cat{
-    font-family:var(--mono);
-    font-size:0.62rem;
-    letter-spacing:0.08em;
-    text-transform:uppercase;
-    color:var(--red);
     margin-bottom:0.7rem;
   }
-  .bom-items{ display:flex; flex-direction:column; gap:0.32rem; }
-  .bom-items span{ font-size:0.85rem; color:var(--ink-soft); }
-  @media (max-width:640px){
-    .bom{ grid-template-columns:1fr 1fr; }
-  }
-  @media (max-width:560px){
-    .bom{ grid-template-columns:1fr; }
-  }
-
-  /* ── ABOUT ── */
-  .about{
-    display:grid;
-    grid-template-columns:1.15fr 0.85fr;
-    gap:3rem;
-    align-items:start;
-  }
-  .about-text p{
-    font-size:0.96rem;
-    color:var(--ink-soft);
-    line-height:1.95;
-    margin-bottom:1.05rem;
-  }
-  .about-text p:last-child{ margin-bottom:0; }
-  .about-facts{ border-top:1px solid var(--line); }
-  .fact-row{
-    display:flex;
-    justify-content:space-between;
-    gap:1rem;
-    padding:0.75rem 0;
-    border-bottom:1px solid var(--line);
+  .card p{ font-size:0.95rem; line-height:1.62; }
+  .card .tech{
+    margin-top:1.1rem;
+    padding-top:0.9rem;
+    border-top:1px solid var(--rule);
     font-size:0.86rem;
+    color:var(--quiet);
   }
-  .fact-label{
-    font-family:var(--mono);
-    font-size:0.62rem;
-    letter-spacing:0.08em;
-    text-transform:uppercase;
-    color:var(--ink-faint);
-    padding-top:0.15rem;
-  }
-  .fact-val{ text-align:right; color:var(--ink); overflow-wrap:break-word; max-width:70%; }
-  .fact-val a{ text-decoration:none; border-bottom:1px solid var(--line-strong); }
-  .fact-val a:hover{ color:var(--red); border-color:var(--red); }
-  @media (max-width:700px){
-    .about{ grid-template-columns:1fr; gap:2rem; }
+  @media (max-width:1000px){
+    .cards{ grid-template-columns:1fr; }
   }
 
-  /* ── CONTACT / FOOTER TITLE BLOCK ── */
-  .contact-band{
-    border-top:1px solid var(--ink);
-    border-bottom:1px solid var(--ink);
-    padding:2.4rem 0;
+  /* ─── stack table ───────────────────────────── */
+  .spec{ border-top:1px solid var(--rule); }
+  .spec-row{
     display:grid;
-    grid-template-columns:1.2fr 1fr;
-    gap:2rem;
+    grid-template-columns:148px minmax(0,1fr);
+    gap:0.15rem 1.5rem;
+    padding:0.9rem 0;
+    border-bottom:1px solid var(--rule);
   }
-  .contact-band h2{
-    font-family:var(--sans);
-    font-weight:700;
-    font-size:clamp(1.6rem,3.4vw,2.2rem);
-    line-height:1.2;
-    margin-bottom:0.8rem;
+  .spec-row dt{ color:var(--quiet); font-size:0.9rem; padding-top:0.1rem; }
+  .spec-row dd{ font-size:0.95rem; }
+  @media (max-width:640px){
+    .spec-row{ grid-template-columns:1fr; }
   }
-  .contact-band p{ color:var(--ink-soft); font-size:0.92rem; max-width:420px; line-height:1.8; }
-  .contact-list{ display:flex; flex-direction:column; justify-content:center; gap:0.1rem; }
-  .contact-row{
-    display:flex; justify-content:space-between; align-items:baseline;
-    padding:0.7rem 0;
-    border-bottom:1px solid var(--line);
+
+  /* ─── masthead ──────────────────────────────── */
+  .masthead{
+    position:sticky; top:0; z-index:40;
+    background:var(--paper);
+    display:flex; align-items:baseline; justify-content:space-between;
+    flex-wrap:wrap; gap:0.6rem 2rem;
+    padding:1.45rem 0 1.2rem;
+  }
+  .masthead::after{
+    content:'';
+    position:absolute; left:0; right:0; bottom:0;
+    height:1px;
+    background:var(--rule);
+    opacity:0;
+    transition:opacity 0.35s var(--ease);
+  }
+  .masthead.parked::after{ opacity:1; }
+  .masthead .who{
+    font-family:var(--display);
+    font-size:1rem; font-weight:600;
+    letter-spacing:-0.012em;
+    color:var(--ink); text-decoration:none;
+  }
+  .masthead nav{ display:flex; gap:1.7rem; }
+  .masthead nav a{
+    font-size:0.92rem;
+    color:var(--quiet);
     text-decoration:none;
+    transition:color 0.3s var(--ease);
+  }
+  .masthead nav a:hover{ color:var(--ink); }
+  .masthead nav a.on{ color:var(--ink); }
+
+  /* ─── opening ───────────────────────────────── */
+  .opening{ padding:clamp(4rem,11vw,8rem) 0 clamp(3.5rem,8vw,6rem); }
+  .opening h1{
+    font-family:var(--display);
+    font-variation-settings:'opsz' 48;
+    font-size:clamp(1.75rem, 3.6vw, 2.65rem);
+    font-weight:500;
+    line-height:1.22;
+    letter-spacing:-0.022em;
+    color:var(--ink);
+    max-width:22ch;
+  }
+  .opening p{ margin-top:1.8rem; max-width:58ch; }
+  .opening .where{
+    margin-top:1.6rem;
+    color:var(--quiet);
+    font-size:0.95rem;
+  }
+
+  /* ─── spine ─────────────────────────────────── */
+  .spine{ position:relative; --p:0; }
+  .spine::before,
+  .spine::after{
+    content:'';
+    position:absolute;
+    top:0; bottom:0;
+    left:calc(var(--gutter) + (var(--gap) / 2));
+    width:1px;
+  }
+  .spine::before{ background:var(--rule); }
+  .spine::after{
+    background:var(--rule-live);
+    transform-origin:top;
+    transform:scaleY(var(--p));
+  }
+
+  .band{
+    display:grid;
+    grid-template-columns:var(--gutter) minmax(0,1fr);
+    column-gap:var(--gap);
+    padding:3.6rem 0;
+  }
+  .band + .band{ border-top:1px solid var(--rule); }
+
+  .band > h2{
+    position:sticky; top:calc(var(--head) + 1.6rem);
+    align-self:start;
+    font-family:var(--body);
+    font-size:0.92rem; font-weight:500;
+    color:var(--quiet);
+    text-align:right;
+    padding-top:0.34rem;
+    transition:color 0.4s var(--ease);
+  }
+  .band > h2::after{
+    content:'';
+    position:absolute;
+    top:calc(0.34rem + 0.82em);
+    right:calc(-1 * var(--gap) / 2);
+    height:1px; width:0;
+    background:var(--ink);
+    transform-origin:right;
+    transition:width 0.45s var(--ease);
+  }
+  .band.current > h2{ color:var(--ink); }
+  .band.current > h2::after{ width:12px; }
+
+  /* ─── entries ───────────────────────────────── */
+  .entry + .entry{
+    margin-top:2.4rem;
+    padding-top:2.4rem;
+    border-top:1px solid var(--rule);
+  }
+  .entry-top{
+    position:relative;
+    display:flex; align-items:baseline; justify-content:space-between;
+    gap:0.3rem 2rem; flex-wrap:wrap;
+    margin-bottom:0.2rem;
+  }
+  @media (min-width:761px){
+    .entry-top::before{
+      content:'';
+      position:absolute;
+      top:0.72em;
+      right:auto;
+      left:calc(-1 * var(--gap) / 2);
+      height:1px; width:0;
+      background:var(--rule-live);
+      transition:width 0.45s var(--ease);
+    }
+    .entry:hover .entry-top::before{ width:13px; }
+  }
+  .entry-top h3{
+    font-family:var(--display);
+    font-variation-settings:'opsz' 18;
+    font-size:1.14rem; font-weight:600;
+    letter-spacing:-0.015em;
     color:var(--ink);
   }
-  .contact-row:hover{ color:var(--red); }
-  .contact-row .clabel{
-    font-family:var(--mono);
-    font-size:0.6rem;
-    letter-spacing:0.08em;
-    text-transform:uppercase;
-    color:var(--ink-faint);
+  .when{
+    font-size:0.87rem;
+    color:var(--quiet);
+    font-variant-numeric:tabular-nums;
+    white-space:nowrap;
   }
-  .contact-row .cval{ font-family:var(--mono); font-size:0.82rem; overflow-wrap:break-word; text-align:right; }
-  @media (max-width:700px){
-    .contact-band{ grid-template-columns:1fr; }
+  .at{
+    font-size:0.93rem;
+    color:var(--quiet);
+    margin-bottom:0.7rem;
   }
-  @media (max-width:480px){
-    .contact-row{ flex-direction:column; align-items:flex-start; gap:0.2rem; padding:0.9rem 0; }
-    .contact-row .cval{ text-align:left; }
+  .entry p{ max-width:60ch; }
+  .entry p + p{ margin-top:0.85rem; }
+  .entry .tech{ margin-top:0.85rem; margin-bottom:0; color:var(--quiet); font-size:0.9rem; }
+
+  .out{ margin-top:0.95rem; display:flex; flex-wrap:wrap; gap:0.3rem 1.6rem; }
+  .out a, .inline-link{
+    color:var(--ink);
+    text-decoration:underline;
+    text-decoration-color:#c9c9c4;
+    text-underline-offset:3px;
+    text-decoration-thickness:1px;
+    transition:text-decoration-color 0.3s var(--ease), text-underline-offset 0.3s var(--ease);
   }
+  .out a{ font-size:0.94rem; }
+  .out a:hover, .inline-link:hover{
+    text-decoration-color:var(--ink);
+    text-underline-offset:5px;
+  }
+
+  /* ─── scroll reveal ─────────────────────────── */
+  .rv{ opacity:0; transform:translateY(14px); }
+  .rv.in{
+    opacity:1; transform:none;
+    transition:opacity 0.7s var(--ease), transform 0.7s var(--ease);
+  }
+
+  /* ─── closing ───────────────────────────────── */
+  .closing p{ max-width:56ch; }
+  .closing .mail{
+    display:inline-block;
+    margin-top:1.7rem;
+    font-family:var(--display);
+    font-variation-settings:'opsz' 32;
+    font-size:clamp(1.15rem,2.6vw,1.6rem);
+    font-weight:500;
+    letter-spacing:-0.02em;
+    color:var(--ink);
+    text-decoration:underline;
+    text-decoration-color:#cfcfca;
+    text-underline-offset:6px;
+    text-decoration-thickness:1px;
+    overflow-wrap:anywhere;
+    transition:text-decoration-color 0.35s var(--ease), text-underline-offset 0.35s var(--ease);
+  }
+  .closing .mail:hover{ text-decoration-color:var(--ink); text-underline-offset:9px; }
+  .closing .also{ margin-top:1.5rem; display:flex; flex-wrap:wrap; gap:0.3rem 1.6rem; font-size:0.94rem; }
 
   footer{
-    padding:1.4rem 0 2.5rem;
-    display:flex;
-    justify-content:space-between;
-    flex-wrap:wrap;
-    gap:0.5rem;
-    font-family:var(--mono);
-    font-size:0.62rem;
-    color:var(--ink-faint);
-    letter-spacing:0.02em;
+    border-top:1px solid var(--rule);
+    padding:1.6rem 0 3.5rem;
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:0.4rem 2rem;
+    font-size:0.84rem;
+    color:var(--quiet);
+  }
+  footer a{ text-decoration:none; transition:color 0.3s var(--ease); }
+  footer a:hover{ color:var(--ink); }
+
+  /* ─── narrow ────────────────────────────────── */
+  /* ─── narrow: the spine stays, the margin note turns on its side ─── */
+  @media (max-width:760px){
+    :root{
+      --gutter:22px;
+      --gap:0.8rem;
+      --edge:1.05rem;
+    }
+    body{ font-size:16px; }
+    .band{ padding:2.8rem 0; }
+
+    .band > h2{
+      writing-mode:vertical-rl;
+      justify-self:end;
+      text-align:start;
+      top:calc(var(--head) + 1rem);
+      padding-top:0;
+      font-size:0.76rem;
+      letter-spacing:0.01em;
+      white-space:nowrap;
+    }
+    /* the tick rotates with it: a live segment on the rule itself */
+    .band > h2::after{
+      top:0;
+      right:calc(-1 * var(--gap) / 2);
+      width:1px;
+      height:0;
+      transform-origin:top;
+      transition:height 0.45s var(--ease);
+    }
+    .band.current > h2::after{ width:1px; height:14px; }
+
+    .entry-top{ flex-direction:column; }
+    .masthead nav{ gap:1.2rem; }
   }
 
-  /* ── reveal (subtle, sparing) ── */
-  .reveal{
-    opacity:0;
-    transform:translateY(10px);
-    transition:opacity 0.5s ease, transform 0.5s ease;
+  @media (max-width:560px){
+    :root{ --head:100px; }
+    .masthead{ padding:1.1rem 0 0.85rem; }
+    .masthead .who{ width:100%; }
+    .masthead nav{ width:100%; gap:1rem; }
+    .masthead nav a{ font-size:0.86rem; }
   }
-  .reveal.visible{ opacity:1; transform:translateY(0); }
+
+  /* ─── motion off ────────────────────────────── */
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    .lift{ animation:none; }
+    .rv{ opacity:1; transform:none; }
+    .spine::after{ display:none; }
+    .js .opening h1{ visibility:visible; }
+    .ln-i{ animation:none; transform:none; }
+    *{ transition-duration:0.01ms !important; }
+  }
 </style>
 </head>
-<body>
+<body id="top">
+<script>document.documentElement.className += ' js';</script>
 
-<header>
-  <div class="wrap titleblock">
-    <div class="tb-main">
-      <div class="reg on"></div>
-      <div>
-        <div class="tb-name">RICK ARMAND DE LEON</div>
-        <div class="tb-role">Odoo Development Manager — Journey Better Business Group</div>
-      </div>
-    </div>
+<div class="page">
+
+  <header class="masthead lift d1">
+    <a class="who" href="#top">Rick Armand De Leon</a>
     <nav>
-      <ul class="nav-links">
-        <li><a href="#experience" data-section="experience">01 Exp</a></li>
-        <li><a href="#work" data-section="work">02 Work</a></li>
-        <li><a href="#clients" data-section="clients">03 Clients</a></li>
-        <li><a href="#stack" data-section="stack">04 Stack</a></li>
-        <li><a href="#about" data-section="about">05 About</a></li>
-        <li><a href="#contact" data-section="contact">06 Contact</a></li>
-      </ul>
+      <a href="#practice" data-nav="practice">What I do</a>
+      <a href="#work" data-nav="work">Work</a>
+      <a href="#experience" data-nav="experience">Experience</a>
+      <a href="#contact" data-nav="contact">Contact</a>
     </nav>
-  </div>
-</header>
+  </header>
 
-<div class="wrap">
-
-  <!-- HERO -->
-  <section class="hero" id="home">
-    <div class="hero-kicker"><span class="reg on"></span> Currently at Journey Better Business Group, Makati PH</div>
-    <h1>I build and maintain the systems<br>that run other people's businesses.<span> </span></h1>
-    <p class="hero-desc">
-      ERP customization, cross-platform integrations, and the automation that keeps
-      data moving between them. I lead the Odoo development team at Journey Better,
-      overseeing code quality, architecting Webflow↔Odoo integrations, and building
-      the n8n workflows and Python scripts that run underneath.
+  <section class="opening">
+    <h1>I build and maintain the systems that run other people's businesses.</h1>
+    <p class="lift d3">
+      I'm an Odoo developer and a front-end developer at Journey Better Business Group in
+      Makati, where I lead the Odoo team and work with clients in the US. I build the ERP
+      side in Python, the interfaces that sit on top of it, and the n8n automations that
+      connect the two.
     </p>
-    <div class="hero-facts">
-      <span><b>BS Computer Science</b>, Cum Laude — PLM, 2024</span>
-      <span><b>Based in</b> Caloocan City, Metro Manila, PH</span>
-      <span><b>Open to</b> remote &amp; international roles</span>
-    </div>
-    <div class="hero-actions">
-      <a href="#experience" class="btn">View experience</a>
-      <a href="mailto:rickarmand3@gmail.com" class="link-inline">rickarmand3@gmail.com</a>
-    </div>
+    <p class="where lift d4">
+      Caloocan City, Metro Manila. Open to remote and international work.
+      <a class="inline-link" href="mailto:rickarmand3@gmail.com">rickarmand3@gmail.com</a>
+    </p>
   </section>
 
-  <!-- EXPERIENCE -->
-  <section id="experience">
-    <div class="sheet-bar">
-      <span class="sheet-num">01</span>
-      <span class="sheet-title">Experience</span>
-      <span class="sheet-rule"></span>
-      <span class="sheet-meta">2023 — PRESENT</span>
-    </div>
+  <main class="spine">
 
-    <div class="ledger">
+    <section class="band" id="practice">
+      <h2>What I do</h2>
+      <div class="cards">
 
-      <div class="entry reveal">
-        <div class="entry-period">
-          JUN 2026 —<br>PRESENT
-          <span class="now">CURRENT</span>
-        </div>
-        <div>
-          <div class="entry-head">
-            <span class="entry-role">Odoo Development Manager</span>
-            <span class="entry-co">Journey Better Business Group Inc. — Makati, PH</span>
-          </div>
-          <ul>
-            <li>Lead and direct the Odoo development team, conducting QC code reviews on all tasks to maintain reliability and standards.</li>
-            <li>Architect custom API integrations between Webflow CMS and Odoo SaaS, keeping frontend and ERP data in sync.</li>
-            <li>Build automated n8n workflows for data migration, analysis, and mass data updates across Odoo operations.</li>
-            <li>Write Python scripts for automated database dumping and backups.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="entry reveal">
-        <div class="entry-period">JAN 2026 —<br>MAY 2026</div>
-        <div>
-          <div class="entry-head">
-            <span class="entry-role">Front-End Developer</span>
-            <span class="entry-co">Journey Better Business Group Inc. — Makati, PH</span>
-          </div>
-          <ul>
-            <li>Developed and maintained custom Odoo modules in Python — business logic, model extensions, ORM overrides.</li>
-            <li>Built responsive frontends in Webflow and Odoo's QWeb/XML templating engine.</li>
-            <li>Tuned PostgreSQL queries and automated Scheduled Actions (cron jobs).</li>
-            <li>Worked the full SDLC, requirements through deployment, in SaaS environments.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="entry reveal">
-        <div class="entry-period">OCT 2024 —<br>DEC 2025</div>
-        <div>
-          <div class="entry-head">
-            <span class="entry-role">Python Developer</span>
-            <span class="entry-co">Software Farm International Inc. — Pasig, PH</span>
-          </div>
-          <ul>
-            <li>Translated complex client operational requirements into customized Odoo workflows and solutions using Python.</li>
-            <li>Developed and customized Odoo modules to support client-specific business processes and operational workflows.</li>
-            <li>Diagnosed and resolved critical system issues to maintain data integrity and reliable system operations.</li>
-            <li>Configured and optimized Odoo Access Rights and Record Rules to implement secure, role-based access to ERP data.</li>
-            <li>Developed Python-based automation solutions to reduce repetitive data tasks and enhance Odoo functionality and operational efficiency.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="entry reveal">
-        <div class="entry-period">JUN 2023 —<br>AUG 2023</div>
-        <div>
-          <div class="entry-head">
-            <span class="entry-role">Front-End Developer Intern</span>
-            <span class="entry-co">Pamantasan ng Lungsod ng Maynila — ICTO, Manila</span>
-          </div>
-          <ul>
-            <li>Developed user interface components for the university's Patient Management System (PMS).</li>
-            <li>Used HTML, CSS, PHP, and JavaScript to build interactive elements and ensure responsiveness across devices.</li>
-            <li>Collaborated with clients to gather preferences and presented project progress to clients and supervisors.</li>
-            <li>Created documentation, including user manuals, and conducted User Acceptance Testing (UAT) for the website.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="entry reveal">
-        <div class="entry-period">SEP 2023 —<br>MAR 2024</div>
-        <div>
-          <div class="entry-head">
-            <span class="entry-role">Social Media Manager</span>
-            <span class="entry-co">Google Developer Student Club — Manila</span>
-          </div>
-          <ul>
-            <li>Managed content across platforms to promote club events, workshops, and initiatives.</li>
-            <li>Built a content calendar and kept brand messaging consistent across channels.</li>
-          </ul>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- PROJECTS -->
-  <section id="work">
-    <div class="sheet-bar">
-      <span class="sheet-num">02</span>
-      <span class="sheet-title">Personal Work</span>
-      <span class="sheet-rule"></span>
-      <span class="sheet-meta">SELF-DIRECTED</span>
-    </div>
-
-    <div class="panels">
-
-      <div class="panel reveal">
-        <div class="reg"></div>
-        <div>
-          <div class="panel-head">
-            <span class="panel-title">TaskFlow</span>
-            <span class="panel-status">Completed</span>
-          </div>
-          <p class="panel-desc">
-            Project and task management app with Discord OAuth login, a slash-command bot, and
-            real-time email + Discord notifications on assignment. Role-based access —
-            viewer, member, manager, admin.
+        <article class="card rv">
+          <h3>Odoo development</h3>
+          <p>
+            Custom modules in Python: business logic, model extensions, ORM overrides.
+            Access rights and record rules, query tuning, scheduled actions. I work in
+            v17 and v18 on SaaS, and review the team's work before it ships.
           </p>
-          <div class="panel-tags">
-            <span>React 19</span><span>Vite</span><span>Tailwind v4</span><span>Node + Express</span>
-            <span>Firebase</span><span>Firestore</span><span>Discord.js</span><span>Resend</span><span>Tiptap</span>
-          </div>
-          <div class="panel-links">
-            <a href="https://taskflow-pm-lovat.vercel.app" target="_blank" rel="noopener">Live demo →</a>
-            <a href="https://github.com/Sheiynee/TaskFlow" target="_blank" rel="noopener">Source →</a>
-          </div>
-        </div>
-      </div>
+          <p class="tech">Python · Odoo ORM · PostgreSQL · record rules</p>
+        </article>
 
-      <div class="panel reveal">
-        <div class="reg"></div>
-        <div>
-          <div class="panel-head">
-            <span class="panel-title">LinkFOLIO</span>
-            <span class="panel-status">Completed</span>
-          </div>
-          <p class="panel-desc">
-            A live page builder for creators — one themeable hub aggregating Twitch, YouTube,
-            TikTok, and Spotify. Live data throughout: viewers see when you're streaming and what's
-            currently playing, not a static link list.
+        <article class="card rv">
+          <h3>Front-end development</h3>
+          <p>
+            Interfaces inside Odoo with QWeb and XML, plus JavaScript for behaviour the
+            editor can't reach. Webflow when the site lives outside the ERP, React and
+            Next.js in my own projects. Usually starts as a designer's mockup.
           </p>
-          <div class="panel-tags">
-            <span>Next.js 14</span><span>TypeScript</span><span>App Router</span><span>Supabase</span>
-            <span>NextAuth v5</span><span>Tailwind CSS</span><span>shadcn/ui</span><span>dnd-kit</span>
-          </div>
-          <div class="panel-links">
-            <a href="https://link-folio-blue.vercel.app" target="_blank" rel="noopener">Live demo →</a>
-            <a href="https://github.com/Sheiynee/LinkFOLIO" target="_blank" rel="noopener">Source →</a>
-          </div>
-        </div>
-      </div>
+          <p class="tech">QWeb · XML · JavaScript · Webflow · React</p>
+        </article>
 
-      <div class="panel reveal">
-        <div class="reg"></div>
-        <div>
-          <div class="panel-head">
-            <span class="panel-title">Supply Tracker</span>
-            <span class="panel-status">Completed</span>
-          </div>
-          <p class="panel-desc">
-            Full-stack inventory and supply management app — stock levels, suppliers, and
-            supply-chain activity in real time, on a Next.js frontend with a Prisma data layer.
+        <article class="card rv">
+          <h3>Automation &amp; integrations</h3>
+          <p>
+            n8n workflows that answer quote requests, migrate data, and push mass updates
+            across Odoo. APIs keeping Webflow CMS and the ERP in sync. Python scripts
+            running database dumps on a schedule.
           </p>
-          <div class="panel-tags">
-            <span>Next.js</span><span>TypeScript</span><span>App Router</span><span>Prisma ORM</span>
-            <span>Tailwind CSS</span><span>shadcn/ui</span>
+          <p class="tech">n8n · REST APIs · webhooks · Python</p>
+        </article>
+
+      </div>
+    </section>
+
+    <section class="band" id="work">
+      <h2>Work</h2>
+      <div>
+
+        <article class="entry rv">
+          <div class="entry-top">
+            <h3>Instant RFQ Response Engine</h3>
+            <span class="when">Scilogex, 2025 — 2026</span>
           </div>
-          <div class="panel-links">
-            <a href="https://supply-tracker-beta.vercel.app" target="_blank" rel="noopener">Live demo →</a>
-            <a href="https://github.com/Sheiynee/supply-tracker" target="_blank" rel="noopener">Source →</a>
+          <p class="at">n8n automation</p>
+          <p>
+            A quote request that used to sit in an inbox now gets answered on its own. A
+            Typeform submission enters an n8n workflow that parses the form, applies free
+            accessory promotions keyed to specific SKUs, calculates totals, and sends back a
+            priced response. A second, webhook-driven version powers the chatbot on the site.
+          </p>
+          <p>
+            I audited the workflow for orphaned nodes and split the pricing logic into three
+            named steps, parse, apply promos, calculate totals, so the next person changing a
+            promotion doesn't have to trace wires to find where the number came from.
+          </p>
+        </article>
+
+        <article class="entry rv">
+          <div class="entry-top">
+            <h3>Scilogex</h3>
+            <span class="when">2025 — 2026</span>
           </div>
+          <p class="at">Benchtop lab equipment: centrifuges, stirrers, pipettes, liquid handling.</p>
+          <p>
+            A lab can request a quote from any product page instead of emailing sales. I
+            built that form and the pricing logic behind it. I also rebuilt the mega menu for
+            a catalog that had outgrown it, and reworked checkout so each vendor only offers
+            the shipping methods it can actually fulfil, including FedEx rates for orders
+            leaving the UK warehouse.
+          </p>
+          <div class="out"><a href="https://www.scilogex.com" target="_blank" rel="noopener">scilogex.com</a></div>
+        </article>
+
+        <article class="entry rv">
+          <div class="entry-top">
+            <h3>Block Scientific</h3>
+            <span class="when">2025</span>
+          </div>
+          <p class="at">Clinical lab analyzers for hospitals and diagnostic labs.</p>
+          <p>
+            The site shows a different sales rep depending on which part of the US you're
+            browsing from, which I built as a conditional banner module. I also traced a
+            marketing automation rule that had been sending reagent follow-ups to customers
+            who had bought test strips, and fixed the domain filter causing it.
+          </p>
+          <div class="out"><a href="https://www.blockscientific.com" target="_blank" rel="noopener">blockscientific.com</a></div>
+        </article>
+
+        <article class="entry rv">
+          <div class="entry-top">
+            <h3>Yamato USA</h3>
+            <span class="when">2024 — 2025</span>
+          </div>
+          <p class="at">US arm of a 140-year-old Japanese lab equipment manufacturer.</p>
+          <p>
+            I rebuilt the products mega menu and its mobile counterpart, then implemented
+            designer layouts across the product and category pages. Along the way I tracked
+            down a JavaScript crash breaking admin-only views. It turned out to be a
+            confirmed Odoo bug, so I patched around it rather than waiting for the fix.
+          </p>
+          <div class="out"><a href="https://www.yamato-usa.com" target="_blank" rel="noopener">yamato-usa.com</a></div>
+        </article>
+
+      </div>
+    </section>
+
+    <section class="band" id="side">
+      <h2>Side projects</h2>
+      <div>
+
+        <article class="entry rv">
+          <div class="entry-top">
+            <h3>TaskFlow</h3>
+            <span class="when">2025</span>
+          </div>
+          <p>
+            Task management for teams that already live in Discord. You sign in with Discord,
+            manage work through slash commands as well as the web app, and get notified in
+            both Discord and email the moment something is assigned to you. Access is scoped
+            across viewer, member, manager, and admin.
+          </p>
+          <p class="tech">React · Vite · Express · Firestore · Discord.js · Resend</p>
+          <div class="out">
+            <a href="https://taskflow-pm-lovat.vercel.app" target="_blank" rel="noopener">Live demo</a>
+            <a href="https://github.com/Sheiynee/TaskFlow" target="_blank" rel="noopener">Source</a>
+          </div>
+        </article>
+
+        <article class="entry rv">
+          <div class="entry-top">
+            <h3>LinkFOLIO</h3>
+            <span class="when">2025</span>
+          </div>
+          <p>
+            A link page for creators that knows what you're doing right now. It pulls live
+            state from Twitch, YouTube, TikTok, and Spotify, so visitors see that you're
+            streaming and what's playing rather than a static list of URLs.
+          </p>
+          <p class="tech">Next.js · TypeScript · Supabase · NextAuth · dnd-kit</p>
+          <div class="out">
+            <a href="https://link-folio-blue.vercel.app" target="_blank" rel="noopener">Live demo</a>
+            <a href="https://github.com/Sheiynee/LinkFOLIO" target="_blank" rel="noopener">Source</a>
+          </div>
+        </article>
+
+        <article class="entry rv">
+          <div class="entry-top">
+            <h3>Supply Tracker</h3>
+            <span class="when">2024</span>
+          </div>
+          <p>
+            Inventory and supplier management: stock levels, supplier records, and
+            supply-chain activity, updating in real time.
+          </p>
+          <p class="tech">Next.js · TypeScript · Prisma · Tailwind</p>
+          <div class="out">
+            <a href="https://supply-tracker-beta.vercel.app" target="_blank" rel="noopener">Live demo</a>
+            <a href="https://github.com/Sheiynee/supply-tracker" target="_blank" rel="noopener">Source</a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <section class="band" id="experience">
+      <h2>Experience</h2>
+      <div>
+
+        <article class="entry rv">
+          <div class="entry-top">
+            <h3>Odoo Development Manager</h3>
+            <span class="when">Jun 2026 — Present</span>
+          </div>
+          <p class="at">Journey Better Business Group Inc., Makati</p>
+          <p>
+            I lead the Odoo development team and review every task before it ships. My own
+            work is mostly integration: custom APIs keeping Webflow CMS and Odoo SaaS in
+            sync, n8n workflows for migrations and mass data updates, and Python scripts that
+            handle database dumps and backups.
+          </p>
+          <p>
+            The rest is whatever breaks. Recently that meant tracing a client's email
+            delivery failure to a stale outgoing mail server intercepting everything, then
+            rebuilding the domain's SPF, DKIM, and DMARC records.
+          </p>
+        </article>
+
+        <article class="entry rv">
+          <div class="entry-top">
+            <h3>Front-End Developer</h3>
+            <span class="when">Jan 2026 — May 2026</span>
+          </div>
+          <p class="at">Journey Better Business Group Inc., Makati</p>
+          <p>
+            Custom Odoo modules in Python, covering business logic, model extensions, and ORM
+            overrides, with frontends built in Webflow and Odoo's QWeb templating. Also
+            PostgreSQL query tuning and scheduled actions, across the full cycle from
+            requirements to deployment.
+          </p>
+        </article>
+
+        <article class="entry rv">
+          <div class="entry-top">
+            <h3>Python Developer</h3>
+            <span class="when">Oct 2024 — Dec 2025</span>
+          </div>
+          <p class="at">Software Farm International Inc., Pasig</p>
+          <p>
+            Turned client operating requirements into working Odoo workflows. I built and
+            customized modules for client-specific processes, configured access rights and
+            record rules for role-based access to ERP data, and debugged the issues that
+            threatened data integrity.
+          </p>
+        </article>
+
+        <article class="entry rv">
+          <div class="entry-top">
+            <h3>Social Media Manager</h3>
+            <span class="when">Sep 2023 — Mar 2024</span>
+          </div>
+          <p class="at">Google Developer Student Club, Manila</p>
+          <p>
+            Ran content and the posting calendar for club events and workshops, keeping
+            messaging consistent across channels.
+          </p>
+        </article>
+
+        <article class="entry rv">
+          <div class="entry-top">
+            <h3>Front-End Developer Intern</h3>
+            <span class="when">Jun 2023 — Aug 2023</span>
+          </div>
+          <p class="at">Pamantasan ng Lungsod ng Maynila, ICTO</p>
+          <p>
+            Built interface components for the university's Patient Management System in
+            HTML, CSS, PHP, and JavaScript. I gathered requirements from staff, wrote the
+            user manuals, and ran user acceptance testing before handover.
+          </p>
+        </article>
+
+      </div>
+    </section>
+
+    <section class="band" id="stack">
+      <h2>Stack</h2>
+      <div class="rv">
+        <dl class="spec">
+          <div class="spec-row">
+            <dt>Languages</dt>
+            <dd>Python · JavaScript · TypeScript · SQL · PHP · HTML · CSS · XML</dd>
+          </div>
+          <div class="spec-row">
+            <dt>Odoo</dt>
+            <dd>Odoo SaaS v17 &amp; v18 · custom modules · ORM · QWeb · access rights · record rules · scheduled actions</dd>
+          </div>
+          <div class="spec-row">
+            <dt>Front-end</dt>
+            <dd>QWeb / XML · JavaScript · Webflow · React · Next.js · Tailwind</dd>
+          </div>
+          <div class="spec-row">
+            <dt>Automation &amp; data</dt>
+            <dd>n8n · REST APIs · webhooks · PostgreSQL · data migration · database backups</dd>
+          </div>
+          <div class="spec-row">
+            <dt>Tools</dt>
+            <dd>Git · Supabase · Firebase · Prisma · Vercel</dd>
+          </div>
+          <div class="spec-row">
+            <dt>Practice</dt>
+            <dd>Technical leadership · code review · QC · user acceptance testing · SDLC</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="band" id="about">
+      <h2>About</h2>
+      <div class="rv">
+        <p>
+          I studied Computer Science at Pamantasan ng Lungsod ng Maynila and graduated cum
+          laude in 2024. I like work that runs the length of a problem, from the database
+          schema to whatever the user actually clicks on.
+        </p>
+        <p style="margin-top:0.85rem">
+          Most of my job is other people's systems, so I build side projects to stay in
+          practice with parts of the stack I don't otherwise touch. Away from the screen:
+          music, basketball, volleyball, and games.
+        </p>
+      </div>
+    </section>
+
+    <section class="band closing" id="contact">
+      <h2>Contact</h2>
+      <div class="rv">
+        <p>
+          If you have a system that needs fixing, connecting, or automating, I'd like to hear
+          about it. I'm open to remote and international work, full-time or freelance, and
+          I'm used to working with US teams from Manila.
+        </p>
+        <a class="mail" href="mailto:rickarmand3@gmail.com">rickarmand3@gmail.com</a>
+        <div class="also">
+          <a class="inline-link" href="https://www.linkedin.com/in/rick-armand-de-leon-810843356/" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="inline-link" href="https://github.com/Sheiynee" target="_blank" rel="noopener">GitHub</a>
         </div>
       </div>
+    </section>
 
-    </div>
-  </section>
+  </main>
 
-  <!-- CLIENT WORK -->
-  <section id="clients">
-    <div class="sheet-bar">
-      <span class="sheet-num">03</span>
-      <span class="sheet-title">Client Work — Odoo Websites</span>
-      <span class="sheet-rule"></span>
-      <span class="sheet-meta">VIA JOURNEY BETTER</span>
-    </div>
-
-    <div class="panels">
-
-      <div class="panel reveal">
-        <div class="reg"></div>
-        <div>
-          <div class="panel-head">
-            <span class="panel-title">Scilogex</span>
-            <span class="panel-status">Odoo Website Editor</span>
-          </div>
-          <p class="panel-desc">Benchtop lab equipment manufacturer — centrifuges, stirrers, pipettes, and liquid-handling products for research labs.</p>
-          <ul>
-            <li>Built the instant quote form and its underlying calculation logic, requestable straight from a product page.</li>
-            <li>Translated design mockups into live product and category page layouts across the catalog.</li>
-            <li>Rebuilt the products mega menu for a wide, category-heavy catalog.</li>
-            <li>Reworked the checkout page layout and flow.</li>
-          </ul>
-          <div class="panel-links">
-            <a href="https://www.scilogex.com" target="_blank" rel="noopener">Visit site →</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="panel reveal">
-        <div class="reg"></div>
-        <div>
-          <div class="panel-head">
-            <span class="panel-title">Block Scientific</span>
-            <span class="panel-status">Odoo Website Editor</span>
-          </div>
-          <p class="panel-desc">Distributor of new, used, and refurbished clinical lab analyzers and equipment for hospitals and diagnostic labs.</p>
-          <ul>
-            <li>Added the homepage promotional banner and repositioned the lead-generation form.</li>
-            <li>Translated design mockups into live homepage and page layouts.</li>
-            <li>Built the sales-rep banner module, shown conditionally by the visitor's US region.</li>
-          </ul>
-          <div class="panel-links">
-            <a href="https://www.blockscientific.com" target="_blank" rel="noopener">Visit site →</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="panel reveal">
-        <div class="reg"></div>
-        <div>
-          <div class="panel-head">
-            <span class="panel-title">Yamato USA</span>
-            <span class="panel-status">Odoo Website Editor</span>
-          </div>
-          <p class="panel-desc">US arm of a 140-year-old Japanese lab equipment manufacturer — rotary evaporators, spray dryers, water purification, and industry-specific lab systems.</p>
-          <ul>
-            <li>Rebuilt the products mega menu and its mobile navigation counterpart.</li>
-            <li>Implemented designer-created layouts across several product and category pages.</li>
-          </ul>
-          <div class="panel-links">
-            <a href="https://www.yamato-usa.com" target="_blank" rel="noopener">Visit site →</a>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- STACK -->
-  <section id="stack">
-    <div class="sheet-bar">
-      <span class="sheet-num">04</span>
-      <span class="sheet-title">Stack — Bill of Materials</span>
-      <span class="sheet-rule"></span>
-      <span class="sheet-meta">AS OF 2026</span>
-    </div>
-
-    <div class="bom reveal">
-      <div class="bom-cell">
-        <div class="bom-cat">Languages</div>
-        <div class="bom-items"><span>Python</span><span>JavaScript</span><span>SQL</span><span>PHP</span><span>HTML</span><span>CSS</span><span>XML</span></div>
-      </div>
-      <div class="bom-cell">
-        <div class="bom-cat">Odoo</div>
-        <div class="bom-items"><span>Odoo SaaS</span><span>Custom Module Development</span><span>ORM</span><span>QWeb</span><span>Access Rights</span><span>Record Rules</span><span>Scheduled Actions</span></div>
-      </div>
-      <div class="bom-cell">
-        <div class="bom-cat">Tools &amp; Technologies</div>
-        <div class="bom-items"><span>PostgreSQL</span><span>REST APIs</span><span>n8n</span><span>Webflow</span><span>Git</span><span>Database Dumping / Backups</span></div>
-      </div>
-      <div class="bom-cell">
-        <div class="bom-cat">Professional</div>
-        <div class="bom-items"><span>Technical Leadership</span><span>Code Review</span><span>Quality Control (QC)</span><span>User Acceptance Testing (UAT)</span><span>SDLC</span><span>Data Migration</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="sheet-bar">
-      <span class="sheet-num">05</span>
-      <span class="sheet-title">About</span>
-      <span class="sheet-rule"></span>
-      <span class="sheet-meta">SCALE N.T.S.</span>
-    </div>
-
-    <div class="about">
-      <div class="about-text reveal">
-        <p>
-          I'm a Computer Science graduate from Pamantasan ng Lungsod ng Maynila (Cum Laude, 2024)
-          and a developer who works end-to-end — from database schema to deployed interface.
-        </p>
-        <p>
-          I currently lead the Odoo development team at Journey Better Business Group, directing
-          technical delivery and code quality for US-based clients while architecting ERP
-          customizations, Webflow-to-SaaS integrations, and n8n-driven automation.
-        </p>
-        <p>
-          Before that I worked as a Python Developer at Software Farm International, building
-          custom Odoo workflows and modules for client-specific business processes.
-          Outside the day job, I build side projects — TaskFlow, LinkFOLIO, Supply Tracker — to work
-          new parts of the stack.
-        </p>
-        <p>
-          Outside of code: music, basketball, volleyball, and video games.
-        </p>
-      </div>
-      <div class="about-facts reveal">
-        <div class="fact-row"><span class="fact-label">Alias</span><span class="fact-val">Sheiynee</span></div>
-        <div class="fact-row"><span class="fact-label">Location</span><span class="fact-val">Caloocan City, Metro Manila, PH</span></div>
-        <div class="fact-row"><span class="fact-label">Currently at</span><span class="fact-val">Journey Better Business Group Inc.</span></div>
-        <div class="fact-row"><span class="fact-label">Education</span><span class="fact-val">BS Computer Science, Cum Laude — PLM, 2024</span></div>
-        <div class="fact-row"><span class="fact-label">Email</span><span class="fact-val"><a href="mailto:rickarmand3@gmail.com">rickarmand3@gmail.com</a></span></div>
-        <div class="fact-row"><span class="fact-label">GitHub</span><span class="fact-val"><a href="https://github.com/Sheiynee" target="_blank" rel="noopener">github.com/Sheiynee</a></span></div>
-        <div class="fact-row"><span class="fact-label">LinkedIn</span><span class="fact-val"><a href="https://www.linkedin.com/in/rick-armand-de-leon-810843356/" target="_blank" rel="noopener">Rick Armand De Leon</a></span></div>
-        <div class="fact-row"><span class="fact-label">Status</span><span class="fact-val">Open to remote &amp; international roles</span></div>
-      </div>
-    </div>
-  </section>
-
-</div>
-
-<!-- CONTACT -->
-<div class="wrap" id="contact">
-  <div class="contact-band reveal">
-    <div>
-      <h2>Have a system that needs fixing, connecting, or automating?</h2>
-      <p>Open to remote, international, freelance, and full-time roles — Odoo/ERP work, integrations, or workflow automation.</p>
-    </div>
-    <div class="contact-list">
-      <a class="contact-row" href="mailto:rickarmand3@gmail.com">
-        <span class="clabel">Email</span><span class="cval">rickarmand3@gmail.com</span>
-      </a>
-      <a class="contact-row" href="https://www.linkedin.com/in/rick-armand-de-leon-810843356/" target="_blank" rel="noopener">
-        <span class="clabel">LinkedIn</span><span class="cval">/in/rick-armand-de-leon</span>
-      </a>
-      <a class="contact-row" href="https://github.com/Sheiynee" target="_blank" rel="noopener">
-        <span class="clabel">GitHub</span><span class="cval">github.com/Sheiynee</span>
-      </a>
-    </div>
-  </div>
-</div>
-
-<div class="wrap">
   <footer>
-    <span>DRAWN BY R. DE LEON — CHECKED SELF-QC — REV 2026.08</span>
-    <span>© 2026 Rick Armand De Leon — Hosted on GitHub Pages — no framework</span>
+    <span>Rick Armand De Leon, 2026</span>
+    <a href="#top">Back to top</a>
   </footer>
+
 </div>
 
 <script>
-  const navLinks = document.querySelectorAll('.nav-links a[data-section]');
-  const sections = document.querySelectorAll('section[id]');
+(function(){
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  window.addEventListener('scroll', () => {
-    const y = window.scrollY;
-    let current = '';
-    sections.forEach(s => { if (y >= s.offsetTop - 140) current = s.id; });
-    navLinks.forEach(a => a.classList.toggle('active', a.dataset.section === current));
+  /* the headline arrives a line at a time */
+  var h1 = document.querySelector('.opening h1');
+  function revealHeadline(){
+    if (!h1) return;
+    if (reduced){ h1.classList.add('ready'); return; }
+
+    var words = h1.textContent.trim().split(/\s+/);
+    h1.textContent = '';
+    words.forEach(function(w, i){
+      var s = document.createElement('span');
+      s.textContent = w;
+      h1.appendChild(s);
+      if (i < words.length - 1) h1.appendChild(document.createTextNode(' '));
+      s.dataset.w = '1';
+    });
+
+    /* group the words by the line they landed on */
+    var spans = h1.querySelectorAll('[data-w]');
+    var lines = [], run = [], top = null;
+    Array.prototype.forEach.call(spans, function(s){
+      if (top === null || Math.abs(s.offsetTop - top) < 3){
+        if (top === null) top = s.offsetTop;
+      } else {
+        lines.push(run); run = []; top = s.offsetTop;
+      }
+      run.push(s.textContent);
+    });
+    lines.push(run);
+
+    h1.innerHTML = lines.map(function(l, i){
+      return '<span class="ln"><span class="ln-i" style="animation-delay:' +
+             (0.06 + i * 0.09).toFixed(2) + 's">' + l.join(' ') + '</span></span>';
+    }).join('');
+    h1.classList.add('ready');
+
+    /* let the lines overflow again once they've settled, so a resize can't clip them */
+    setTimeout(function(){ h1.classList.add('done'); }, 1600);
+  }
+  if (document.fonts && document.fonts.ready){
+    document.fonts.ready.then(revealHeadline);
+  } else {
+    revealHeadline();
+  }
+
+  /* the header keeps a hairline only once it's parked over content */
+  var masthead = document.querySelector('.masthead');
+  function parkHeader(){
+    masthead.classList.toggle('parked', window.scrollY > 6);
+  }
+  window.addEventListener('scroll', parkHeader, { passive:true });
+  parkHeader();
+
+  /* the spine fills as you read */
+  var spine = document.querySelector('.spine');
+  var ticking = false;
+  function drawSpine(){
+    var r = spine.getBoundingClientRect();
+    var mark = window.innerHeight * 0.55;
+    var p = (mark - r.top) / r.height;
+    spine.style.setProperty('--p', Math.min(1, Math.max(0, p)).toFixed(4));
+    ticking = false;
+  }
+  function onScroll(){
+    if (!ticking){ ticking = true; window.requestAnimationFrame(drawSpine); }
+  }
+  if (!reduced && spine){
+    window.addEventListener('scroll', onScroll, { passive:true });
+    window.addEventListener('resize', onScroll);
+    drawSpine();
+  }
+
+  /* the margin note for the section you're in goes to full ink */
+  var bands = document.querySelectorAll('.band');
+  var navLinks = document.querySelectorAll('.masthead nav a[data-nav]');
+
+  /* entries in the same section cascade rather than landing together */
+  bands.forEach(function(band){
+    var items = band.querySelectorAll('.rv');
+    Array.prototype.forEach.call(items, function(el, i){
+      el.style.transitionDelay = (Math.min(i, 3) * 75) + 'ms';
+    });
   });
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
-    });
-  }, { threshold: 0.08 });
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  if ('IntersectionObserver' in window){
+    var current = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        e.target.classList.toggle('current', e.isIntersecting);
+        if (e.isIntersecting){
+          var id = e.target.id;
+          Array.prototype.forEach.call(navLinks, function(a){
+            a.classList.toggle('on', a.dataset.nav === id);
+          });
+        }
+      });
+    }, { rootMargin:'-42% 0px -50% 0px' });
+    bands.forEach(function(b){ current.observe(b); });
+
+    /* entries settle in once, on first sight */
+    if (!reduced){
+      var reveal = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if (e.isIntersecting){ e.target.classList.add('in'); reveal.unobserve(e.target); }
+        });
+      }, { threshold:0.08, rootMargin:'0px 0px -60px 0px' });
+      document.querySelectorAll('.rv').forEach(function(el){ reveal.observe(el); });
+    } else {
+      document.querySelectorAll('.rv').forEach(function(el){ el.classList.add('in'); });
+    }
+  } else {
+    document.querySelectorAll('.rv').forEach(function(el){ el.classList.add('in'); });
+  }
+})();
 </script>
 
 </body>
