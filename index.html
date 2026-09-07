@@ -3,9 +3,19 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Rick Armand De Leon — Odoo &amp; front-end developer</title>
-<meta name="description" content="Odoo and front-end developer in Metro Manila. ERP customization, Webflow-to-Odoo integrations, and n8n workflow automation for US-based clients." />
+<title>Rick Armand De Leon — Odoo Developer &amp; Full-Stack Web Developer</title>
+<meta name="description" content="Odoo developer and full-stack web developer in Metro Manila. Custom Odoo modules, business system integrations, and modern hand-coded websites for US-based clients — full-time and freelance." />
 <meta name="theme-color" content="#ffffff" />
+<link rel="canonical" href="https://sheiynee.github.io/" />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Rick Armand De Leon — Odoo Developer &amp; Full-Stack Web Developer" />
+<meta property="og:description" content="Odoo development, business system integrations, and modern hand-coded websites. Based in Metro Manila, working with clients in the US." />
+<meta property="og:url" content="https://sheiynee.github.io/" />
+<meta name="twitter:card" content="summary" />
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%23111111'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='34' fill='%23ffffff' text-anchor='middle'%3ER%3C/text%3E%3C/svg%3E" />
+
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..600&family=Instrument+Sans:wght@400;500&display=swap" rel="stylesheet" />
@@ -59,6 +69,7 @@
   .d2{ animation-delay:0.14s; }
   .d3{ animation-delay:0.26s; }
   .d4{ animation-delay:0.38s; }
+  .d5{ animation-delay:0.5s; }
 
   /* ─── headline, revealed a line at a time ───── */
   .js .opening h1{ visibility:hidden; }
@@ -149,7 +160,7 @@
     letter-spacing:-0.012em;
     color:var(--ink); text-decoration:none;
   }
-  .masthead nav{ display:flex; gap:1.7rem; }
+  .masthead nav{ display:flex; gap:1.6rem; }
   .masthead nav a{
     font-size:0.92rem;
     color:var(--quiet);
@@ -172,6 +183,12 @@
     max-width:22ch;
   }
   .opening p{ margin-top:1.8rem; max-width:58ch; }
+  .opening .cta-row{
+    margin-top:1.6rem;
+    display:flex; flex-wrap:wrap;
+    gap:0.4rem 1.6rem;
+    font-size:0.96rem;
+  }
   .opening .where{
     margin-top:1.6rem;
     color:var(--quiet);
@@ -225,6 +242,8 @@
   }
   .band.current > h2{ color:var(--ink); }
   .band.current > h2::after{ width:12px; }
+
+  .band-intro{ max-width:60ch; margin-bottom:2rem; }
 
   /* ─── entries ───────────────────────────────── */
   .entry + .entry{
@@ -287,6 +306,11 @@
     text-decoration-color:var(--ink);
     text-underline-offset:5px;
   }
+  .cta-note{
+    margin-top:0.85rem;
+    font-size:0.92rem;
+    color:var(--quiet);
+  }
 
   /* ─── scroll reveal ─────────────────────────── */
   .rv{ opacity:0; transform:translateY(14px); }
@@ -327,7 +351,6 @@
   footer a:hover{ color:var(--ink); }
 
   /* ─── narrow ────────────────────────────────── */
-  /* ─── narrow: the spine stays, the margin note turns on its side ─── */
   @media (max-width:760px){
     :root{
       --gutter:22px;
@@ -347,7 +370,6 @@
       letter-spacing:0.01em;
       white-space:nowrap;
     }
-    /* the tick rotates with it: a live segment on the rule itself */
     .band > h2::after{
       top:0;
       right:calc(-1 * var(--gap) / 2);
@@ -391,6 +413,7 @@
     <a class="who" href="#top">Rick Armand De Leon</a>
     <nav>
       <a href="#practice" data-nav="practice">What I do</a>
+      <a href="#services" data-nav="services">Services</a>
       <a href="#work" data-nav="work">Work</a>
       <a href="#experience" data-nav="experience">Experience</a>
       <a href="#contact" data-nav="contact">Contact</a>
@@ -400,13 +423,19 @@
   <section class="opening">
     <h1>I build and maintain the systems that run other people's businesses.</h1>
     <p class="lift d3">
-      I'm an Odoo developer and a front-end developer at Journey Better Business Group in
+      I'm an Odoo developer and a full-stack web developer at Journey Better Business Group in
       Makati, where I lead the Odoo team and work with clients in the US. I build the ERP
       side in Python, the interfaces that sit on top of it, and the n8n automations that
-      connect the two.
+      connect the two — and outside of that, I design and hand-code websites and web
+      applications for businesses that don't want to look like everyone else's template.
     </p>
-    <p class="where lift d4">
-      Caloocan City, Metro Manila. Open to remote and international work.
+    <p class="cta-row lift d4">
+      <a class="inline-link" href="#work">View my work</a>
+      <a class="inline-link" href="#contact">Let's work together</a>
+      <a class="inline-link" href="resume.pdf" target="_blank" rel="noopener">Resume (PDF)</a>
+    </p>
+    <p class="where lift d5">
+      Caloocan City, Metro Manila. Open to remote and international work, full-time or freelance.
       <a class="inline-link" href="mailto:rickarmand3@gmail.com">rickarmand3@gmail.com</a>
     </p>
   </section>
@@ -447,6 +476,51 @@
           <p class="tech">n8n · REST APIs · webhooks · Python</p>
         </article>
 
+      </div>
+    </section>
+
+    <section class="band" id="services">
+      <h2>Services</h2>
+      <div>
+        <p class="band-intro rv">
+          For business owners rather than other developers: if any of this sounds like
+          something you need, it's the kind of work I take on outside my full-time role.
+          <a class="inline-link" href="#contact">Let's talk</a>.
+        </p>
+
+        <div class="cards">
+
+          <article class="card rv">
+            <h3>Custom websites</h3>
+            <p>
+              A site built for your business, not assembled from a page builder or a
+              generic theme. Designed and coded from scratch so it loads fast, reads well
+              on a phone, and actually looks like you.
+            </p>
+            <p class="tech">Hand-coded, not templated</p>
+          </article>
+
+          <article class="card rv">
+            <h3>Web applications</h3>
+            <p>
+              For processes bigger than a website — booking, inventory, internal tools,
+              customer portals. I design the database and build the interface around how
+              your team already works, not the other way around.
+            </p>
+            <p class="tech">React · Next.js · Node.js · PostgreSQL</p>
+          </article>
+
+          <article class="card rv">
+            <h3>Odoo &amp; automation</h3>
+            <p>
+              If you run Odoo, or are considering it, I customize it around your actual
+              workflow — inventory, sales, purchasing, accounting, POS — and connect it to
+              your website and other tools so nothing gets re-entered twice.
+            </p>
+            <p class="tech">Custom modules · integrations · workflow automation</p>
+          </article>
+
+        </div>
       </div>
     </section>
 
@@ -517,6 +591,38 @@
             confirmed Odoo bug, so I patched around it rather than waiting for the fix.
           </p>
           <div class="out"><a href="https://www.yamato-usa.com" target="_blank" rel="noopener">yamato-usa.com</a></div>
+        </article>
+
+      </div>
+    </section>
+
+    <section class="band" id="concept">
+      <h2>Concept work</h2>
+      <div>
+
+        <article class="entry rv">
+          <div class="entry-top">
+            <h3>Tin'to Coffee Bar</h3>
+            <span class="when">Concept project</span>
+          </div>
+          <p class="at">Self-initiated concept — not a paid client engagement.</p>
+          <p>
+            A four-page site (home, about, menu, contact) built around one idea: Filipino
+            ingredients presented as familiar rather than novelty. Ube, tablea, and
+            calamansi are framed that way on the menu, with baybayin script and warm
+            interior photography carrying the identity instead of stock café imagery.
+          </p>
+          <p>
+            Built with plain HTML, CSS, and JavaScript rather than a website builder, and
+            fully responsive. It's also upfront about being a proposal — the site labels
+            its own placeholder menu items and contact details as placeholders rather than
+            presenting them as confirmed.
+          </p>
+          <p class="tech">HTML · CSS · JavaScript · responsive layout · brand-led design</p>
+          <div class="out">
+            <a href="https://sheiynee.github.io/tinto-website/index.html" target="_blank" rel="noopener">View the concept</a>
+          </div>
+          <p class="cta-note">Interested in a site like this for your business? <a class="inline-link" href="#contact">Let's talk</a>.</p>
         </article>
 
       </div>
@@ -711,14 +817,17 @@
       <h2>Contact</h2>
       <div class="rv">
         <p>
-          If you have a system that needs fixing, connecting, or automating, I'd like to hear
-          about it. I'm open to remote and international work, full-time or freelance, and
-          I'm used to working with US teams from Manila.
+          Looking for a developer who can work across Odoo, business systems, and web
+          applications? Have a business idea or need a site that's actually built for you
+          instead of assembled from a template? Either way, I'd like to hear about it. I'm
+          open to remote and international work, full-time or freelance, and I'm used to
+          working with US teams from Manila.
         </p>
         <a class="mail" href="mailto:rickarmand3@gmail.com">rickarmand3@gmail.com</a>
         <div class="also">
           <a class="inline-link" href="https://www.linkedin.com/in/rick-armand-de-leon-810843356/" target="_blank" rel="noopener">LinkedIn</a>
           <a class="inline-link" href="https://github.com/Sheiynee" target="_blank" rel="noopener">GitHub</a>
+          <a class="inline-link" href="resume.pdf" target="_blank" rel="noopener">Resume (PDF)</a>
         </div>
       </div>
     </section>
