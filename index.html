@@ -8,16 +8,15 @@
 
   <meta
     name="description"
-    content="Full-stack Python developer specializing in Odoo, SaaS development, business systems integration, and workflow automation."
+    content="Full-stack Python developer specializing in Odoo, SaaS systems, integrations, and business workflow automation."
   >
 
-  <title>Developer Portfolio — Industrial Drafting</title>
+  <title>Developer Portfolio — Odoo, Python & SaaS</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
   <link
-    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;450;500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;450;500;550;600;650;700&display=swap"
     rel="stylesheet"
   >
 
@@ -26,380 +25,541 @@
 </head>
 
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
   <header class="site-header">
-    <a class="wordmark" href="#home" aria-label="Home">
-      ENGINEER / DEV
+    <a class="wordmark" href="#home" aria-label="Portfolio home">
+      <span class="wordmark-mark" aria-hidden="true">R.</span>
+      <span>Developer Portfolio</span>
     </a>
 
-    <nav class="main-nav" aria-label="Main navigation">
-      <a href="#capabilities">Capabilities</a>
-      <a href="#services">Services</a>
+    <button
+      class="menu-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="primary-navigation"
+      aria-label="Open navigation"
+    >
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="primary-navigation" id="primary-navigation" aria-label="Main navigation">
       <a href="#work">Selected work</a>
+      <a href="#experience">Experience</a>
+      <a href="#about">About</a>
+      <a class="nav-contact" href="#contact">Contact <span aria-hidden="true">↗</span></a>
     </nav>
-
-    <a class="header-contact" href="#contact">
-      Contact
-    </a>
   </header>
 
-  <main>
-    <!-- TITLE BLOCK -->
-    <section class="hero section-shell" id="home" aria-labelledby="hero-title">
-      <div class="hero-heading">
-        <p class="hero-kicker">Independent developer · Philippines</p>
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero page-shell" id="home" aria-labelledby="hero-title">
+      <div class="hero-topline">
+        <p class="eyebrow">Independent-minded engineer / Philippines</p>
+        <p class="availability"><span class="status-dot"></span> Open to select opportunities</p>
+      </div>
 
-        <h1 id="hero-title">
-          I build and maintain the systems that run other people's businesses.
+      <div class="hero-heading">
+        <p class="hero-index">01 / INTRODUCTION</p>
+
+        <h1 class="editorial-title" id="hero-title">
+          I build the systems that
+          <span>keep businesses moving.</span>
         </h1>
+
+        <p class="hero-description">
+          Full-stack Python developer focused on Odoo, SaaS applications,
+          system integrations, and workflow automation. I turn operational
+          requirements into software that is practical to use and maintain.
+        </p>
       </div>
 
       <div class="title-block" aria-label="Professional overview">
-        <div class="title-cell title-discipline">
-          <span class="cell-label">Discipline</span>
-          <p>Software engineering</p>
+        <div class="title-cell title-block-cell">
+          <span class="cell-label">PRIMARY DISCIPLINE</span>
+          <span class="cell-value">Odoo &amp; Python</span>
         </div>
 
-        <div class="title-cell title-specialty">
-          <span class="cell-label">Specialization</span>
-          <p>Python / Odoo / SaaS</p>
+        <div class="title-cell title-block-cell">
+          <span class="cell-label">SYSTEMS</span>
+          <span class="cell-value">ERP / SaaS / APIs</span>
         </div>
 
-        <div class="title-cell title-description">
-          <span class="cell-label">Approach</span>
-          <p>
-            Business applications, system integrations, and practical
-            automation designed around how organizations actually work.
-          </p>
+        <div class="title-cell title-block-cell">
+          <span class="cell-label">APPROACH</span>
+          <span class="cell-value">Native-first engineering</span>
         </div>
 
-        <a class="title-cell title-action" href="#work">
-          <span class="cell-label">Selected work</span>
-          <span class="action-label">Explore projects</span>
+        <a class="title-cell title-action title-block-cell" href="#work">
+          <span class="cell-label">PORTFOLIO INDEX</span>
+          <span class="cell-value">Explore selected work <span aria-hidden="true">↘</span></span>
         </a>
       </div>
     </section>
 
-    <!-- CAPABILITIES -->
-    <section
-      class="content-section section-shell"
-      id="capabilities"
-      aria-labelledby="capabilities-title"
-    >
-      <div class="section-heading">
+    <!-- WORK -->
+    <section class="section page-shell" id="work" aria-labelledby="work-title">
+      <div class="section-heading" data-reveal>
         <div>
-          <p class="section-kicker">Capabilities</p>
-          <h2 id="capabilities-title">What I do</h2>
+          <p class="eyebrow">02 / Selected work</p>
+          <h2 id="work-title">Engineering in practice.</h2>
         </div>
-
         <p class="section-intro">
-          Engineering business systems with an emphasis on useful functionality,
-          reliable integrations, and maintainable software.
+          Business systems, custom applications, and integrations.
+          A selection of work and technical projects.
         </p>
       </div>
 
-      <div class="bento-grid capabilities-grid">
-        <article class="bento-card card-wide">
-          <div class="card-content">
-            <h3>Backend systems and business logic</h3>
-            <p>
-              Build custom application logic and backend functionality that
-              reflect real business requirements, with structured data and
-              maintainable implementations.
-            </p>
+      <div class="bento-grid">
+        <!-- FEATURED ODOO CASE STUDY -->
+        <article class="bento-card card-featured" data-reveal>
+          <div class="card-topline">
+            <span class="card-category">ODOO / WORKFLOW ENGINEERING</span>
+            <span class="card-number">CASE 01</span>
           </div>
 
-          <ul class="tech-list" aria-label="Technologies">
-            <li>Python</li>
-            <li>PostgreSQL</li>
-            <li>REST APIs</li>
-            <li>Node.js</li>
-          </ul>
-        </article>
-
-        <article class="bento-card card-tall">
           <div class="card-content">
-            <h3>Odoo and SaaS engineering</h3>
+            <p class="case-label">Anonymized implementation case study</p>
+            <h3>Sales tax approval workflow</h3>
             <p>
-              Extend ERP workflows, develop custom modules, and align business
-              processes with practical software solutions.
+              A controlled approval process for tax-related changes, designed
+              to move requests from an inbox to an approver decision before
+              updating the customer's account configuration.
             </p>
-          </div>
 
-          <ul class="tech-list" aria-label="Technologies">
-            <li>Odoo ORM</li>
-            <li>Python</li>
-            <li>XML</li>
-            <li>PostgreSQL</li>
-          </ul>
-        </article>
-
-        <article class="bento-card card-wide">
-          <div class="card-content">
-            <h3>System integration and automation</h3>
-            <p>
-              Connect websites, ERP platforms, APIs, and communication tools.
-              Reduce repetitive manual work through dependable workflows.
-            </p>
-          </div>
-
-          <ul class="tech-list" aria-label="Technologies">
-            <li>REST APIs</li>
-            <li>Webhooks</li>
-            <li>n8n</li>
-            <li>JavaScript</li>
-          </ul>
-        </article>
-
-        <article class="bento-card card-wide">
-          <div class="card-content">
-            <h3>Full-stack web development</h3>
-            <p>
-              Develop responsive web applications with considered interfaces,
-              dependable data flows, and backend architecture that can evolve.
-            </p>
-          </div>
-
-          <ul class="tech-list" aria-label="Technologies">
-            <li>Next.js</li>
-            <li>TypeScript</li>
-            <li>React</li>
-            <li>Supabase</li>
-          </ul>
-        </article>
-
-        <article class="bento-card card-tall">
-          <div class="card-content">
-            <h3>Technical operations</h3>
-            <p>
-              Troubleshoot production issues, maintain integrations, and
-              improve existing systems without introducing unnecessary complexity.
-            </p>
-          </div>
-
-          <ul class="tech-list" aria-label="Technologies">
-            <li>Git</li>
-            <li>DNS</li>
-            <li>SEO</li>
-            <li>Debugging</li>
-          </ul>
-        </article>
-      </div>
-    </section>
-
-    <!-- SERVICES -->
-    <section
-      class="content-section section-shell"
-      id="services"
-      aria-labelledby="services-title"
-    >
-      <div class="section-heading">
-        <div>
-          <p class="section-kicker">Engagements</p>
-          <h2 id="services-title">Services</h2>
-        </div>
-
-        <p class="section-intro">
-          Focused technical support for businesses building, connecting,
-          or improving their software systems.
-        </p>
-      </div>
-
-      <div class="bento-grid services-grid">
-        <article class="bento-card card-wide">
-          <div class="card-content">
-            <h3>Odoo customization and development</h3>
-            <p>
-              Custom modules, business rules, scheduled actions, workflow
-              improvements, and ERP troubleshooting.
-            </p>
+            <div class="case-detail-grid">
+              <div>
+                <span class="detail-label">PROBLEM</span>
+                <p>Tax changes needed a clear review and approval path.</p>
+              </div>
+              <div>
+                <span class="detail-label">IMPLEMENTATION</span>
+                <p>
+                  Customized the Odoo workflow with approval actions and
+                  customer-account updates.
+                </p>
+              </div>
+              <div>
+                <span class="detail-label">ENGINEERING FOCUS</span>
+                <p>Approval logic, state transitions, and controlled updates.</p>
+              </div>
+            </div>
           </div>
 
           <ul class="tech-list" aria-label="Technologies">
             <li>Odoo</li>
             <li>Python</li>
-            <li>PostgreSQL</li>
+            <li>Business workflows</li>
           </ul>
+
+          <a class="card-disclosure" href="#case-study-notes">
+            <span>Implementation notes</span>
+            <span aria-hidden="true">→</span>
+          </a>
         </article>
 
-        <article class="bento-card card-tall">
+        <!-- ODOO ACCOUNTING -->
+        <article class="bento-card" data-reveal>
+          <div class="card-topline">
+            <span class="card-category">ODOO / ACCOUNTING</span>
+            <span class="card-number">CASE 02</span>
+          </div>
+
           <div class="card-content">
-            <h3>Workflow automation</h3>
+            <h3>Accounting reconciliation customization</h3>
             <p>
-              Automate repetitive tasks, notifications, data synchronization,
-              and multi-step operational processes.
+              Investigated and customized reconciliation-related behavior
+              in an Odoo environment, including the handling of required
+              terms in the bank reconciliation flow.
             </p>
+
+            <div class="card-note">
+              <span class="detail-label">FOCUS</span>
+              <p>Accounting behavior, reconciliation requirements, and native compatibility.</p>
+            </div>
           </div>
 
           <ul class="tech-list" aria-label="Technologies">
-            <li>n8n</li>
-            <li>APIs</li>
-            <li>Webhooks</li>
+            <li>Odoo Accounting</li>
+            <li>Python</li>
+            <li>Debugging</li>
           </ul>
+
+          <a class="card-disclosure" href="#case-study-notes">
+            <span>Implementation notes</span>
+            <span aria-hidden="true">→</span>
+          </a>
         </article>
 
-        <article class="bento-card card-wide">
+        <!-- ACCESS RULES -->
+        <article class="bento-card" data-reveal>
+          <div class="card-topline">
+            <span class="card-category">ODOO / ACCESS CONTROL</span>
+            <span class="card-number">CASE 03</span>
+          </div>
+
           <div class="card-content">
-            <h3>Web applications and integrations</h3>
+            <h3>Multi-company access behavior</h3>
             <p>
-              Build websites and web apps, connect external services, and
-              establish consistent data flows across the software stack.
+              Worked with record-rule and allowed-company behavior in Odoo,
+              with attention to how users access records across company
+              and location contexts.
             </p>
+
+            <div class="card-note">
+              <span class="detail-label">FOCUS</span>
+              <p>Record rules, company context, and access troubleshooting.</p>
+            </div>
+          </div>
+
+          <ul class="tech-list" aria-label="Technologies">
+            <li>Odoo</li>
+            <li>Record rules</li>
+            <li>Multi-company</li>
+          </ul>
+
+          <a class="card-disclosure" href="#case-study-notes">
+            <span>Implementation notes</span>
+            <span aria-hidden="true">→</span>
+          </a>
+        </article>
+
+        <!-- PRODUCT CONFIGURATION -->
+        <article class="bento-card" data-reveal>
+          <div class="card-topline">
+            <span class="card-category">ODOO / PRODUCT CONFIGURATION</span>
+            <span class="card-number">CASE 04</span>
+          </div>
+
+          <div class="card-content">
+            <h3>Product category restrictions</h3>
+            <p>
+              Worked on custom product-category fields and pricing or cost
+              group behavior, connecting configuration requirements to
+              Odoo's existing product and business logic.
+            </p>
+
+            <div class="card-note">
+              <span class="detail-label">FOCUS</span>
+              <p>Custom modules, product configuration, and access behavior.</p>
+            </div>
+          </div>
+
+          <ul class="tech-list" aria-label="Technologies">
+            <li>Odoo modules</li>
+            <li>Python</li>
+            <li>PostgreSQL</li>
+          </ul>
+
+          <a class="card-disclosure" href="#case-study-notes">
+            <span>Implementation notes</span>
+            <span aria-hidden="true">→</span>
+          </a>
+        </article>
+
+        <!-- LINKFOLIO -->
+        <article class="bento-card card-wide" data-reveal>
+          <div class="card-topline">
+            <span class="card-category">FULL-STACK / PERSONAL PROJECT</span>
+            <span class="card-number">PROJECT 01</span>
+          </div>
+
+          <div class="card-content">
+            <h3>LinkFOLIO</h3>
+            <p>
+              A portfolio-oriented web project built with a modern full-stack
+              toolchain. A demonstration of product thinking, interface
+              implementation, and building beyond ERP customization.
+            </p>
+
+            <div class="project-meta">
+              <div>
+                <span class="detail-label">STACK</span>
+                <p>Next.js / TypeScript / Supabase</p>
+              </div>
+              <div>
+                <span class="detail-label">ROLE</span>
+                <p>Personal project / development</p>
+              </div>
+            </div>
           </div>
 
           <ul class="tech-list" aria-label="Technologies">
             <li>Next.js</li>
-            <li>React</li>
             <li>TypeScript</li>
-            <li>REST APIs</li>
+            <li>Supabase</li>
           </ul>
-        </article>
-
-        <article class="bento-card card-wide">
-          <div class="card-content">
-            <h3>Maintenance and technical consulting</h3>
-            <p>
-              Investigate bugs, improve existing implementations, and identify
-              practical solutions before adding more complexity.
-            </p>
-          </div>
-
-          <ul class="tech-list" aria-label="Technologies">
-            <li>Debugging</li>
-            <li>Refactoring</li>
-            <li>Documentation</li>
-          </ul>
-        </article>
-      </div>
-    </section>
-
-    <!-- SELECTED WORK -->
-    <section
-      class="content-section section-shell"
-      id="work"
-      aria-labelledby="work-title"
-    >
-      <div class="section-heading">
-        <div>
-          <p class="section-kicker">Selected projects</p>
-          <h2 id="work-title">Selected work</h2>
-        </div>
-
-        <p class="section-intro">
-          Applications and system development work across different layers
-          of the stack.
-        </p>
-      </div>
-
-      <div class="project-list">
-        <article class="project-row">
-          <div class="project-main">
-            <h3>LinkFOLIO</h3>
-            <p>
-              A portfolio-focused web application built with a modern
-              full-stack architecture.
-            </p>
-
-            <ul class="tech-list" aria-label="Technologies">
-              <li>Next.js</li>
-              <li>TypeScript</li>
-              <li>Supabase</li>
-            </ul>
-          </div>
 
           <a
-            class="project-link"
+            class="card-disclosure"
             href="https://sheiynee.github.io"
             target="_blank"
             rel="noopener noreferrer"
           >
-            View portfolio
+            <span>Visit project <span class="visually-hidden">(opens in a new tab)</span></span>
+            <span aria-hidden="true">↗</span>
           </a>
         </article>
 
-        <article class="project-row">
-          <div class="project-main">
-            <h3>TaskFlow</h3>
-            <p>
-              A task-management Discord application with role-based access,
-              notifications, and collaborative workflows.
-            </p>
-
-            <ul class="tech-list" aria-label="Technologies">
-              <li>React</li>
-              <li>Node.js</li>
-              <li>Firebase</li>
-              <li>Discord.js</li>
-            </ul>
+        <!-- TASKFLOW -->
+        <article class="bento-card card-wide" data-reveal>
+          <div class="card-topline">
+            <span class="card-category">FULL-STACK / COLLABORATION</span>
+            <span class="card-number">PROJECT 02</span>
           </div>
 
-          <a
-            class="project-link"
-            href="https://github.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            View on GitHub
+          <div class="card-content">
+            <h3>TaskFlow — Discord task management</h3>
+            <p>
+              A task-management concept connecting a web interface with
+              Discord interactions and notifications. Features include
+              role-based permissions, slash commands, and email notifications.
+            </p>
+
+            <div class="project-meta">
+              <div>
+                <span class="detail-label">FRONTEND</span>
+                <p>React / Vite / Tailwind CSS</p>
+              </div>
+              <div>
+                <span class="detail-label">BACKEND &amp; INTEGRATIONS</span>
+                <p>Node.js / Express / Firestore / Discord.js / Resend</p>
+              </div>
+            </div>
+          </div>
+
+          <ul class="tech-list" aria-label="Technologies">
+            <li>React</li>
+            <li>Node.js</li>
+            <li>Firebase</li>
+            <li>Discord.js</li>
+          </ul>
+
+          <a class="card-disclosure" href="#contact">
+            <span>Ask about this project</span>
+            <span aria-hidden="true">→</span>
           </a>
         </article>
 
-        <article class="project-row">
-          <div class="project-main">
-            <h3>ERP and system integrations</h3>
-            <p>
-              Business workflow extensions and integrations connecting
-              websites, Odoo, and operational processes.
-            </p>
-
-            <ul class="tech-list" aria-label="Technologies">
-              <li>Odoo</li>
-              <li>Python</li>
-              <li>APIs</li>
-            </ul>
+        <!-- INTEGRATIONS -->
+        <article class="bento-card" data-reveal>
+          <div class="card-topline">
+            <span class="card-category">INTEGRATIONS</span>
+            <span class="card-number">CAPABILITY 01</span>
           </div>
 
-          <a class="project-link" href="#contact">
-            Discuss a project
-          </a>
+          <div class="card-content">
+            <h3>Connecting web and ERP systems</h3>
+            <p>
+              Experience working with Webflow-to-Odoo integrations and
+              connecting external-facing experiences to business systems.
+            </p>
+          </div>
+
+          <ul class="tech-list" aria-label="Technologies">
+            <li>APIs</li>
+            <li>Odoo</li>
+            <li>Webflow</li>
+          </ul>
+        </article>
+
+        <!-- AUTOMATION -->
+        <article class="bento-card" data-reveal>
+          <div class="card-topline">
+            <span class="card-category">AUTOMATION</span>
+            <span class="card-number">CAPABILITY 02</span>
+          </div>
+
+          <div class="card-content">
+            <h3>Reducing repetitive work</h3>
+            <p>
+              Python scheduled jobs and backend automation for recurring
+              operations. Interested in extending this work through API
+              orchestration and tools such as n8n.
+            </p>
+          </div>
+
+          <ul class="tech-list" aria-label="Technologies">
+            <li>Python</li>
+            <li>Cron jobs</li>
+            <li>Workflow automation</li>
+          </ul>
         </article>
       </div>
     </section>
 
-    <!-- CONTACT -->
-    <section
-      class="contact-section section-shell"
-      id="contact"
-      aria-labelledby="contact-title"
-    >
-      <div class="contact-layout">
-        <div class="contact-heading">
-          <p class="section-kicker">Contact</p>
-          <h2 id="contact-title">
-            Let's make your systems work better.
-          </h2>
+    <!-- CASE STUDY NOTES -->
+    <section class="section page-shell notes-section" id="case-study-notes" aria-labelledby="notes-title">
+      <div class="section-heading" data-reveal>
+        <div>
+          <p class="eyebrow">03 / Engineering approach</p>
+          <h2 id="notes-title">Beyond the feature.</h2>
+        </div>
+        <p class="section-intro">
+          The important details are not just what changed, but why it needed
+          to change and how the solution fits the existing system.
+        </p>
+      </div>
+
+      <div class="notes-grid">
+        <article class="note-item" data-reveal>
+          <span class="note-index">A / 01</span>
+          <h3>Understand the workflow</h3>
+          <p>
+            Identify the operational requirement, the people involved,
+            the expected state transitions, and the existing Odoo behavior
+            before choosing a customization.
+          </p>
+        </article>
+
+        <article class="note-item" data-reveal>
+          <span class="note-index">A / 02</span>
+          <h3>Prefer native behavior</h3>
+          <p>
+            Work with existing models and business logic where practical.
+            Add custom behavior where the requirement genuinely needs it,
+            while respecting the constraints of the deployment environment.
+          </p>
+        </article>
+
+        <article class="note-item" data-reveal>
+          <span class="note-index">A / 03</span>
+          <h3>Validate edge cases</h3>
+          <p>
+            Consider permissions, company context, record visibility,
+            unexpected states, and the effect of a change on related workflows.
+          </p>
+        </article>
+      </div>
+
+      <p class="privacy-note">
+        Client-specific names, screenshots, data, and proprietary code are
+        intentionally omitted. Detailed technical write-ups should only be
+        published when they can be shared without violating confidentiality.
+      </p>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section class="section page-shell" id="experience" aria-labelledby="experience-title">
+      <div class="section-heading" data-reveal>
+        <div>
+          <p class="eyebrow">04 / Experience</p>
+          <h2 id="experience-title">Where software meets operations.</h2>
+        </div>
+      </div>
+
+      <article class="experience-entry" data-reveal>
+        <div class="experience-date">
+          <span class="detail-label">ROLE</span>
+          <p>Odoo Development Manager</p>
+          <span class="detail-label">ORGANIZATION</span>
+          <p>Journey Better Business Group Inc.</p>
         </div>
 
-        <div class="contact-copy">
+        <div class="experience-description">
+          <h3>Odoo development and business systems</h3>
           <p>
-            Have an ERP challenge, an integration to build, or a workflow
-            that needs automating? Let's discuss the requirements and
-            a practical way to solve them.
+            Worked on Odoo customizations, integrations, backend automation,
+            and client workflow requirements. Served as a technical point of
+            contact for business process changes and implementation questions.
           </p>
 
-          <!-- Replace with your actual email address. -->
-          <a class="contact-link" href="mailto:your.email@example.com">
-            Start a conversation
+          <ul class="experience-points">
+            <li>Developed and maintained custom Odoo functionality.</li>
+            <li>Worked with Python, PostgreSQL, and scheduled jobs.</li>
+            <li>Supported Webflow-to-Odoo integration work.</li>
+            <li>Translated operational requests into technical changes.</li>
+            <li>Investigated issues across accounting, inventory, access rules, and sales workflows.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="education-entry" data-reveal>
+        <div>
+          <p class="eyebrow">Education</p>
+          <h3>Bachelor's degree in Computer Science</h3>
+          <p>Pamantasan ng Lungsod ng Maynila</p>
+        </div>
+        <span class="education-honor">Cum Laude</span>
+      </article>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section page-shell" id="about" aria-labelledby="about-title">
+      <div class="about-layout" data-reveal>
+        <div>
+          <p class="eyebrow">05 / About</p>
+          <h2 id="about-title">Practical engineering. Thoughtful systems.</h2>
+        </div>
+
+        <div class="about-copy">
+          <p>
+            I’m a developer interested in the intersection of business
+            operations and software engineering. My experience spans Odoo
+            customization, Python backend development, system integration,
+            and independent full-stack projects.
+          </p>
+          <p>
+            I value solutions that are understandable, maintainable, and
+            appropriate for the environment they run in—not complexity for
+            its own sake.
+          </p>
+
+          <div class="skills-block">
+            <span class="detail-label">CORE TECHNOLOGIES</span>
+            <p>Python · Odoo · PostgreSQL · JavaScript · TypeScript · React · Next.js · Supabase · Node.js · REST APIs · Git</p>
+          </div>
+
+          <div class="skills-block">
+            <span class="detail-label">AREAS OF INTEREST</span>
+            <p>SaaS products · ERP engineering · API integrations · Business automation · AI-assisted workflows</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact-section page-shell" id="contact" aria-labelledby="contact-title">
+      <div class="contact-panel" data-reveal>
+        <div>
+          <p class="eyebrow">06 / Get in touch</p>
+          <h2 id="contact-title">Have a system to improve?</h2>
+          <p class="contact-description">
+            I’m interested in thoughtful engineering work across Odoo,
+            backend systems, full-stack applications, and automation.
+          </p>
+        </div>
+
+        <div class="contact-actions">
+          <!-- Replace this placeholder with your actual email address. -->
+          <a class="contact-primary" href="mailto:your.email@example.com">
+            Email me <span aria-hidden="true">↗</span>
           </a>
+
+          <!-- Replace these with your actual profile URLs. -->
+          <a
+            class="contact-secondary"
+            href="https://github.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >GitHub ↗</a>
+
+          <a
+            class="contact-secondary"
+            href="https://www.linkedin.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >LinkedIn ↗</a>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer section-shell">
-    <a class="wordmark" href="#home">ENGINEER / DEV</a>
-
-    <p>Independent developer · Philippines</p>
-
-    <a class="footer-top" href="#home">Back to top</a>
+  <footer class="site-footer page-shell">
+    <span>Designed with precision.</span>
+    <span>Portfolio / <span id="current-year">2026</span></span>
+    <a href="#home">Back to top ↑</a>
   </footer>
 </body>
 </html>
