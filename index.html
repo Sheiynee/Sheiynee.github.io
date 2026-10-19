@@ -4,20 +4,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#F3F3F1">
+
   <meta
     name="description"
-    content="Full-Stack Python Developer specializing in Odoo, SaaS platforms, system integrations, and workflow automation."
+    content="Full-stack Python developer specializing in Odoo, SaaS development, business systems integration, and workflow automation."
   >
-  <meta name="theme-color" content="#0a0a0a">
 
-  <title>Developer Portfolio — Engineered Precision</title>
+  <title>Developer Portfolio — Industrial Drafting</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;450;500;600;700&display=swap"
     rel="stylesheet"
   >
+
   <link rel="stylesheet" href="styles.css">
   <script src="script.js" defer></script>
 </head>
@@ -25,8 +28,7 @@
 <body>
   <header class="site-header">
     <a class="wordmark" href="#home" aria-label="Home">
-      <span class="wordmark-mark" aria-hidden="true">[ ]</span>
-      <span>ENGINEER<span class="text-muted">/</span>DEV</span>
+      ENGINEER / DEV
     </a>
 
     <nav class="main-nav" aria-label="Main navigation">
@@ -36,63 +38,44 @@
     </nav>
 
     <a class="header-contact" href="#contact">
-      <span class="status-dot" aria-hidden="true"></span>
-      Available for select projects
-      <span aria-hidden="true">↗</span>
+      Contact
     </a>
   </header>
 
   <main>
-    <!-- HERO -->
+    <!-- TITLE BLOCK -->
     <section class="hero section-shell" id="home" aria-labelledby="hero-title">
-      <div class="hero-grid">
-        <div class="hero-index mono reveal">
-          <span>PORTFOLIO / 2026</span>
-          <span class="index-divider" aria-hidden="true"></span>
-          <span>INDEPENDENT DEVELOPER</span>
+      <div class="hero-heading">
+        <p class="hero-kicker">Independent developer · Philippines</p>
+
+        <h1 id="hero-title">
+          I build and maintain the systems that run other people's businesses.
+        </h1>
+      </div>
+
+      <div class="title-block" aria-label="Professional overview">
+        <div class="title-cell title-discipline">
+          <span class="cell-label">Discipline</span>
+          <p>Software engineering</p>
         </div>
 
-        <div class="hero-heading reveal">
-          <p class="eyebrow">
-            <span class="eyebrow-mark" aria-hidden="true">01</span>
-            SYSTEMS · INTEGRATION · AUTOMATION
+        <div class="title-cell title-specialty">
+          <span class="cell-label">Specialization</span>
+          <p>Python / Odoo / SaaS</p>
+        </div>
+
+        <div class="title-cell title-description">
+          <span class="cell-label">Approach</span>
+          <p>
+            Business applications, system integrations, and practical
+            automation designed around how organizations actually work.
           </p>
-
-          <h1 id="hero-title">
-            I build and maintain the systems that run other people's businesses<span class="accent-period">.</span>
-          </h1>
         </div>
 
-        <div class="hero-bottom reveal">
-          <div class="hero-meta mono">
-            <span class="meta-rule" aria-hidden="true"></span>
-            <div>
-              <p>PYTHON / ODOO / SAAS</p>
-              <p>PHILIPPINES · AVAILABLE REMOTELY</p>
-            </div>
-          </div>
-
-          <div class="hero-intro">
-            <p class="hero-description">
-              I engineer business applications, connect platforms, and automate
-              workflows — turning fragmented processes into reliable,
-              maintainable systems.
-            </p>
-
-            <div class="hero-actions">
-              <a class="button button-primary" href="#work">
-                Explore my work <span aria-hidden="true">↘</span>
-              </a>
-              <a class="button button-secondary" href="#contact">
-                Get in touch <span aria-hidden="true">↗</span>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <span class="hero-coordinate mono" aria-hidden="true">
-          14°35' N / 120°59' E
-        </span>
+        <a class="title-cell title-action" href="#work">
+          <span class="cell-label">Selected work</span>
+          <span class="action-label">Explore projects</span>
+        </a>
       </div>
     </section>
 
@@ -102,36 +85,30 @@
       id="capabilities"
       aria-labelledby="capabilities-title"
     >
-      <div class="section-heading reveal">
+      <div class="section-heading">
         <div>
-          <p class="eyebrow">
-            <span class="eyebrow-mark">02</span>
-            CORE COMPETENCIES
-          </p>
-          <h2 id="capabilities-title">What I do<span class="accent-period">.</span></h2>
+          <p class="section-kicker">Capabilities</p>
+          <h2 id="capabilities-title">What I do</h2>
         </div>
-        <p class="section-aside">
-          From business logic to the integrations that hold everything together.
+
+        <p class="section-intro">
+          Engineering business systems with an emphasis on useful functionality,
+          reliable integrations, and maintainable software.
         </p>
       </div>
 
       <div class="bento-grid capabilities-grid">
-        <article class="bento-card card-wide reveal">
-          <div class="card-topline">
-            <span class="card-number mono">01 / DEVELOPMENT</span>
-            <span class="card-index" aria-hidden="true">↗</span>
-          </div>
-
+        <article class="bento-card card-wide">
           <div class="card-content">
-            <h3>Backend systems &amp; business logic</h3>
+            <h3>Backend systems and business logic</h3>
             <p>
-              Build custom applications and backend functionality that reflect
-              how a business actually operates — with maintainable code,
-              structured data, and dependable automation.
+              Build custom application logic and backend functionality that
+              reflect real business requirements, with structured data and
+              maintainable implementations.
             </p>
           </div>
 
-          <ul class="tech-chips" aria-label="Technologies">
+          <ul class="tech-list" aria-label="Technologies">
             <li>Python</li>
             <li>PostgreSQL</li>
             <li>REST APIs</li>
@@ -139,21 +116,16 @@
           </ul>
         </article>
 
-        <article class="bento-card card-tall reveal">
-          <div class="card-topline">
-            <span class="card-number mono">02 / ERP</span>
-            <span class="card-index" aria-hidden="true">↗</span>
-          </div>
-
+        <article class="bento-card card-tall">
           <div class="card-content">
-            <h3>Odoo &amp; SaaS engineering</h3>
+            <h3>Odoo and SaaS engineering</h3>
             <p>
-              Extend ERP workflows, implement custom modules, and align
-              business processes with practical software solutions.
+              Extend ERP workflows, develop custom modules, and align business
+              processes with practical software solutions.
             </p>
           </div>
 
-          <ul class="tech-chips" aria-label="Technologies">
+          <ul class="tech-list" aria-label="Technologies">
             <li>Odoo ORM</li>
             <li>Python</li>
             <li>XML</li>
@@ -161,22 +133,16 @@
           </ul>
         </article>
 
-        <article class="bento-card card-wide reveal">
-          <div class="card-topline">
-            <span class="card-number mono">03 / INTEGRATION</span>
-            <span class="card-index" aria-hidden="true">↗</span>
-          </div>
-
+        <article class="bento-card card-wide">
           <div class="card-content">
-            <h3>System integration &amp; automation</h3>
+            <h3>System integration and automation</h3>
             <p>
               Connect websites, ERP platforms, APIs, and communication tools.
-              Replace repetitive manual work with consistent, traceable
-              workflows.
+              Reduce repetitive manual work through dependable workflows.
             </p>
           </div>
 
-          <ul class="tech-chips" aria-label="Technologies">
+          <ul class="tech-list" aria-label="Technologies">
             <li>REST APIs</li>
             <li>Webhooks</li>
             <li>n8n</li>
@@ -184,21 +150,16 @@
           </ul>
         </article>
 
-        <article class="bento-card card-wide reveal">
-          <div class="card-topline">
-            <span class="card-number mono">04 / APPLICATIONS</span>
-            <span class="card-index" aria-hidden="true">↗</span>
-          </div>
-
+        <article class="bento-card card-wide">
           <div class="card-content">
             <h3>Full-stack web development</h3>
             <p>
-              Deliver responsive web applications with thoughtful interfaces,
-              reliable data flows, and backend architecture designed to evolve.
+              Develop responsive web applications with considered interfaces,
+              dependable data flows, and backend architecture that can evolve.
             </p>
           </div>
 
-          <ul class="tech-chips" aria-label="Technologies">
+          <ul class="tech-list" aria-label="Technologies">
             <li>Next.js</li>
             <li>TypeScript</li>
             <li>React</li>
@@ -206,21 +167,16 @@
           </ul>
         </article>
 
-        <article class="bento-card card-tall reveal">
-          <div class="card-topline">
-            <span class="card-number mono">05 / OPERATIONS</span>
-            <span class="card-index" aria-hidden="true">↗</span>
-          </div>
-
+        <article class="bento-card card-tall">
           <div class="card-content">
             <h3>Technical operations</h3>
             <p>
-              Maintain integrations, troubleshoot production issues, and
-              improve existing systems without adding unnecessary complexity.
+              Troubleshoot production issues, maintain integrations, and
+              improve existing systems without introducing unnecessary complexity.
             </p>
           </div>
 
-          <ul class="tech-chips" aria-label="Technologies">
+          <ul class="tech-list" aria-label="Technologies">
             <li>Git</li>
             <li>DNS</li>
             <li>SEO</li>
@@ -236,77 +192,61 @@
       id="services"
       aria-labelledby="services-title"
     >
-      <div class="section-heading reveal">
+      <div class="section-heading">
         <div>
-          <p class="eyebrow">
-            <span class="eyebrow-mark">03</span>
-            ENGAGEMENTS
-          </p>
-          <h2 id="services-title">Services<span class="accent-period">.</span></h2>
+          <p class="section-kicker">Engagements</p>
+          <h2 id="services-title">Services</h2>
         </div>
-        <p class="section-aside">
-          Focused engineering for businesses that need their software to work together.
+
+        <p class="section-intro">
+          Focused technical support for businesses building, connecting,
+          or improving their software systems.
         </p>
       </div>
 
       <div class="bento-grid services-grid">
-        <article class="bento-card card-wide reveal">
-          <div class="card-topline">
-            <span class="card-number mono">SVC / 001</span>
-            <span class="card-index" aria-hidden="true">↗</span>
-          </div>
-
+        <article class="bento-card card-wide">
           <div class="card-content">
-            <h3>Odoo customization &amp; development</h3>
+            <h3>Odoo customization and development</h3>
             <p>
               Custom modules, business rules, scheduled actions, workflow
               improvements, and ERP troubleshooting.
             </p>
           </div>
 
-          <ul class="tech-chips" aria-label="Technologies">
+          <ul class="tech-list" aria-label="Technologies">
             <li>Odoo</li>
             <li>Python</li>
             <li>PostgreSQL</li>
           </ul>
         </article>
 
-        <article class="bento-card card-tall reveal">
-          <div class="card-topline">
-            <span class="card-number mono">SVC / 002</span>
-            <span class="card-index" aria-hidden="true">↗</span>
-          </div>
-
+        <article class="bento-card card-tall">
           <div class="card-content">
             <h3>Workflow automation</h3>
             <p>
               Automate repetitive tasks, notifications, data synchronization,
-              and multi-step business processes.
+              and multi-step operational processes.
             </p>
           </div>
 
-          <ul class="tech-chips" aria-label="Technologies">
+          <ul class="tech-list" aria-label="Technologies">
             <li>n8n</li>
             <li>APIs</li>
             <li>Webhooks</li>
           </ul>
         </article>
 
-        <article class="bento-card card-wide reveal">
-          <div class="card-topline">
-            <span class="card-number mono">SVC / 003</span>
-            <span class="card-index" aria-hidden="true">↗</span>
-          </div>
-
+        <article class="bento-card card-wide">
           <div class="card-content">
-            <h3>Web applications &amp; integrations</h3>
+            <h3>Web applications and integrations</h3>
             <p>
-              Develop websites and web apps, connect external services,
-              and create cohesive experiences across your software stack.
+              Build websites and web apps, connect external services, and
+              establish consistent data flows across the software stack.
             </p>
           </div>
 
-          <ul class="tech-chips" aria-label="Technologies">
+          <ul class="tech-list" aria-label="Technologies">
             <li>Next.js</li>
             <li>React</li>
             <li>TypeScript</li>
@@ -314,21 +254,16 @@
           </ul>
         </article>
 
-        <article class="bento-card card-wide reveal">
-          <div class="card-topline">
-            <span class="card-number mono">SVC / 004</span>
-            <span class="card-index" aria-hidden="true">↗</span>
-          </div>
-
+        <article class="bento-card card-wide">
           <div class="card-content">
-            <h3>Maintenance &amp; technical consulting</h3>
+            <h3>Maintenance and technical consulting</h3>
             <p>
-              Investigate bugs, improve existing implementations, and
-              identify practical technical solutions before adding complexity.
+              Investigate bugs, improve existing implementations, and identify
+              practical solutions before adding more complexity.
             </p>
           </div>
 
-          <ul class="tech-chips" aria-label="Technologies">
+          <ul class="tech-list" aria-label="Technologies">
             <li>Debugging</li>
             <li>Refactoring</li>
             <li>Documentation</li>
@@ -343,87 +278,87 @@
       id="work"
       aria-labelledby="work-title"
     >
-      <div class="section-heading reveal">
+      <div class="section-heading">
         <div>
-          <p class="eyebrow">
-            <span class="eyebrow-mark">04</span>
-            SELECTED PROJECTS
-          </p>
-          <h2 id="work-title">Selected work<span class="accent-period">.</span></h2>
+          <p class="section-kicker">Selected projects</p>
+          <h2 id="work-title">Selected work</h2>
         </div>
-        <p class="section-aside">
-          A selection of applications and engineering work.
+
+        <p class="section-intro">
+          Applications and system development work across different layers
+          of the stack.
         </p>
       </div>
 
       <div class="project-list">
-        <article class="project-row reveal">
-          <span class="project-number mono">01</span>
+        <article class="project-row">
           <div class="project-main">
             <h3>LinkFOLIO</h3>
             <p>
-              A portfolio-focused web application built around a modern
+              A portfolio-focused web application built with a modern
               full-stack architecture.
             </p>
-            <ul class="tech-chips" aria-label="Technologies">
+
+            <ul class="tech-list" aria-label="Technologies">
               <li>Next.js</li>
               <li>TypeScript</li>
               <li>Supabase</li>
             </ul>
           </div>
+
           <a
             class="project-link"
             href="https://sheiynee.github.io"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Visit portfolio website"
           >
-            <span>View project</span><span aria-hidden="true">↗</span>
+            View portfolio
           </a>
         </article>
 
-        <article class="project-row reveal">
-          <span class="project-number mono">02</span>
+        <article class="project-row">
           <div class="project-main">
             <h3>TaskFlow</h3>
             <p>
               A task-management Discord application with role-based access,
               notifications, and collaborative workflows.
             </p>
-            <ul class="tech-chips" aria-label="Technologies">
+
+            <ul class="tech-list" aria-label="Technologies">
               <li>React</li>
               <li>Node.js</li>
               <li>Firebase</li>
               <li>Discord.js</li>
             </ul>
           </div>
+
           <a
             class="project-link"
             href="https://github.com/"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="View code on GitHub"
           >
-            <span>View code</span><span aria-hidden="true">↗</span>
+            View on GitHub
           </a>
         </article>
 
-        <article class="project-row reveal">
-          <span class="project-number mono">03</span>
+        <article class="project-row">
           <div class="project-main">
-            <h3>ERP &amp; system integrations</h3>
+            <h3>ERP and system integrations</h3>
             <p>
               Business workflow extensions and integrations connecting
               websites, Odoo, and operational processes.
             </p>
-            <ul class="tech-chips" aria-label="Technologies">
+
+            <ul class="tech-list" aria-label="Technologies">
               <li>Odoo</li>
               <li>Python</li>
               <li>APIs</li>
             </ul>
           </div>
+
           <a class="project-link" href="#contact">
-            <span>Discuss work</span><span aria-hidden="true">↗</span>
+            Discuss a project
           </a>
         </article>
       </div>
@@ -431,29 +366,28 @@
 
     <!-- CONTACT -->
     <section
-      class="contact-section section-shell reveal"
+      class="contact-section section-shell"
       id="contact"
       aria-labelledby="contact-title"
     >
-      <p class="eyebrow">
-        <span class="eyebrow-mark">05</span>
-        NEXT STEP
-      </p>
-
       <div class="contact-layout">
-        <h2 id="contact-title">
-          Let's make your systems work better<span class="accent-period">.</span>
-        </h2>
+        <div class="contact-heading">
+          <p class="section-kicker">Contact</p>
+          <h2 id="contact-title">
+            Let's make your systems work better.
+          </h2>
+        </div>
 
         <div class="contact-copy">
           <p>
             Have an ERP challenge, an integration to build, or a workflow
-            that needs automating? Let's talk about the problem and a practical
-            way to solve it.
+            that needs automating? Let's discuss the requirements and
+            a practical way to solve them.
           </p>
+
           <!-- Replace with your actual email address. -->
-          <a class="button button-primary" href="mailto:your.email@example.com">
-            Start a conversation <span aria-hidden="true">↗</span>
+          <a class="contact-link" href="mailto:your.email@example.com">
+            Start a conversation
           </a>
         </div>
       </div>
@@ -461,16 +395,11 @@
   </main>
 
   <footer class="site-footer section-shell">
-    <a class="wordmark" href="#home">
-      <span class="wordmark-mark" aria-hidden="true">[ ]</span>
-      <span>ENGINEER<span class="text-muted">/</span>DEV</span>
-    </a>
+    <a class="wordmark" href="#home">ENGINEER / DEV</a>
 
-    <p class="mono">DESIGNED WITH INTENT. BUILT TO LAST.</p>
+    <p>Independent developer · Philippines</p>
 
-    <a class="footer-top mono" href="#home">
-      BACK TO TOP ↑
-    </a>
+    <a class="footer-top" href="#home">Back to top</a>
   </footer>
 </body>
 </html>
