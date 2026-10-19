@@ -1,90 +1,92 @@
 
 /* =========================================================
-   ENGINEERED PRECISION
-   Design system / styles.css
+   INDUSTRIAL DRAFTING & ARCHITECTURAL BLUEPRINT
+   styles.css
    ========================================================= */
 
-/* 01. DESIGN TOKENS
-   Mobile type scale: Minor Third (1.2)
-   Desktop type scale: Major Third (1.25)
-   All typography and spacing scales are fluid.
-   ========================================================= */
+/* 01. DESIGN TOKENS */
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 
-  /* Backgrounds */
-  --bg-base: #0a0a0a;
-  --bg-surface: #141414;
-  --bg-surface-hover: #1a1a1a;
-
-  /* Text */
-  --text-primary: #ededed;
-  --text-secondary: #888888;
-
-  /* Accent */
-  --accent-technical: #00ff41;
-
-  /* Borders */
-  --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-active: rgba(255, 255, 255, 0.25);
+  /* Canvas and surfaces */
+  --bg-base: #F3F3F1;
+  --bg-surface: #FFFFFF;
+  --bg-surface-hover: #FAFAF9;
 
   /* Typography */
+  --text-primary: #1C1B1A;
+  --text-secondary: #6B6A68;
+  --text-tertiary: #B0B0AD;
+
+  /* Interaction accent */
+  --accent-color: #D3442A;
+
+  /* Structure */
+  --border-subtle: rgba(0, 0, 0, 0.08);
+  --border-strong: rgba(0, 0, 0, 0.16);
+
+  --shadow-surface:
+    0 1px 3px rgba(0, 0, 0, 0.03),
+    0 1px 2px rgba(0, 0, 0, 0.02);
+
+  --shadow-surface-hover: 0 4px 12px rgba(0, 0, 0, 0.05);
+
+  /* Fonts */
   --font-sans: "Inter", sans-serif;
-  --font-mono: "JetBrains Mono", monospace;
+  --font-mono: "DM Mono", monospace;
 
-  /* Fluid type scale — mobile base ratio: 1.2 */
-  --text-xs: clamp(0.625rem, 0.6rem + 0.1vw, 0.75rem);
-  --text-sm: clamp(0.75rem, 0.7rem + 0.2vw, 0.875rem);
-  --text-base: clamp(0.875rem, 0.825rem + 0.25vw, 1rem);
-  --text-lg: clamp(1.05rem, 0.95rem + 0.5vw, 1.2rem);
-  --text-xl: clamp(1.26rem, 1.1rem + 0.8vw, 1.44rem);
-  --text-2xl: clamp(1.5rem, 1.3rem + 1vw, 1.728rem);
-  --text-3xl: clamp(1.8rem, 1.45rem + 1.75vw, 2.074rem);
-  --text-4xl: clamp(2.16rem, 1.7rem + 2.3vw, 2.488rem);
-  --text-display: clamp(2.4rem, 1.85rem + 3.8vw, 4.5rem);
+  /* Fluid type scale: Minor Third inspired on mobile */
+  --text-xs: clamp(0.6875rem, 0.66rem + 0.1vw, 0.75rem);
+  --text-sm: clamp(0.8125rem, 0.77rem + 0.16vw, 0.875rem);
+  --text-base: clamp(0.9375rem, 0.89rem + 0.2vw, 1rem);
+  --text-lg: clamp(1.125rem, 1.02rem + 0.4vw, 1.2rem);
+  --text-xl: clamp(1.25rem, 1.12rem + 0.6vw, 1.44rem);
+  --text-2xl: clamp(1.5rem, 1.3rem + 0.8vw, 1.728rem);
+  --text-3xl: clamp(1.8rem, 1.5rem + 1.4vw, 2.074rem);
+  --text-4xl: clamp(2rem, 1.7rem + 1.8vw, 2.488rem);
+  --text-display: clamp(2.5rem, 1.8rem + 4vw, 5.5rem);
 
-  /* Fluid spacing scale */
-  --space-1: clamp(0.25rem, 0.2rem + 0.15vw, 0.375rem);
-  --space-2: clamp(0.5rem, 0.4rem + 0.25vw, 0.625rem);
-  --space-3: clamp(0.75rem, 0.6rem + 0.4vw, 1rem);
-  --space-4: clamp(1rem, 0.8rem + 0.5vw, 1.25rem);
-  --space-5: clamp(1.25rem, 1rem + 0.75vw, 1.75rem);
-  --space-6: clamp(1.5rem, 1.1rem + 1.2vw, 2rem);
-  --space-8: clamp(2rem, 1.4rem + 1.8vw, 3rem);
-  --space-10: clamp(2.5rem, 1.75rem + 2.2vw, 4rem);
+  /* Fluid spacing */
+  --space-1: clamp(0.25rem, 0.22rem + 0.1vw, 0.375rem);
+  --space-2: clamp(0.5rem, 0.44rem + 0.2vw, 0.625rem);
+  --space-3: clamp(0.75rem, 0.65rem + 0.3vw, 1rem);
+  --space-4: clamp(1rem, 0.85rem + 0.45vw, 1.25rem);
+  --space-5: clamp(1.25rem, 1rem + 0.7vw, 1.75rem);
+  --space-6: clamp(1.5rem, 1.2rem + 1vw, 2rem);
+  --space-8: clamp(2rem, 1.5rem + 1.5vw, 3rem);
+  --space-10: clamp(2.5rem, 1.8rem + 2vw, 4rem);
   --space-12: clamp(3rem, 2rem + 3vw, 5rem);
-  --space-16: clamp(4rem, 2.5rem + 4vw, 7rem);
-  --space-20: clamp(5rem, 3rem + 5vw, 9rem);
+  --space-16: clamp(4rem, 2.5rem + 4vw, 6.5rem);
+  --space-20: clamp(5rem, 3rem + 5vw, 8rem);
 
   /* Layout */
   --page-gutter: clamp(1.125rem, 4vw, 4.5rem);
+  --content-max: 1600px;
   --grid-gap: clamp(0.75rem, 1.25vw, 1.25rem);
   --header-height: clamp(4rem, 3.5rem + 1vw, 5.5rem);
-  --content-max: 1600px;
 
-  /* Interaction */
+  /* Motion */
   --transition-fast: 0.2s ease;
-  --transition-card: 0.3s ease;
+  --transition-card: 0.2s ease;
 }
 
-/* Desktop type scale — Major Third (1.25) */
+/* Desktop type scale: Major Third inspired */
 @media (min-width: 900px) {
   :root {
-    --text-xs: clamp(0.6875rem, 0.65rem + 0.08vw, 0.8125rem);
-    --text-sm: clamp(0.8125rem, 0.75rem + 0.12vw, 0.9375rem);
-    --text-base: clamp(1rem, 0.94rem + 0.15vw, 1.125rem);
-    --text-lg: clamp(1.25rem, 1.1rem + 0.3vw, 1.406rem);
-    --text-xl: clamp(1.5625rem, 1.3rem + 0.5vw, 1.758rem);
-    --text-2xl: clamp(1.953rem, 1.6rem + 0.7vw, 2.197rem);
-    --text-3xl: clamp(2.441rem, 1.9rem + 1vw, 2.747rem);
-    --text-4xl: clamp(3.052rem, 2.3rem + 1.4vw, 3.433rem);
-    --text-display: clamp(3.25rem, 5vw + 1rem, 6.5rem);
+    --text-xs: clamp(0.6875rem, 0.66rem + 0.05vw, 0.75rem);
+    --text-sm: clamp(0.8125rem, 0.76rem + 0.1vw, 0.9375rem);
+    --text-base: clamp(0.9375rem, 0.88rem + 0.15vw, 1.0625rem);
+    --text-lg: clamp(1.125rem, 1.02rem + 0.25vw, 1.25rem);
+    --text-xl: clamp(1.406rem, 1.2rem + 0.4vw, 1.758rem);
+    --text-2xl: clamp(1.758rem, 1.5rem + 0.6vw, 2.197rem);
+    --text-3xl: clamp(2.197rem, 1.8rem + 0.9vw, 2.747rem);
+    --text-4xl: clamp(2.747rem, 2.2rem + 1.2vw, 3.433rem);
+    --text-display: clamp(3.25rem, 4.8vw + 0.75rem, 6.5rem);
   }
 }
 
-/* 02. RESET & GLOBAL BASE
-   ========================================================= */
+/* 02. RESET */
 
 *,
 *::before,
@@ -99,22 +101,15 @@ html {
 }
 
 body {
-  margin: 0;
   min-width: 320px;
+  margin: 0;
   background: var(--bg-base);
   color: var(--text-primary);
   font-family: var(--font-sans);
   font-size: var(--text-base);
-  line-height: 1.65;
+  line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-body,
-button,
-input,
-textarea {
-  font-family: var(--font-sans);
 }
 
 img,
@@ -127,27 +122,24 @@ video {
 a {
   color: inherit;
   text-decoration: none;
+  text-underline-offset: 0.2em;
+  transition: color var(--transition-fast);
+}
+
+a:focus-visible {
+  outline: 1px solid var(--accent-color);
+  outline-offset: 4px;
 }
 
 button,
-a {
-  -webkit-tap-highlight-color: transparent;
+input,
+textarea {
+  font: inherit;
 }
 
-a:focus-visible,
-button:focus-visible {
-  outline: 2px solid var(--accent-technical);
-  outline-offset: 5px;
-}
-
-p,
-ul,
-ol {
-  margin-top: 0;
-}
-
-p {
-  color: var(--text-secondary);
+::selection {
+  color: var(--text-primary);
+  background: rgba(211, 68, 42, 0.14);
 }
 
 h1,
@@ -155,42 +147,40 @@ h2,
 h3 {
   margin: 0;
   color: var(--text-primary);
-  font-weight: 500;
-  line-height: 1.1;
+  font-weight: 400;
   text-wrap: balance;
 }
 
 h1 {
   font-size: var(--text-display);
-  line-height: 1.05;
-  letter-spacing: -0.04em;
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: -0.055em;
 }
 
 h2 {
   font-size: var(--text-4xl);
-  letter-spacing: -0.04em;
+  line-height: 1.1;
+  letter-spacing: -0.045em;
 }
 
 h3 {
   font-size: var(--text-xl);
-  letter-spacing: -0.025em;
+  line-height: 1.25;
+  letter-spacing: -0.035em;
 }
 
-::selection {
-  color: var(--bg-base);
-  background: var(--accent-technical);
-}
-
-.text-muted {
+p {
+  margin-top: 0;
   color: var(--text-secondary);
 }
 
-.accent-period {
-  color: var(--accent-technical);
+ul,
+ol {
+  margin-top: 0;
 }
 
-/* 03. SHARED LAYOUT
-   ========================================================= */
+/* 03. SHARED LAYOUT */
 
 .section-shell {
   width: 100%;
@@ -199,71 +189,34 @@ h3 {
   padding-inline: var(--page-gutter);
 }
 
-.mono,
-.eyebrow,
-.card-number,
-.tech-chips,
-.hero-meta,
-.hero-coordinate,
-.project-number,
-.site-footer p,
-.footer-top {
+.section-kicker,
+.hero-kicker,
+.cell-label {
   font-family: var(--font-mono);
-}
-
-.mono,
-.eyebrow {
   font-size: var(--text-xs);
-  letter-spacing: 0.04em;
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: 0.025em;
 }
 
-.eyebrow {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  margin-bottom: var(--space-5);
+.section-kicker {
+  margin-bottom: var(--space-3);
   color: var(--text-secondary);
-  line-height: 1.5;
-}
-
-.eyebrow-mark {
-  color: var(--accent-technical);
 }
 
 .content-section {
   padding-top: var(--space-20);
 }
 
-.section-heading {
-  display: flex;
-  align-items: end;
-  justify-content: space-between;
-  gap: var(--space-8);
-  padding-bottom: var(--space-8);
-  border-bottom: 1px solid var(--border-subtle);
-}
-
-.section-heading h2 {
-  max-width: 16ch;
-}
-
-.section-aside {
-  max-width: 34ch;
-  margin-bottom: var(--space-1);
-  font-size: var(--text-sm);
-  line-height: 1.8;
-}
-
-/* 04. HEADER
-   ========================================================= */
+/* 04. HEADER */
 
 .site-header {
   position: relative;
-  z-index: 10;
+  z-index: 5;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--space-5);
+  gap: var(--space-6);
   min-height: var(--header-height);
   padding-inline: var(--page-gutter);
   border-bottom: 1px solid var(--border-subtle);
@@ -271,18 +224,11 @@ h3 {
 }
 
 .wordmark {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
   flex-shrink: 0;
   font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  font-weight: 600;
-  letter-spacing: 0.02em;
-}
-
-.wordmark-mark {
-  color: var(--accent-technical);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  letter-spacing: -0.035em;
 }
 
 .main-nav {
@@ -294,181 +240,138 @@ h3 {
 .main-nav a,
 .header-contact {
   color: var(--text-secondary);
-  font-size: var(--text-xs);
-  transition: color var(--transition-fast);
+  font-size: var(--text-sm);
 }
 
 .main-nav a:hover,
-.header-contact:hover {
-  color: var(--text-primary);
+.header-contact:hover,
+.site-footer a:hover,
+.project-link:hover,
+.contact-link:hover {
+  color: var(--accent-color);
 }
 
 .header-contact {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  white-space: nowrap;
+  flex-shrink: 0;
 }
 
-.status-dot {
-  width: 6px;
-  height: 6px;
-  flex: 0 0 6px;
-  border-radius: 50%;
-  background: var(--accent-technical);
-}
-
-/* 05. ASYMMETRIC HERO
-   ========================================================= */
+/* 05. HERO — ARCHITECTURAL TITLE BLOCK */
 
 .hero {
-  min-height: calc(100svh - var(--header-height));
-  min-height: calc(100dvh - var(--header-height));
-  padding-top: var(--space-8);
-  padding-bottom: var(--space-8);
-}
-
-.hero-grid {
-  position: relative;
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  grid-template-rows: auto 1fr auto;
-  column-gap: var(--grid-gap);
-  row-gap: var(--space-8);
-  min-height: calc(100dvh - var(--header-height) - var(--space-16));
-}
-
-.hero-index {
-  grid-column: 1 / 10;
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  color: var(--text-secondary);
-  font-size: var(--text-xs);
-  letter-spacing: 0.035em;
-}
-
-.index-divider {
-  width: clamp(1rem, 2vw, 2.5rem);
-  height: 1px;
-  background: var(--border-active);
+  padding-top: clamp(4rem, 10vh, 9rem);
+  padding-bottom: var(--space-16);
 }
 
 .hero-heading {
-  grid-column: 1 / 10;
-  align-self: center;
-  padding-block: var(--space-8);
-}
-
-.hero-heading .eyebrow {
-  margin-bottom: var(--space-6);
-}
-
-.hero-heading h1 {
-  max-width: 20ch;
-}
-
-.hero-bottom {
-  grid-column: 8 / 13;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--space-6);
-  justify-self: stretch;
-  padding-top: var(--space-6);
+  padding-bottom: clamp(3.5rem, 10vh, 8rem);
 }
 
-.hero-meta {
-  display: flex;
-  align-items: stretch;
-  gap: var(--space-3);
+.hero-kicker {
+  margin-bottom: var(--space-6);
   color: var(--text-secondary);
-  font-size: var(--text-xs);
+}
+
+.hero-heading h1 {
+  max-width: 18ch;
+}
+
+/* Four unequal drafting cells */
+
+.title-block {
+  display: grid;
+  grid-template-columns: 1.5fr 1.5fr 4fr 2fr;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.title-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-8);
+  min-width: 0;
+  min-height: clamp(9.5rem, 15vw, 13rem);
+  padding: var(--space-4);
+  border-right: 1px solid var(--border-subtle);
+}
+
+.title-cell:first-child {
+  padding-left: 0;
+}
+
+.title-cell:last-child {
+  border-right: 0;
+}
+
+.cell-label {
+  color: var(--text-tertiary);
+}
+
+.title-cell p {
+  max-width: 36ch;
+  margin: 0;
+  color: var(--text-primary);
+  font-size: var(--text-sm);
+  line-height: 1.65;
+}
+
+.title-action {
+  cursor: pointer;
+  background: transparent;
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.title-action .action-label {
+  font-size: var(--text-base);
+  line-height: 1.5;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 0.3em;
+  transition: text-decoration-color var(--transition-fast);
+}
+
+.title-action:hover {
+  background: var(--bg-surface);
+  color: var(--accent-color);
+}
+
+.title-action:hover .action-label {
+  text-decoration-color: var(--accent-color);
+}
+
+.title-action:focus-visible {
+  outline: 1px solid var(--accent-color);
+  outline-offset: -4px;
+}
+
+/* 06. SECTION HEADINGS */
+
+.section-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-8);
+  padding-bottom: var(--space-6);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.section-heading h2 {
+  max-width: 18ch;
+}
+
+.section-intro {
+  max-width: 42ch;
+  margin-bottom: 0;
+  font-size: var(--text-sm);
   line-height: 1.8;
 }
 
-.hero-meta p {
-  margin: 0;
-  color: inherit;
-  font: inherit;
-}
-
-.meta-rule {
-  width: 2px;
-  flex: 0 0 2px;
-  background: var(--accent-technical);
-}
-
-.hero-intro {
-  width: 100%;
-  max-width: 45ch;
-}
-
-.hero-description {
-  margin-bottom: var(--space-6);
-  font-size: var(--text-lg);
-  line-height: 1.75;
-}
-
-.hero-actions {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--space-3);
-}
-
-.hero-coordinate {
-  grid-column: 1 / 5;
-  align-self: end;
-  color: var(--text-secondary);
-  font-size: var(--text-xs);
-  opacity: 0.7;
-}
-
-/* 06. BUTTONS
-   ========================================================= */
-
-.button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-4);
-  min-height: clamp(2.75rem, 2.5rem + 0.6vw, 3.25rem);
-  padding: var(--space-3) var(--space-4);
-  border: 1px solid transparent;
-  font-size: var(--text-sm);
-  font-weight: 500;
-  transition:
-    background-color var(--transition-fast),
-    color var(--transition-fast),
-    border-color var(--transition-fast);
-}
-
-.button-primary {
-  border-color: var(--accent-technical);
-  background: var(--accent-technical);
-  color: var(--bg-base);
-}
-
-.button-primary:hover {
-  border-color: var(--accent-technical);
-  background: transparent;
-  color: var(--accent-technical);
-}
-
-.button-secondary {
-  border-color: var(--border-subtle);
-  background: transparent;
-  color: var(--text-primary);
-}
-
-.button-secondary:hover {
-  border-color: var(--border-active);
-  background: var(--bg-surface-hover);
-}
-
-/* 07. BENTO GRID
-   ========================================================= */
+/* 07. BENTO GRID — PHYSICAL SURFACE TREATMENT */
 
 .bento-grid {
   display: grid;
@@ -493,113 +396,87 @@ h3 {
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
-  min-width: 0;
   gap: var(--space-8);
+  min-width: 0;
   padding: var(--space-5);
   border: 1px solid var(--border-subtle);
   background: var(--bg-surface);
+  box-shadow: var(--shadow-surface);
   transition:
-    background-color var(--transition-card),
-    border-color var(--transition-card);
+    transform var(--transition-card),
+    box-shadow var(--transition-card);
 }
 
 .bento-card:hover {
-  border-color: var(--border-active);
-  background: var(--bg-surface-hover);
-}
-
-.card-topline {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-4);
-  width: 100%;
-}
-
-.card-number {
-  color: var(--text-secondary);
-  font-size: var(--text-xs);
-  letter-spacing: 0.04em;
-}
-
-.card-index {
-  color: var(--text-secondary);
-  font-size: var(--text-lg);
-  transition: color var(--transition-fast);
-}
-
-.bento-card:hover .card-index {
-  color: var(--accent-technical);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-surface-hover);
 }
 
 .card-content {
   width: 100%;
-  max-width: 58ch;
+  max-width: 60ch;
   margin-top: auto;
 }
 
 .card-content h3 {
-  margin-bottom: var(--space-3);
   max-width: 28ch;
+  margin-bottom: var(--space-3);
 }
 
 .card-content p {
-  max-width: 55ch;
+  max-width: 56ch;
   margin-bottom: 0;
   font-size: var(--text-sm);
   line-height: 1.85;
 }
 
-.tech-chips {
+/* 08. TYPOGRAPHIC TECH LISTS
+   No pills, no individual borders, no badges.
+   Separators are generated in CSS.
+*/
+
+.tech-list {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-2);
+  align-items: center;
+  gap: 0 var(--space-2);
   padding: 0;
   margin: var(--space-5) 0 0;
   list-style: none;
 }
 
-.tech-chips li {
-  padding: var(--space-1) var(--space-2);
-  border: 1px solid var(--border-subtle);
+.tech-list li {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
   color: var(--text-secondary);
-  font-size: var(--text-xs);
-  line-height: 1.7;
-  transition:
-    color var(--transition-fast),
-    border-color var(--transition-fast);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  line-height: 1.9;
 }
 
-.bento-card:hover .tech-chips li {
-  border-color: rgba(0, 255, 65, 0.4);
-  color: var(--accent-technical);
+.tech-list li:not(:last-child)::after {
+  content: "·";
+  color: var(--text-tertiary);
 }
 
-/* 08. SELECTED WORK
-   ========================================================= */
+/* 09. SELECTED WORK */
 
 .project-list {
-  margin-top: var(--space-4);
+  margin-top: var(--space-3);
 }
 
 .project-row {
   display: grid;
-  grid-template-columns: 0.5fr 5fr 1.5fr;
-  align-items: start;
-  gap: var(--space-6);
+  grid-template-columns: minmax(0, 1fr) minmax(8rem, 0.25fr);
+  align-items: center;
+  gap: var(--space-8);
   padding-block: var(--space-8);
   border-bottom: 1px solid var(--border-subtle);
-  transition: border-color var(--transition-fast);
 }
 
-.project-row:hover {
-  border-bottom-color: var(--border-active);
-}
-
-.project-number {
-  padding-top: var(--space-2);
-  color: var(--text-secondary);
-  font-size: var(--text-xs);
+.project-main {
+  min-width: 0;
 }
 
 .project-main h3 {
@@ -607,33 +484,28 @@ h3 {
 }
 
 .project-main p {
-  max-width: 55ch;
+  max-width: 58ch;
   margin-bottom: 0;
   font-size: var(--text-sm);
-  line-height: 1.8;
+  line-height: 1.85;
 }
 
-.project-main .tech-chips {
+.project-main .tech-list {
   margin-top: var(--space-4);
 }
 
 .project-link {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-3);
-  padding-block: var(--space-2);
+  justify-self: end;
+  align-self: center;
   color: var(--text-secondary);
   font-size: var(--text-sm);
-  transition: color var(--transition-fast);
+  text-align: right;
+  text-decoration: underline;
+  text-decoration-color: var(--border-strong);
+  text-underline-offset: 0.3em;
 }
 
-.project-link:hover {
-  color: var(--accent-technical);
-}
-
-/* 09. CONTACT
-   ========================================================= */
+/* 10. CONTACT */
 
 .contact-section {
   margin-top: var(--space-20);
@@ -644,31 +516,36 @@ h3 {
 
 .contact-layout {
   display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: var(--grid-gap);
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
   align-items: end;
+  gap: var(--space-10);
 }
 
-.contact-layout h2 {
-  grid-column: 1 / 8;
-  max-width: 14ch;
-  font-size: clamp(2.25rem, 4.5vw + 0.75rem, 5.25rem);
-  line-height: 1.05;
+.contact-heading h2 {
+  max-width: 15ch;
+  font-size: clamp(2.25rem, 4vw + 0.75rem, 5rem);
+  line-height: 1.04;
 }
 
 .contact-copy {
-  grid-column: 9 / 13;
-  max-width: 45ch;
+  max-width: 46ch;
 }
 
 .contact-copy p {
   margin-bottom: var(--space-5);
   font-size: var(--text-sm);
-  line-height: 1.85;
+  line-height: 1.9;
 }
 
-/* 10. FOOTER
-   ========================================================= */
+.contact-link {
+  display: inline-block;
+  padding-bottom: var(--space-1);
+  border-bottom: 1px solid var(--border-strong);
+  color: var(--text-primary);
+  font-size: var(--text-sm);
+}
+
+/* 11. FOOTER */
 
 .site-footer {
   display: flex;
@@ -685,64 +562,34 @@ h3 {
   margin: 0;
   color: var(--text-secondary);
   font-size: var(--text-xs);
-  letter-spacing: 0.04em;
 }
 
-.footer-top {
+.site-footer .footer-top {
   color: var(--text-secondary);
-  font-size: var(--text-xs);
-  transition: color var(--transition-fast);
+  font-size: var(--text-sm);
 }
 
-.footer-top:hover {
-  color: var(--accent-technical);
-}
-
-/* 11. REVEAL MOTION
-   JS adds .is-visible when the element enters the viewport.
-   Without JS, content remains visible.
-   ========================================================= */
-
-.reveal {
-  opacity: 1;
-  transform: none;
-}
-
-.js-reveal .reveal {
-  opacity: 0;
-  transform: translateY(20px);
-  transition:
-    opacity 0.5s ease,
-    transform 0.5s ease;
-}
-
-.js-reveal .reveal.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* 12. RESPONSIVE — TABLET & MOBILE
-   ========================================================= */
+/* 12. RESPONSIVE LAYOUTS */
 
 @media (max-width: 1100px) {
-  .hero-heading {
-    grid-column: 1 / 12;
+  .title-block {
+    grid-template-columns: 1fr 1fr 2fr 1.25fr;
   }
 
-  .hero-bottom {
-    grid-column: 7 / 13;
-  }
-
-  .contact-layout h2 {
-    grid-column: 1 / 8;
-  }
-
-  .contact-copy {
-    grid-column: 8 / 13;
+  .title-cell {
+    padding: var(--space-3);
   }
 
   .main-nav {
     gap: var(--space-4);
+  }
+
+  .card-wide {
+    grid-column: span 7;
+  }
+
+  .card-tall {
+    grid-column: span 5;
   }
 }
 
@@ -757,7 +604,6 @@ h3 {
     order: 3;
     width: 100%;
     justify-content: flex-start;
-    gap: var(--space-5);
     padding-top: var(--space-2);
   }
 
@@ -766,40 +612,42 @@ h3 {
   }
 
   .hero {
-    min-height: auto;
-    padding-top: var(--space-8);
-    padding-bottom: var(--space-10);
-  }
-
-  .hero-grid {
-    min-height: min(76dvh, 55rem);
-    grid-template-rows: auto 1fr auto auto;
-    row-gap: var(--space-6);
-  }
-
-  .hero-index {
-    grid-column: 1 / 13;
-    flex-wrap: wrap;
+    padding-top: var(--space-12);
   }
 
   .hero-heading {
-    grid-column: 1 / 13;
-    align-self: center;
-    padding-block: var(--space-8);
+    padding-bottom: var(--space-10);
   }
 
   .hero-heading h1 {
-    max-width: 18ch;
+    max-width: 16ch;
   }
 
-  .hero-bottom {
-    grid-column: 1 / 13;
-    padding-top: var(--space-5);
+  .title-block {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .hero-coordinate {
-    grid-column: 1 / 13;
-    align-self: end;
+  .title-cell {
+    min-height: clamp(8.5rem, 22vw, 11rem);
+    padding: var(--space-4);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .title-cell:first-child {
+    padding-left: var(--space-4);
+  }
+
+  .title-cell:nth-child(2) {
+    border-right: 0;
+  }
+
+  .title-cell:nth-child(3) {
+    border-bottom: 0;
+    border-left: 0;
+  }
+
+  .title-cell:last-child {
+    border-bottom: 0;
   }
 
   .section-heading {
@@ -808,8 +656,8 @@ h3 {
     gap: var(--space-4);
   }
 
-  .section-aside {
-    max-width: 48ch;
+  .section-intro {
+    max-width: 55ch;
   }
 
   .bento-grid {
@@ -821,63 +669,66 @@ h3 {
   .card-tall {
     grid-column: span 12;
     grid-row: auto;
-    min-height: clamp(14rem, 35vw, 20rem);
-  }
-
-  .bento-card {
-    gap: var(--space-8);
+    min-height: clamp(14rem, 32vw, 19rem);
   }
 
   .contact-layout {
-    grid-template-columns: repeat(12, minmax(0, 1fr));
-    row-gap: var(--space-6);
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-6);
   }
 
-  .contact-layout h2 {
-    grid-column: 1 / 13;
-    max-width: 15ch;
-  }
-
-  .contact-copy {
-    grid-column: 1 / 10;
+  .contact-heading h2 {
+    max-width: 16ch;
   }
 }
 
 @media (max-width: 560px) {
-  .header-contact {
-    font-size: var(--text-xs);
-  }
-
   .main-nav {
-    gap: var(--space-4);
+    flex-wrap: wrap;
+    gap: var(--space-3) var(--space-5);
   }
 
-  .main-nav a {
-    font-size: var(--text-xs);
-  }
-
-  .hero-index {
-    font-size: 0.625rem;
+  .hero {
+    padding-top: var(--space-10);
   }
 
   .hero-heading h1 {
-    font-size: clamp(2.35rem, 10.5vw, 3.5rem);
+    font-size: clamp(2.4rem, 10vw, 3.5rem);
     max-width: 14ch;
+    letter-spacing: -0.05em;
   }
 
-  .hero-description {
+  .title-block {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .title-cell,
+  .title-cell:first-child {
+    min-height: auto;
+    padding: var(--space-4) 0;
+    border-right: 0;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .title-cell:last-child {
+    border-bottom: 0;
+  }
+
+  .title-cell:nth-child(3) {
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .title-cell p,
+  .title-action .action-label {
     font-size: var(--text-base);
   }
 
-  .hero-actions {
-    align-items: stretch;
-    flex-direction: column;
-    width: 100%;
+  .title-cell {
+    gap: var(--space-4);
   }
 
-  .hero-actions .button {
-    width: 100%;
-    justify-content: space-between;
+  .title-action {
+    min-height: 6.5rem;
   }
 
   .bento-card {
@@ -885,29 +736,13 @@ h3 {
   }
 
   .project-row {
-    grid-template-columns: auto 1fr;
-    gap: var(--space-3) var(--space-4);
-  }
-
-  .project-number {
-    grid-column: 1;
-    grid-row: 1;
-  }
-
-  .project-main {
-    grid-column: 2;
-    grid-row: 1 / span 2;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-4);
   }
 
   .project-link {
-    grid-column: 2;
-    grid-row: 3;
     justify-self: start;
-    width: min(100%, 12rem);
-  }
-
-  .contact-copy {
-    grid-column: 1 / 13;
+    text-align: left;
   }
 
   .site-footer {
@@ -916,8 +751,7 @@ h3 {
   }
 }
 
-/* 13. REDUCED MOTION
-   ========================================================= */
+/* 13. REDUCED MOTION */
 
 @media (prefers-reduced-motion: reduce) {
   html {
@@ -927,14 +761,13 @@ h3 {
   *,
   *::before,
   *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
   }
 
-  .js-reveal .reveal {
-    opacity: 1;
+  .bento-card:hover {
     transform: none;
   }
 }
